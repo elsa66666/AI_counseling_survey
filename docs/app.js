@@ -4,6 +4,10 @@ const FIELD_NAMES = {
   P: "functions.P.label", E: "functions.E.label",
   E_relational_adaptation: "functions.E.relational_adaptation",
 };
+const FIELD_LABELS = {
+  S: "S", F: "F", F_mode: "F mode", P: "P", E: "E",
+  E_relational_adaptation: "Relational adaptation",
+};
 let data = [];
 let sortKey = "year";
 let sortDirection = -1;
@@ -90,7 +94,6 @@ function render() {
       cell(badge(paper.sfpe.E_relational_adaptation)),
     );
     for (const edge of EDGES) tr.append(cell(edgeCell(paper.dependencies[edge])));
-    tr.append(cell(badge(paper.status)));
     const button = document.createElement("button");
     button.className = "details";
     button.type = "button";
@@ -102,30 +105,73 @@ function render() {
   el("count").textContent = `${papers.length} of ${data.length} papers`;
 }
 
-function evidenceBlock(result) {
+function finalReason(result) {
+  if (result?.status === "adjudicated" && result.adjudication?.summary) {
+    return result.adjudication.summary;
+  }
+  const reasons = [...new Set((result?.supporting_evidence ?? [])
+    .map(item => item.rationale)
+    .filter(Boolean))];
+  return reasons.join(" ") || "No final rationale is recorded in the consensus export.";
+}
+
+function finalResult(label, result) {
+  const block = document.createElement("div");
+  block.className = "final-result";
+  const heading = document.createElement("h4");
+  heading.textContent = label;
+  const outcome = document.createElement("div");
+  outcome.className = "final-outcome";
+  outcome.append(badge(result?.label), document.createTextNode(` ${result?.status ?? "unknown"}`));
+  const reason = document.createElement("p");
+  reason.textContent = finalReason(result);
+  block.append(heading, outcome, reason);
+  return block;
+}
+
+function evidenceByAuditor(result) {
+  const evidence = new Map();
+  for (const source of [
+    result?.adjudication?.evidence,
+    result?.supporting_evidence,
+    result?.pre_adjudication?.supporting_evidence,
+  ]) {
+    for (const item of source ?? []) if (item.auditor) evidence.set(item.auditor, item);
+  }
+  return evidence;
+}
+
+function auditorBlock(result) {
   const container = document.createElement("div");
   const votes = document.createElement("div");
   votes.className = "votes";
   votes.textContent = `Votes: ${JSON.stringify(result?.votes ?? {})} · agreement ${Math.round((result?.agreement ?? 0) * 100)}%`;
   container.append(votes);
-  if (result?.status === "adjudicated" && result.adjudication) {
-    const summary = document.createElement("div");
-    summary.className = "adjudication";
-    const strong = document.createElement("strong");
-    strong.textContent = `Second-stage judge → ${result.label}: `;
-    summary.append(strong, document.createTextNode(result.adjudication.summary));
-    container.append(summary);
-  }
-  for (const item of result?.supporting_evidence ?? []) {
+  const evidence = evidenceByAuditor(result);
+  for (const [auditor, label] of Object.entries(result?.agent_labels ?? {})) {
+    const item = evidence.get(auditor);
     const block = document.createElement("div");
     block.className = "evidence";
-    for (const [label, value] of [[item.auditor, item.evidence], ["Location", item.location], ["Rationale", item.rationale]]) {
+    const auditorHeading = document.createElement("div");
+    auditorHeading.className = "auditor-heading";
+    const strong = document.createElement("strong");
+    strong.textContent = auditor;
+    auditorHeading.append(strong, badge(label ?? "INVALID"));
+    block.append(auditorHeading);
+    for (const [name, value] of [["Evidence", item?.evidence], ["Location", item?.location],
+      ["Rationale", item?.rationale], ["Confidence", item?.confidence]]) {
       if (!value) continue;
       const p = document.createElement("p");
-      const strong = document.createElement("strong");
-      strong.textContent = `${label}: `;
-      p.append(strong, document.createTextNode(value));
+      const key = document.createElement("strong");
+      key.textContent = `${name}: `;
+      p.append(key, document.createTextNode(value));
       block.append(p);
+    }
+    if (!item) {
+      const note = document.createElement("p");
+      note.className = "missing-evidence";
+      note.textContent = "This auditor's evidence was not included in the consensus export.";
+      block.append(note);
     }
     container.append(block);
   }
@@ -156,27 +202,33 @@ function showDetail(paper) {
   source.rel = "noopener noreferrer";
   source.textContent = "Open original paper";
   head.append(h2, metadata, source);
-  const grid = document.createElement("div");
-  grid.className = "detail-grid";
-
-  const functions = detailCard("SFPE judgments");
+  const finals = detailCard("Final results and rationale");
   for (const [label, key] of Object.entries(FIELD_NAMES)) {
-    const heading = document.createElement("h4");
-    heading.textContent = `${label.replaceAll("_", " ")}: ${paper.sfpe[label]}`;
-    functions.append(heading, evidenceBlock(paper.fields[key]));
+    finals.append(finalResult(FIELD_LABELS[label], paper.fields[key]));
   }
-  grid.append(functions);
-
-  const dependencies = detailCard("Dependencies and validation");
   for (const edge of EDGES) {
     const key = edge.replace("→", "_to_");
-    const heading = document.createElement("h4");
-    const value = paper.dependencies[edge];
-    heading.textContent = `${edge}: ${value.presence} · ${value.validation}`;
-    dependencies.append(heading, evidenceBlock(paper.fields[`dependencies.${key}.presence`]));
+    finals.append(
+      finalResult(`${edge} presence`, paper.fields[`dependencies.${key}.presence`]),
+      finalResult(`${edge} validation`, paper.fields[`dependencies.${key}.validation`]),
+    );
   }
-  grid.append(dependencies);
-  root.append(head, grid);
+
+  const process = detailCard("Auditor evidence and voting process");
+  for (const [label, key] of Object.entries(FIELD_NAMES)) {
+    const heading = document.createElement("h4");
+    heading.textContent = FIELD_LABELS[label];
+    process.append(heading, auditorBlock(paper.fields[key]));
+  }
+  for (const edge of EDGES) {
+    const key = edge.replace("→", "_to_");
+    for (const part of ["presence", "validation"]) {
+      const heading = document.createElement("h4");
+      heading.textContent = `${edge} ${part}`;
+      process.append(heading, auditorBlock(paper.fields[`dependencies.${key}.${part}`]));
+    }
+  }
+  root.append(head, finals, process);
   el("detail").showModal();
 }
 
