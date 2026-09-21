@@ -2,7 +2,7 @@
 
 This repository contains a reproducible, evidence-grounded framework for auditing papers about LLM-based mental health counseling systems. Three heterogeneous language-model auditors independently read the same paper and apply a frozen coding protocol. The framework records evidence for four system functions (SFPE), seven directed dependencies, edge-specific validation levels, input completeness, confidence, and borderline cases. Python then computes a strict field-level two-of-three consensus without debate, cross-agent prompting, or a fourth judge model.
 
-The repository also publishes the current 47-paper consensus dataset through a searchable [GitHub Pages audit explorer](docs/index.html). The web data is generated from the structured consensus records; the table does not contain a second hand-maintained copy of the judgments.
+The repository also publishes the current 47-paper consensus dataset through a searchable [GitHub Pages audit explorer](https://elsa66666.github.io/AI_counseling_survey/). The web data is generated from the structured consensus records; the table does not contain a second hand-maintained copy of the judgments.
 
 ## Overview
 
