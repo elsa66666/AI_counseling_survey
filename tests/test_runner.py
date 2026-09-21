@@ -6,8 +6,9 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
-from audit_framework.auditor import run_single_auditor
-from audit_framework.config import AUDITOR_IDS
+from audit_framework.auditor import AuditResult, run_single_auditor
+from audit_framework.config import AUDITOR_IDS, JUDGE_ID
+from audit_framework.judge import JudgeResult
 from audit_framework.llm_client import CallError, Response
 from audit_framework.runner import run_batch, rebuild_consensus
 from audit_framework.storage import load_json, save_json
@@ -16,6 +17,49 @@ from tests.helpers import PROTOCOL, audit, config
 
 
 class RunnerTests(unittest.TestCase):
+    def test_no_majority_is_sent_to_second_stage_judge(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            save_json(root / "papers.json", [{"bib": "@article{x,title={Test Paper},year={2024}}",
+                                               "url": "https://example.org/paper"}])
+            (root / "prompt.md").write_text(PROTOCOL, encoding="utf-8")
+
+            def fetch(paper, *args):
+                paper.content = "Shared evidence"
+                paper.source = {"source": paper.url}
+
+            def single(paper, agent, cfg, **kwargs):
+                if agent == "auditor_3":
+                    return AuditResult(agent, "failed", error_type="rate_limit")
+                data = audit()
+                data["systems"][0]["functions"]["S"].update(
+                    label="Present" if agent == "auditor_1" else "Absent",
+                    evidence=agent + " evidence", location="Methods", rationale=agent + " rationale")
+                return AuditResult(agent, "success", data, calls=1)
+
+            seen = []
+            def judge(metadata, disputes, cfg, **kwargs):
+                seen.extend(disputes)
+                return JudgeResult("success", {"systems.*.functions.S.label": {
+                    "label": "Present",
+                    "evidence": [{"auditor": "auditor_1", "evidence": "auditor_1 evidence",
+                                  "location": "Methods", "rationale": "auditor_1 rationale"}],
+                    "summary": "Positive implementation evidence meets S."
+                }}, calls=1)
+
+            configs = {agent: config() for agent in (*AUDITOR_IDS, JUDGE_ID)}
+            summary = run_batch(
+                papers_path=root / "papers.json", prompt_path=root / "prompt.md", output=root / "out",
+                cache=root / "cache", configs=configs, retrieve_fn=fetch, auditor_fn=single,
+                judge_fn=judge, log=lambda _: None,
+            )
+            consensus = load_json(root / "out/x/consensus.json")
+            field = consensus["systems"][0]["fields"]["functions.S.label"]
+            self.assertEqual([item["field"] for item in seen], ["systems.*.functions.S.label"])
+            self.assertEqual((field["label"], field["status"]), ("Present", "adjudicated"))
+            self.assertEqual(consensus["adjudication"]["model"], "test-model")
+            self.assertEqual(summary["judge_calls_this_run"], 1)
+
     def test_batch_survives_one_agent_failure_and_exports_all_papers(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -24,6 +24,13 @@ class SiteDataTests(unittest.TestCase):
             self.assertEqual(len(payload["papers"]), 47)
             self.assertTrue(all(paper["title"] and paper["paper_url"] and paper["year"] for paper in payload["papers"]))
             self.assertTrue(all(len(paper["dependencies"]) == 7 for paper in payload["papers"]))
+            self.assertTrue(all(paper["sfpe"][key] in {"Present", "Absent"}
+                                for paper in payload["papers"] for key in "SFPE"))
+            self.assertEqual(payload["summary"]["no_majority_fields"], 0)
+            self.assertEqual(payload["summary"]["adjudicated_fields"], 19)
+            by_id = {paper["paper_id"]: paper for paper in payload["papers"]}
+            self.assertEqual(by_id["heinz2025therabot"]["sfpe"]["S"], "Present")
+            self.assertEqual(by_id["gratch2014distress"]["sfpe"]["P"], "Absent")
 
 
 if __name__ == "__main__":

@@ -98,6 +98,14 @@ function evidenceBlock(result) {
   votes.className = "votes";
   votes.textContent = `Votes: ${JSON.stringify(result?.votes ?? {})} · agreement ${Math.round((result?.agreement ?? 0) * 100)}%`;
   container.append(votes);
+  if (result?.status === "adjudicated" && result.adjudication) {
+    const summary = document.createElement("div");
+    summary.className = "adjudication";
+    const strong = document.createElement("strong");
+    strong.textContent = `Second-stage judge → ${result.label}: `;
+    summary.append(strong, document.createTextNode(result.adjudication.summary));
+    container.append(summary);
+  }
   for (const item of result?.supporting_evidence ?? []) {
     const block = document.createElement("div");
     block.className = "evidence";
@@ -171,6 +179,7 @@ async function init() {
   const stats = [
     [summary.total_papers, "papers"], [summary.unanimous_fields, "unanimous fields"],
     [summary.majority_fields, "majority fields"], [summary.no_majority_fields, "no-majority fields"],
+    [summary.adjudicated_fields ?? 0, "judge-adjudicated fields"],
     [summary.papers_requiring_manual_review, "papers needing review"],
   ];
   for (const [value, label] of stats) {

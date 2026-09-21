@@ -57,17 +57,24 @@ For every label, provide:
 
 Use short evidence excerpts only.
 
-If the paper does not provide enough evidence to make a reliable judgment, use "Unclear" according to the rules below rather than guessing.
+Function-presence labels for S, F, P, and E are binary: use only "Present" or "Absent". Never use "Unclear" for these four labels. Other fields may use "Unclear" according to the rules below.
 
 ---
 
 # 3. DECISION RULE FOR ABSENT, UNCLEAR, AND LOW CONFIDENCE
 
+For S/F/P/E function presence:
+- use "Present" only when identifiable implementation evidence satisfies the function definition;
+- otherwise use "Absent";
+- when missing, truncated, or underspecified material prevents a confident decision, use "Absent" with Low confidence and explicitly describe the evidence limitation in the rationale.
+
+For function presence, "Absent" is the operational non-positive label; it does not claim that inaccessible material proves the function never exists.
+
 Use "Absent" when:
 - the available paper content is sufficiently complete; and
 - no implemented functionality satisfying the definition is found.
 
-Use "Unclear" only when:
+For fields other than S/F/P/E function presence, use "Unclear" only when:
 - the paper indicates that a potentially relevant function or dependency may exist; but
 - the available methodological evidence is insufficient to determine whether it satisfies the coding definition.
 
@@ -80,14 +87,14 @@ Operational test:
 
 1. Is there identifiable evidence relevant to this function/dependency?
    - No, and the paper appears complete → Absent.
-   - No, but relevant material appears missing or truncated → Unclear.
+   - No, but relevant material appears missing or truncated → Absent + Low confidence for S/F/P/E presence; Unclear for other eligible fields.
    - Yes → continue.
 
 2. Can the evidence reasonably support one side of the coding threshold?
    - Yes, but interpretation is difficult → Present/Absent + Low confidence.
-   - No, because implementation remains genuinely underspecified → Unclear.
+   - No, because implementation remains genuinely underspecified → Absent + Low confidence for S/F/P/E presence; Unclear for other eligible fields.
 
-Do not use "Unclear" merely because the decision is difficult.
+Do not use "Unclear" for S/F/P/E presence, and do not use it for other fields merely because the decision is difficult.
 
 ---
 
@@ -674,7 +681,8 @@ If such a conflict affects a coding decision:
 
 If the provided paper content appears incomplete and the missing material may affect coding:
 - do not interpret missing input as evidence that the original paper lacks the functionality;
-- use Unclear when reliable coding is impossible;
+- use Absent + Low confidence for S/F/P/E function presence when reliable positive coding is impossible;
+- use Unclear for other eligible fields when reliable coding is impossible;
 - explicitly state "Potential input truncation" in the rationale.
 
 ---
@@ -735,7 +743,8 @@ Conversely, a paper may appear generally complete while details needed for one s
 Do not interpret missing input as evidence that the original paper lacks the functionality.
 
 For any affected label:
-- use "Unclear" when missing material prevents reliable coding;
+- use "Absent" + Low confidence for S/F/P/E presence when positive evidence cannot be established;
+- use "Unclear" for other eligible fields when missing material prevents reliable coding;
 - state "Potential input truncation" in the rationale.
 
 ---
@@ -842,7 +851,7 @@ Return JSON using exactly this structure:
 
       "functions": {
         "S": {
-          "label": "Present|Absent|Unclear",
+          "label": "Present|Absent",
           "evidence": "",
           "location": "",
           "rationale": "",
@@ -850,7 +859,7 @@ Return JSON using exactly this structure:
         },
 
         "F": {
-          "label": "Present|Absent|Unclear",
+          "label": "Present|Absent",
           "mode": "Static|Dynamic|Unclear|NA",
           "evidence": "",
           "location": "",
@@ -859,7 +868,7 @@ Return JSON using exactly this structure:
         },
 
         "P": {
-          "label": "Present|Absent|Unclear",
+          "label": "Present|Absent",
           "evidence": "",
           "location": "",
           "rationale": "",
@@ -867,7 +876,7 @@ Return JSON using exactly this structure:
         },
 
         "E": {
-          "label": "Present|Absent|Unclear",
+          "label": "Present|Absent",
           "relational_adaptation": "Yes|No|Unclear|NA",
           "evidence": "",
           "location": "",
@@ -1007,8 +1016,7 @@ For downstream audit purposes:
 
 Function presence:
 - Present = positive function label.
-- Absent = function not found.
-- Unclear = excluded from positive counts and flagged for review.
+- Absent = the binary non-positive function label, including cases where positive implementation evidence cannot be established from the available input.
 
 Dependency presence in the primary analysis:
 - Explicit = dependency present.

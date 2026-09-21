@@ -6,7 +6,7 @@ import unicodedata
 from jsonschema import Draft202012Validator
 
 EDGES = ("S_to_F", "S_to_P", "F_to_P", "P_to_E", "E_to_S", "E_to_F", "E_to_P")
-FUNCTION_LABELS = ("Present", "Absent", "Unclear")
+FUNCTION_LABELS = ("Present", "Absent")
 PRESENCE_LABELS = ("Explicit", "Inferential", "Absent", "Unclear")
 VALIDATION_LABELS = ("V0", "V1", "V2", "NA")
 ALLOWED_LABELS = {

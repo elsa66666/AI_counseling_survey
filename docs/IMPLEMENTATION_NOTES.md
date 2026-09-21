@@ -1,11 +1,11 @@
 # Implementation notes
 
-This repository preserves the frozen SFPE protocol, current voting logic, and published consensus results. Repository cleanup and site generation do not change any audit judgment.
+This repository records the executable SFPE protocol, two-stage voting logic, and published consensus results. Site generation copies the structured consensus records without reinterpreting their judgments.
 
 ## Deliberate implementation constraints
 
 1. The protocol can describe multiple eligible systems in a paper, but the current consensus implementation accepts at most one system per auditor in each paper folder. All 47 published papers satisfy this constraint. The three auditor names are retained for provenance and do not control matching; records in one paper folder are merged into one canonical system.
-2. The majority denominator is fixed at three even when an auditor is unavailable. There is no model substitution, debate, or judge model.
+2. The majority denominator is fixed at three even when an auditor is unavailable. A GPT-5.5 second-stage judge is called only for `A/B/C`, `A/B/INVALID`, or `A/INVALID/INVALID`; it receives the saved first-stage opinions and evidence. It never substitutes for an unavailable auditor.
 3. Schema validation verifies structure and allowed labels. It cannot verify that a quoted passage is faithful or that the scientific interpretation is correct; supporting evidence remains available for human review.
 4. Public data contains consensus records and supporting evidence. Raw API envelopes, repeated failed attempts, downloaded papers, and full-text caches are excluded from the public repository.
 5. The static site uses browser-native HTML, CSS, and JavaScript. It has no package manager or runtime dependency beyond a static web server.

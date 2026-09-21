@@ -48,6 +48,7 @@ def paper_record(record):
         "status": record["status"],
         "needs_review": record["needs_review"],
         "full_agreement": record["full_agreement"],
+        "adjudication": record.get("adjudication", {"status": "not_needed", "disputed_fields": [], "resolved_fields": []}),
         "paper_input_completeness": record["paper_input_completeness"],
         "system_names": system.get("system_names", {}),
         "sfpe": {
@@ -104,7 +105,7 @@ def build(input_path, summary_path, public_json, public_csv, site_json, protocol
     if summary["total_papers"] != len(papers):
         raise ValueError("Summary paper count does not match consensus data")
     payload = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "source": "data/audit_results/all_consensus.jsonl",
         "summary": summary,
         "papers": papers,

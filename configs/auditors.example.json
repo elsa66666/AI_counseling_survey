@@ -28,5 +28,15 @@
     "temperature": null,
     "max_tokens": 16384,
     "timeout": 180
+  },
+  "judge": {
+    "model": "gpt-5.5",
+    "api": "openai",
+    "output_mode": "json_schema",
+    "api_key_env": "OPENAI_API_KEY",
+    "base_url_env": "OPENAI_BASE_URL",
+    "temperature": null,
+    "max_tokens": 8192,
+    "timeout": 180
   }
 }

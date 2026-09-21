@@ -56,6 +56,7 @@ dialog::backdrop { background: #07182aa8; }
 .detail-card h4 { margin: 1rem 0 .35rem; }
 .evidence { margin: .55rem 0; padding-left: .7rem; border-left: 3px solid #b7cedd; color: #304459; }
 .evidence p { margin: .25rem 0; line-height: 1.45; }
+.adjudication { margin: .65rem 0; padding: .65rem .75rem; border-left: 4px solid #7c3aed; background: #f5f3ff; }
 .votes { color: var(--muted); font-size: .8rem; }
 footer { padding: 1.2rem max(4vw, 1.25rem) 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
 @media (max-width: 1100px) { .controls { grid-template-columns: repeat(4, minmax(7rem, 1fr)); } .search { grid-column: span 4; } }

@@ -22,6 +22,12 @@ class SchemaTests(unittest.TestCase):
             validate_audit(data, SCHEMA)
         self.assertEqual(ctx.exception.error_type, "illegal_label")
 
+    def test_function_presence_is_binary(self):
+        data = audit(); data["systems"][0]["functions"]["S"]["label"] = "Unclear"
+        with self.assertRaises(AuditValidationError) as ctx:
+            validate_audit(data, SCHEMA)
+        self.assertEqual(ctx.exception.error_type, "illegal_label")
+
     def test_extra_and_missing_fields_rejected(self):
         for mutate in (lambda x: x.update(invented="value"), lambda x: x.pop("systems")):
             data = audit(); mutate(data)
@@ -40,7 +46,7 @@ class SchemaTests(unittest.TestCase):
 
     def test_protocol_change_fails_fast(self):
         with self.assertRaises(ValueError):
-            build_schema(PROTOCOL.replace('"Present|Absent|Unclear"', '"full|partial|none"'))
+            build_schema(PROTOCOL.replace('"Present|Absent"', '"full|none"'))
 
 
 if __name__ == "__main__":

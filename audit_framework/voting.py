@@ -22,7 +22,7 @@ def majority_vote(values, allowed_labels):
             "needs_review": winner is None or winner in {"Unclear", "PossiblyTruncated"}}
 
 
-def field_vote(records, path, allowed):
+def field_vote(records, path, allowed, adjudication=None):
     result = majority_vote([get_path(records.get(a), path) for a in AUDITOR_IDS], allowed)
     result["supporting_evidence"] = []
     if "." in path:
@@ -31,6 +31,16 @@ def field_vote(records, path, allowed):
             parent = get_path(records[agent], parent_path)
             evidence = {k: parent[k] for k in EVIDENCE_FIELDS if k in parent}
             result["supporting_evidence"].append({"auditor": agent, **evidence})
+    if result["status"] == "no_majority" and adjudication:
+        result["pre_adjudication"] = {key: result[key] for key in
+                                      ("label", "status", "needs_review", "supporting_agents", "supporting_evidence")}
+        result["label"] = adjudication["label"]
+        result["status"] = "adjudicated"
+        result["supporting_agents"] = [agent for agent, label in result["agent_labels"].items()
+                                       if label == adjudication["label"]]
+        result["supporting_evidence"] = adjudication["evidence"]
+        result["needs_review"] = adjudication["label"] in {"Unclear", "PossiblyTruncated"}
+        result["adjudication"] = adjudication
     return result
 
 
@@ -51,9 +61,11 @@ def consistency_issues(fields):
     return issues
 
 
-def build_consensus(paper_metadata, audits):
+def build_consensus(paper_metadata, audits, adjudications=None, judge=None):
+    adjudications = adjudications or {}
     audits = {a: audits.get(a) for a in AUDITOR_IDS}
-    paper_field = field_vote(audits, "paper_input_completeness", ALLOWED_LABELS["paper_input_completeness"])
+    paper_field = field_vote(audits, "paper_input_completeness", ALLOWED_LABELS["paper_input_completeness"],
+                             adjudications.get("paper_input_completeness"))
     if any(audit is not None and len(audit["systems"]) > 1 for audit in audits.values()):
         raise ValueError("Paper-folder consensus expects at most one system per auditor")
     records = {a: audit["systems"][0] if audit is not None and audit["systems"] else None
@@ -67,7 +79,7 @@ def build_consensus(paper_metadata, audits):
         for template in VOTABLE_FIELDS:
             if template.startswith("systems.*."):
                 path = template.removeprefix("systems.*.")
-                fields[path] = field_vote(records, path, ALLOWED_LABELS[template])
+                fields[path] = field_vote(records, path, ALLOWED_LABELS[template], adjudications.get(template))
         issues = consistency_issues(fields)
         names = {a: record["system_name"] if record else None for a, record in records.items()}
         systems.append({"system_key": paper_metadata["paper_id"], "system_names": names, "fields": fields,
@@ -83,4 +95,5 @@ def build_consensus(paper_metadata, audits):
             "system_inventories": inventories, "inventory_agreement": inventory_agreement,
             "failed_auditors": missing, "completed": not missing,
             "full_agreement": full_agreement, "needs_review": needs_review,
-            "status": "needs_review" if needs_review else "unanimous" if full_agreement else "majority"}
+            "status": "needs_review" if needs_review else "unanimous" if full_agreement else "majority",
+            "adjudication": judge or {"status": "not_needed", "disputed_fields": [], "resolved_fields": []}}

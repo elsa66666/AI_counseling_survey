@@ -1,6 +1,6 @@
 # SFPE Multi-Agent Audit of LLM-Based Mental Health Counseling Systems
 
-This repository contains a reproducible, evidence-grounded framework for auditing papers about LLM-based mental health counseling systems. Three heterogeneous language-model auditors independently read the same paper and apply a frozen coding protocol. The framework records evidence for four system functions (SFPE), seven directed dependencies, edge-specific validation levels, input completeness, confidence, and borderline cases. Python then computes a strict field-level two-of-three consensus without debate, cross-agent prompting, or a fourth judge model.
+This repository contains a reproducible, evidence-grounded framework for auditing papers about LLM-based mental health counseling systems. Three heterogeneous language-model auditors independently read the same paper and apply a frozen coding protocol. The framework records evidence for four system functions (SFPE), seven directed dependencies, edge-specific validation levels, input completeness, confidence, and borderline cases. Python first computes a strict field-level two-of-three consensus; supported no-majority cases then receive a separate GPT-5.5 adjudication over the saved auditor opinions and evidence.
 
 The repository also publishes the current 47-paper consensus dataset through a searchable [GitHub Pages audit explorer](https://elsa66666.github.io/AI_counseling_survey/). The web data is generated from the structured consensus records; the table does not contain a second hand-maintained copy of the judgments.
 
@@ -34,6 +34,8 @@ Paper metadata and verified full text
                  ↓
        Field-level majority voting
                  ↓
+ GPT-5.5 adjudication for no-majority fields
+                 ↓
  Cross-field consistency and review flags
                  ↓
       Final structured consensus record
@@ -54,7 +56,7 @@ Each auditor receives the same inputs:
 3. the same strict JSON schema;
 4. a short instruction to work independently and return one complete audit.
 
-Each auditor must identify the eligible implemented system, assess paper and system completeness, code S/F/P/E, code all seven dependencies and applicable validation levels, and provide evidence, location, rationale, and confidence. An auditor never sees another auditor's answer. The default example configuration uses GPT-5.4-mini, Claude Sonnet 5, and DeepSeek V3.2; model IDs and endpoints remain explicit in [configs/auditors.example.json](configs/auditors.example.json).
+Each auditor must identify the eligible implemented system, assess paper and system completeness, code S/F/P/E, code all seven dependencies and applicable validation levels, and provide evidence, location, rationale, and confidence. An auditor never sees another auditor's answer. The default example configuration uses GPT-5.4-mini, Claude Sonnet 5, and DeepSeek V3.2, followed by GPT-5.5 as the second-stage judge; model IDs and endpoints remain explicit in [configs/auditors.example.json](configs/auditors.example.json).
 
 Raw responses are saved before parsing. The parser removes only leading/trailing whitespace and a single outer Markdown JSON fence. It does not repair quotes, commas, keys, labels, truncated JSON, or schema violations. Rate limits and transient upstream failures use finite exponential backoff and respect `Retry-After` when present. A final auditor failure is recorded as unavailable and does not abort the paper or batch.
 
@@ -77,11 +79,13 @@ Consensus is computed independently for every votable field. The denominator is 
 - `A / A / A` → unanimous `A`;
 - `A / A / B` → majority `A`;
 - `A / A / INVALID` → majority `A`;
-- `A / B / C` → no majority;
-- `A / B / INVALID` → no majority;
-- `A / INVALID / INVALID` → no majority.
+- `A / B / C` → second-stage adjudication;
+- `A / B / INVALID` → second-stage adjudication;
+- `A / INVALID / INVALID` → second-stage adjudication.
 
-A winner requires at least two matching legal labels. Missing or invalid outputs do not reduce the denominator. No-majority fields receive `label: null`, `status: "no_majority"`, and `needs_review: true`. `Unclear` and `PossiblyTruncated` winners also require review. The system retains vote counts, all agent labels, supporting agents, invalid agents, agreement (`largest legal vote count / 3`), and the evidence supplied by auditors supporting the winner.
+A first-stage winner requires at least two matching legal labels. Missing or invalid outputs do not reduce the denominator. For the three supported no-majority patterns above, GPT-5.5 receives every available auditor label, evidence statement, location, rationale, and confidence. It must select one legal label, summarize the disagreement, and return a merged evidence record without inventing evidence. The field retains the original votes and receives `status: "adjudicated"`, the judge decision, and judge-selected evidence. `INVALID / INVALID / INVALID` remains `no_majority` because no opinion exists to adjudicate. A judge API or schema failure also leaves the field unresolved and flagged for review.
+
+S/F/P/E function presence is binary: only `Present` and `Absent` are legal. If positive implementation evidence cannot be established, the auditor uses `Absent`; missing or weak material is preserved through Low confidence, completeness labels, evidence limitations, and the rationale rather than an `Unclear` function label. `Unclear` remains legal for the non-function fields that explicitly include it.
 
 The current dataset contains one canonical audited system per paper folder. The three system descriptions in that folder are merged as the same system even when the auditors phrase its name differently; the original names remain in `system_names` for provenance. Cross-field consistency checks flag contradictions but never overwrite a majority label. Human adjudication can review flagged records outside this automatic vote; the published data preserves the unmodified automatic consensus.
 
@@ -97,8 +101,7 @@ The following table is a single reference for every categorical audit value and 
 | System input completeness | `PossiblyTruncated` | Relevant material about the eligible system may be missing. | Legal vote; a winning label requires review. |
 | System input completeness | `NotApplicable` | No eligible implemented counseling system is available for system-level coding. | Legal vote for system completeness only. |
 | SFPE function | `Present` | Identifiable implementation evidence satisfies the definition of S, F, P, or E. Positive labels require supporting evidence. | Counted as a positive function label. |
-| SFPE function | `Absent` | The paper is sufficiently complete, but no qualifying implementation is found. | Counted as a negative function label. |
-| SFPE function | `Unclear` | Missing, inaccessible, truncated, or genuinely ambiguous implementation evidence prevents a reliable Present/Absent judgment. Difficulty alone is insufficient. | Excluded from positive counts; a winning label requires review. |
+| SFPE function | `Absent` | No qualifying implementation can be established from the available evidence. When input is missing or underspecified, the auditor records Low confidence and the limitation rather than using `Unclear`. | Counted as the binary non-positive function label. |
 | F formulation mode | `Static` | An explanatory formulation exists, but the paper does not show it changing in response to new client evidence. | Legal only when F is `Present`. |
 | F formulation mode | `Dynamic` | New client evidence can revise, replace, update, or refine the explanatory formulation. Multi-turn interaction alone is insufficient. | Legal only when F is `Present`. |
 | F formulation mode | `Unclear` | F is present, but the paper does not provide enough evidence to determine whether the formulation is static or dynamically updated. | Legal only when F is `Present`; a winning label requires review. |
@@ -122,7 +125,8 @@ The following table is a single reference for every categorical audit value and 
 | Consensus label | `null` | No legal label received the required two matching votes. | Paired with `status: "no_majority"` and `needs_review: true`. |
 | Field consensus status | `unanimous` | All three auditors supplied the same legal label. | Agreement is `1.0`. |
 | Field consensus status | `majority` | Exactly two auditors supplied the same legal label. The third may disagree or be unavailable. | Agreement is `0.6667`. |
-| Field consensus status | `no_majority` | No legal label received two votes, including `A/B/C`, `A/B/INVALID`, and `A/INVALID/INVALID`. | Consensus label is `null`; review is required. |
+| Field consensus status | `adjudicated` | The first-stage vote matched `A/B/C`, `A/B/INVALID`, or `A/INVALID/INVALID`, and GPT-5.5 selected one legal label from the saved opinions and evidence. | The original vote is preserved in `pre_adjudication`; the judge decision and merged evidence are stored in `adjudication`. |
+| Field consensus status | `no_majority` | No legal label received two votes and adjudication could not run or complete, or every auditor was invalid. | Consensus label is `null`; review is required. |
 | System alignment status | `matched` | All three available auditor records contain the canonical system represented by the paper folder. Differences in `system_name` wording do not affect this status. | System fields are merged and voted normally. |
 | System alignment status | `needs_review` | At least one auditor lacks a usable system record for the paper folder. | The system and paper consensus are flagged for review. |
 | Record consensus status | `unanimous` | Inventory alignment is complete and every votable field is unanimous, with no review condition. | Final paper-level status. |
@@ -135,7 +139,7 @@ The following table is a single reference for every categorical audit value and 
 
 ### General decision rule
 
-Use **Present** when identifiable implementation evidence satisfies the definition. Use **Absent** when the paper is sufficiently complete and no qualifying implementation is found. Use **Unclear** only when relevant functionality may exist but the available implementation evidence is genuinely missing, inaccessible, truncated, or ambiguous. A difficult but decidable case should receive Present or Absent with Low confidence rather than Unclear.
+For S/F/P/E presence, use **Present** when identifiable implementation evidence satisfies the definition and **Absent** otherwise. These four labels are binary and never use `Unclear`. Missing, inaccessible, truncated, or ambiguous material must be recorded through completeness, evidence, rationale, and Low confidence. Other fields may use **Unclear** only when their allowed label set explicitly includes it.
 
 The annotation unit is an implemented counseling system. Annotate the full system rather than its ablations. Baselines are excluded unless explicitly requested. The current consensus implementation expects no more than one eligible system per auditor within a paper folder; see [docs/IMPLEMENTATION_NOTES.md](docs/IMPLEMENTATION_NOTES.md).
 
@@ -332,7 +336,7 @@ Use `--papers`, `--prompt`, `--config`, `--env`, `--cache`, and `--sources` to o
 
 Each audit has `paper_title`, `paper_input_completeness`, and a `systems` array. Each system contains its name, completeness, annotation notes, four function objects, seven dependency objects, borderline cases, and overall notes. Function and dependency objects contain evidence, location, rationale, and confidence. The exact generated JSON Schema is checked in at [data/audit_results/audit.schema.json](data/audit_results/audit.schema.json).
 
-The consensus record adds, for every votable field, `votes`, `agent_labels`, `supporting_agents`, `invalid_agents`, `agreement`, `label`, `status`, `needs_review`, and supporting evidence. The published files are:
+The consensus record adds, for every votable field, `votes`, `agent_labels`, `supporting_agents`, `invalid_agents`, `agreement`, `label`, `status`, `needs_review`, and supporting evidence. Adjudicated fields also contain `pre_adjudication` and an `adjudication` object with the GPT-5.5 label, merged evidence, and summary. Raw judge responses and structured decisions are saved under `paper_folder/judge/`. The published files are:
 
 - `data/audit_results/all_consensus.jsonl` — canonical consensus records;
 - `data/audit_results/audits.json` — normalized public JSON with `title`, `paper_url`, and numeric `year`;

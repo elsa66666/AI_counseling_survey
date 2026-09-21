@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "source": "data/audit_results/all_consensus.jsonl",
   "summary": {
     "total_papers": 47,
@@ -9,13 +9,16 @@
     "auditor_calls_this_run": 0,
     "auditor_failures": 0,
     "unanimous_fields": 675,
-    "majority_fields": 341,
-    "no_majority_fields": 18,
+    "majority_fields": 340,
+    "no_majority_fields": 0,
     "papers_with_full_agreement": 1,
     "papers_with_at_least_one_disagreement": 46,
-    "papers_requiring_manual_review": 16,
+    "papers_requiring_manual_review": 10,
     "field_count_scope": "Core audit fields plus paper/system completeness; confidence is not voted",
-    "disagreement_count_includes_missing_votes": true
+    "disagreement_count_includes_missing_votes": true,
+    "total_judge_calls": 12,
+    "judge_calls_this_run": 12,
+    "adjudicated_fields": 19
   },
   "papers": [
     {
@@ -27,6 +30,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -964,6 +973,16 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_P.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_P.presence"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -1024,7 +1043,7 @@
           "validation": "V0"
         },
         "E→P": {
-          "presence": null,
+          "presence": "Explicit",
           "validation": "NA"
         }
       },
@@ -1553,7 +1572,7 @@
           ]
         },
         "dependencies.E_to_P.presence": {
-          "label": null,
+          "label": "Explicit",
           "votes": {
             "Absent": 1,
             "Explicit": 1,
@@ -1564,12 +1583,64 @@
             "auditor_2": "Inferential",
             "auditor_3": "Absent"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_1"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "The counselor continuously adjusts exploration strategies based on client feedback; when candidate actions receive negative rewards, guided resampling is applied.",
+              "location": "Section 4; Appendix E; pp. 4-5, 34232-34233, 34241-34242",
+              "rationale": "This describes client responses and dialogue outcomes changing subsequent exploration or intervention candidate selection."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "The updated causal graph Gt+1, produced from the client response after enactment, feeds subsequent turn planning through the exploration reward and guided resampling.",
+              "location": "Sections 4.3.A and 4.3.B; Figure 2",
+              "rationale": "Although the pathway is mediated by the updated causal graph, the implementation description identifies client feedback as information used in subsequent planning."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "No mechanism was identified in which client feedback revises intervention planning; planning appears based on the static Gttrans and current policy.",
+              "location": "Section 4.3.B",
+              "rationale": "This conflicts with the other reports by interpreting the graph and planning inputs as static rather than feedback-updated."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The counselor continuously adjusts exploration strategies based on client feedback; when candidate actions receive negative rewards, guided resampling is applied.",
+                "location": "Section 4; Appendix E; pp. 4-5, 34232-34233, 34241-34242",
+                "rationale": "This describes client responses and dialogue outcomes changing subsequent exploration or intervention candidate selection."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "The updated causal graph Gt+1, produced from the client response after enactment, feeds subsequent turn planning through the exploration reward and guided resampling.",
+                "location": "Sections 4.3.A and 4.3.B; Figure 2",
+                "rationale": "Although the pathway is mediated by the updated causal graph, the implementation description identifies client feedback as information used in subsequent planning."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "No mechanism was identified in which client feedback revises intervention planning; planning appears based on the static Gttrans and current policy.",
+                "location": "Section 4.3.B",
+                "rationale": "This conflicts with the other reports by interpreting the graph and planning inputs as static rather than feedback-updated."
+              }
+            ],
+            "label": "Explicit",
+            "summary": "Explicit is selected because the available implementation evidence describes client responses after enactment producing an updated causal graph that is then used in subsequent planning through exploration rewards and guided resampling. The pathway may be mediated by formulation or graph updating rather than a direct reaction-to-strategy rule, but the protocol requires evidence that feedback information alters subsequent planning, not that the edge bypass every intermediate representation. Auditor 3's contrary interpretation is preserved, but the reported feedback-conditioned graph update and resampling mechanism meet the threshold for an explicit E→P dependency."
+          }
         },
         "dependencies.S_to_F.validation": {
           "label": "V0",
@@ -1824,7 +1895,9 @@
           ]
         }
       },
-      "consistency_issues": []
+      "consistency_issues": [
+        "E_to_P: presence/validation majorities conflict"
+      ]
     },
     {
       "paper_id": "heo-etal-2026-stress",
@@ -1835,6 +1908,12 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "PossiblyTruncated",
         "votes": {
@@ -2737,6 +2816,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -3660,6 +3745,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -4583,6 +4674,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -5534,6 +5631,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -6429,6 +6532,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -7366,6 +7475,18 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.functions.F.mode",
+          "systems.*.dependencies.S_to_F.validation"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.S_to_F.validation",
+          "systems.*.functions.F.mode"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -7395,7 +7516,7 @@
       "sfpe": {
         "S": "Present",
         "F": "Present",
-        "F_mode": null,
+        "F_mode": "NA",
         "P": "Absent",
         "E": "Present",
         "E_relational_adaptation": "No"
@@ -7403,7 +7524,7 @@
       "dependencies": {
         "S→F": {
           "presence": "Explicit",
-          "validation": null
+          "validation": "NA"
         },
         "S→P": {
           "presence": "Absent",
@@ -7611,7 +7732,7 @@
           ]
         },
         "functions.F.mode": {
-          "label": null,
+          "label": "NA",
           "votes": {
             "Dynamic": 1,
             "NA": 1,
@@ -7622,12 +7743,64 @@
             "auditor_2": "NA",
             "auditor_3": "Dynamic"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "Trainer-defined rules encode general causal associations between intervention types and patient state changes; THINK applies these fixed rules to inferred proposition truth values and does not construct an explanatory formulation about the particular client's difficulties.",
+              "location": "Section 3.2 (Training Scenario Construction); Section 3.3 (THINK subsection); Tables 9, 11",
+              "rationale": "The evidence distinguishes fixed domain rules and state tracking from an individualized explanatory formulation, so F is absent and its mode is not applicable."
+            },
+            {
+              "auditor": "auditor_1",
+              "evidence": "The system implements explicit if-then rules governing patient state transitions; Rules and Thoughts encode causal relationships.",
+              "location": "Abstract; Section 3.2-3.4; Fig. 3; Fig. 12",
+              "rationale": "This supports a static causal state-transition mechanism, but not necessarily the protocol's F function because the rules are pre-implanted rather than an individualized formulation."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The Think module uses trainer-implanted rules to model causal associations between interventions and patient mental states, updating a probabilistic state machine.",
+              "location": "Section 3.3, pages 5-6; Figure 3",
+              "rationale": "Although this was interpreted as dynamic formulation by the auditor, the supplied description concerns updates to a probabilistic state machine and does not establish revision of an explanatory client formulation."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "Trainer-defined rules encode general causal associations between intervention types and patient state changes; THINK applies these fixed rules to inferred proposition truth values and does not construct an explanatory formulation about the particular client's difficulties.",
+                "location": "Section 3.2 (Training Scenario Construction); Section 3.3 (THINK subsection); Tables 9, 11",
+                "rationale": "The evidence distinguishes fixed domain rules and state tracking from an individualized explanatory formulation, so F is absent and its mode is not applicable."
+              },
+              {
+                "auditor": "auditor_1",
+                "evidence": "The system implements explicit if-then rules governing patient state transitions; Rules and Thoughts encode causal relationships.",
+                "location": "Abstract; Section 3.2-3.4; Fig. 3; Fig. 12",
+                "rationale": "This supports a static causal state-transition mechanism, but not necessarily the protocol's F function because the rules are pre-implanted rather than an individualized formulation."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The Think module uses trainer-implanted rules to model causal associations between interventions and patient mental states, updating a probabilistic state machine.",
+                "location": "Section 3.3, pages 5-6; Figure 3",
+                "rationale": "Although this was interpreted as dynamic formulation by the auditor, the supplied description concerns updates to a probabilistic state machine and does not establish revision of an explanatory client formulation."
+              }
+            ],
+            "label": "NA",
+            "summary": "Auditor 1 labeled the mechanism Static and auditor 3 labeled it Dynamic, but auditor 2 correctly identified the protocol distinction: trainer-implanted intervention-to-state rules and probabilistic state tracking do not by themselves form an individualized explanatory representation of the client's difficulties, mechanisms, or maintaining processes. Because F is not established, F_mode is NA."
+          }
         },
         "functions.E.relational_adaptation": {
           "label": "No",
@@ -7925,7 +8098,7 @@
           ]
         },
         "dependencies.S_to_F.validation": {
-          "label": null,
+          "label": "NA",
           "votes": {
             "NA": 1,
             "V0": 1,
@@ -7936,12 +8109,64 @@
             "auditor_2": "NA",
             "auditor_3": "V0"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "The OBSERVE module produces proposition truth values that feed THINK for state transition computation, but the rules are pre-defined by trainers rather than constructed from sensed client evidence.",
+              "location": "Section 3.2, 3.3",
+              "rationale": "Because the supplied evidence does not establish an implemented S-to-F dependency, validation is not applicable."
+            },
+            {
+              "auditor": "auditor_1",
+              "evidence": "Observe maps dialogue history to truth values for atomic propositions; Think uses VA_t and rules/state transitions to infer state update.",
+              "location": "Section 3.3-3.4; Algorithm 1 lines 8-13; Fig. 9; Fig. 12",
+              "rationale": "This supports information flow from sensing to symbolic state transitions, but it does not overcome the absence of a protocol-defined formulation."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "Observe outputs truth values for atomic propositions; Think uses these to compute rule and state transition probabilities.",
+              "location": "Section 3.3, pages 5-6; Equation 6",
+              "rationale": "This indicates sensed evidence affects state transitions, but the supplied evidence does not establish that those transitions are an explanatory formulation under the coding definition."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "The OBSERVE module produces proposition truth values that feed THINK for state transition computation, but the rules are pre-defined by trainers rather than constructed from sensed client evidence.",
+                "location": "Section 3.2, 3.3",
+                "rationale": "Because the supplied evidence does not establish an implemented S-to-F dependency, validation is not applicable."
+              },
+              {
+                "auditor": "auditor_1",
+                "evidence": "Observe maps dialogue history to truth values for atomic propositions; Think uses VA_t and rules/state transitions to infer state update.",
+                "location": "Section 3.3-3.4; Algorithm 1 lines 8-13; Fig. 9; Fig. 12",
+                "rationale": "This supports information flow from sensing to symbolic state transitions, but it does not overcome the absence of a protocol-defined formulation."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Observe outputs truth values for atomic propositions; Think uses these to compute rule and state transition probabilities.",
+                "location": "Section 3.3, pages 5-6; Equation 6",
+                "rationale": "This indicates sensed evidence affects state transitions, but the supplied evidence does not establish that those transitions are an explanatory formulation under the coding definition."
+              }
+            ],
+            "label": "NA",
+            "summary": "Auditors 1 and 3 treated state-transition reasoning as a formulation and therefore proposed V1 or V0, while auditor 2 coded F as absent. The trainer-defined rules and probabilistic state transitions describe general system dynamics, not an individualized explanatory formulation of why the client's difficulties arise or persist. Since S-to-F cannot be coded when F is absent, the validation label is NA."
+          }
         },
         "dependencies.S_to_P.validation": {
           "label": "NA",
@@ -8167,7 +8392,10 @@
           ]
         }
       },
-      "consistency_issues": []
+      "consistency_issues": [
+        "functions.F.mode: majority conflicts with function label",
+        "S_to_F: presence/validation majorities conflict"
+      ]
     },
     {
       "paper_id": "puspo-etal-2026-role",
@@ -8178,6 +8406,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -9129,6 +9363,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -10080,6 +10320,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -10982,6 +11228,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -11870,6 +12122,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -12821,6 +13079,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -13709,6 +13973,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -14622,9 +14892,19 @@
       "paper_url": "https://aclanthology.org/2026.acl-long.806/",
       "year": 2026,
       "authors": "Zhong, Lin and Zhu, Renjin and Ma, Shujuan and Cui, Jinhao and Wang, Lingzhi and Chen, Hao and Liao, Qing",
-      "status": "needs_review",
-      "needs_review": true,
+      "status": "majority",
+      "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_P.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_P.presence"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -14685,7 +14965,7 @@
           "validation": "NA"
         },
         "E→P": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         }
       },
@@ -15193,7 +15473,7 @@
           ]
         },
         "dependencies.E_to_P.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Explicit": 1,
@@ -15204,12 +15484,64 @@
             "auditor_2": "Absent",
             "auditor_3": "Unclear"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "Aeval computes a reward signal by assessing multi-turn feedback, which drives iterative policy optimization; the learned policy is used to build CogBiasESC-PRO.",
+              "location": "Section 4.1-4.2, pp. 5-6",
+              "rationale": "This supports feedback affecting policy learning, but does not establish that client feedback alters subsequent planning during deployed inference."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "No mechanism is described by which client feedback following therapeutic enactment alters subsequent planning decisions during inference; the CPRL training loop uses multi-turn rewards.",
+              "location": "Sections 4.1-4.2",
+              "rationale": "The supplied evidence distinguishes training-time multi-turn optimization from an inference-time feedback pathway and reports no turn-by-turn strategy replanning."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The paper mentions multi-turn feedback driving iterative policy optimization, but it is unclear whether client feedback within a dialogue leads to replanning.",
+              "location": "Section 4.1, p. 5",
+              "rationale": "The evidence identifies a possible feedback-related training mechanism but does not document the required downstream planning change during interaction."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "Aeval computes a reward signal by assessing multi-turn feedback, which drives iterative policy optimization; the learned policy is used to build CogBiasESC-PRO.",
+                "location": "Section 4.1-4.2, pp. 5-6",
+                "rationale": "This supports feedback affecting policy learning, but does not establish that client feedback alters subsequent planning during deployed inference."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "No mechanism is described by which client feedback following therapeutic enactment alters subsequent planning decisions during inference; the CPRL training loop uses multi-turn rewards.",
+                "location": "Sections 4.1-4.2",
+                "rationale": "The supplied evidence distinguishes training-time multi-turn optimization from an inference-time feedback pathway and reports no turn-by-turn strategy replanning."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The paper mentions multi-turn feedback driving iterative policy optimization, but it is unclear whether client feedback within a dialogue leads to replanning.",
+                "location": "Section 4.1, p. 5",
+                "rationale": "The evidence identifies a possible feedback-related training mechanism but does not document the required downstream planning change during interaction."
+              }
+            ],
+            "label": "Absent",
+            "summary": "The auditors disagree among Explicit, Absent, and Unclear. The supplied evidence establishes that multi-turn feedback is used for reward computation and iterative policy optimization during training, but does not establish that feedback following enactment changes subsequent therapeutic planning in the deployed system. Under MULTITURN_NOT_FEEDBACK and the E→P threshold, training-time optimization and generic multi-turn feedback are insufficient; no explicit inference-time feedback-to-replanning pathway is identified. Therefore the dependency is Absent."
+          }
         },
         "dependencies.S_to_F.validation": {
           "label": "NA",
@@ -15489,6 +15821,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -16440,6 +16778,16 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.functions.S.label"
+        ],
+        "resolved_fields": [
+          "systems.*.functions.S.label"
+        ]
+      },
       "paper_input_completeness": {
         "label": "PossiblyTruncated",
         "votes": {
@@ -16467,7 +16815,7 @@
         "auditor_3": "Therabot"
       },
       "sfpe": {
-        "S": "Unclear",
+        "S": "Present",
         "F": "Absent",
         "F_mode": "NA",
         "P": "Absent",
@@ -16527,40 +16875,74 @@
           "supporting_evidence": []
         },
         "functions.S.label": {
-          "label": "Unclear",
+          "label": "Present",
           "votes": {
-            "Absent": 1,
-            "Unclear": 2
+            "Absent": 1
           },
           "agent_labels": {
             "auditor_1": "Absent",
             "auditor_2": "Unclear",
             "auditor_3": "Unclear"
           },
-          "supporting_agents": [
+          "supporting_agents": [],
+          "invalid_agents": [
             "auditor_2",
             "auditor_3"
           ],
-          "invalid_agents": [],
-          "agreement": 0.6667,
-          "status": "majority",
-          "needs_review": true,
+          "agreement": 0.3333,
+          "status": "adjudicated",
+          "needs_review": false,
           "supporting_evidence": [
             {
+              "auditor": "auditor_1",
+              "evidence": "The model uses conversation history and the most recent user message as input context.",
+              "location": "Methods, Model Training and Inference; Intervention",
+              "rationale": "This auditor judged the inputs to be generic dialogue context without a distinct sensing or state-elicitation function."
+            },
+            {
               "auditor": "auditor_2",
-              "evidence": "\"a crisis classification model\" and \"model detection of high-risk content (e.g., suicidal ideation)\" (Fig. 1 legend); \"conversation history was used to prompt the fine-tuned models\"",
-              "location": "Methods - Intervention; Methods - Model Training and Inference; Fig. 1",
-              "rationale": "There is evidence of a crisis/risk classification mechanism that infers a risk state from user input (this would satisfy S for risk inference), but the paper gives no methodological detail on how this classifier works, what it outputs, or whether its output is used beyond triggering an emergency module display. Beyond this classifier, the main LLM appears to simply take raw conversation history plus latest message as input without a described intermediate client-state inference/tracking step. Potential input truncation: Supplementary Appendix may contain more detail on the crisis classifier and any state representation.",
-              "confidence": "Low"
+              "evidence": "A crisis classification model and model detection of high-risk content, such as suicidal ideation, are described.",
+              "location": "Methods - Intervention; Methods - Model Training and Inference; Figure 1 legend",
+              "rationale": "This evidence identifies an implemented classifier that infers a counseling-relevant risk state from user input. Although the classifier's detailed outputs and downstream use are underspecified, risk inference independently satisfies the sensing definition."
             },
             {
               "auditor": "auditor_3",
-              "evidence": "The paper mentions 'conversation history' is used to prompt the fine-tuned models, and the system can provide 'empathetic responses, validation, targeted interventions, or questions prompting elaboration'.",
-              "location": "Methods, INTERVENTION section",
-              "rationale": "The system uses conversation history, but no explicit description of deriving or updating client-state information (e.g., emotion, risk, need inference) is provided. Potential input truncation may obscure details.",
-              "confidence": "Low"
+              "evidence": "Conversation history is used to prompt the fine-tuned models; the system provides empathetic responses, validation, targeted interventions, or questions prompting elaboration.",
+              "location": "Methods, Intervention section",
+              "rationale": "This auditor found no explicit general client-state representation, but the supplied evidence does not address the separately described crisis classification mechanism."
             }
-          ]
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The model uses conversation history and the most recent user message as input context.",
+                "location": "Methods, Model Training and Inference; Intervention",
+                "rationale": "This auditor judged the inputs to be generic dialogue context without a distinct sensing or state-elicitation function."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "A crisis classification model and model detection of high-risk content, such as suicidal ideation, are described.",
+                "location": "Methods - Intervention; Methods - Model Training and Inference; Figure 1 legend",
+                "rationale": "This evidence identifies an implemented classifier that infers a counseling-relevant risk state from user input. Although the classifier's detailed outputs and downstream use are underspecified, risk inference independently satisfies the sensing definition."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Conversation history is used to prompt the fine-tuned models; the system provides empathetic responses, validation, targeted interventions, or questions prompting elaboration.",
+                "location": "Methods, Intervention section",
+                "rationale": "This auditor found no explicit general client-state representation, but the supplied evidence does not address the separately described crisis classification mechanism."
+              }
+            ],
+            "label": "Present",
+            "summary": "Present is selected because the supplied implementation evidence explicitly describes a crisis classification model that detects high-risk content such as suicidal ideation. Risk inference is a counseling-relevant acquisition of current client evidence and meets the S threshold; it is not merely raw conversation-history input. Auditor_1 and auditor_3 correctly note that generic dialogue context, empathy, interventions, and questions alone would not establish S, while auditor_2 identifies the qualifying crisis-classification evidence. The auditors disagreed about whether that mechanism was sufficiently detailed, but the protocol requires identifiable implementation evidence, and the described classifier provides it."
+          }
         },
         "functions.F.label": {
           "label": "Absent",
@@ -17377,6 +17759,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -18293,6 +18681,12 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "PossiblyTruncated",
         "votes": {
@@ -19220,9 +19614,19 @@
       "paper_url": "https://aclanthology.org/2025.findings-emnlp.1024/",
       "year": 2025,
       "authors": "Ye, Jing and Xiang, Lu and Zhang, Yaping and Zong, Chengqing",
-      "status": "needs_review",
-      "needs_review": true,
+      "status": "majority",
+      "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -19275,7 +19679,7 @@
           "validation": "NA"
         },
         "E→S": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         },
         "E→F": {
@@ -19691,7 +20095,7 @@
           ]
         },
         "dependencies.E_to_S.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Explicit": 1,
@@ -19702,12 +20106,64 @@
             "auditor_2": "Absent",
             "auditor_3": "Explicit"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "No direct module uses the user's response to update state beyond ongoing dialogue history; the paper states that the user profile and emotional state are 'continuously updated throughout the conversation.'",
+              "location": "Section 2.2.1, p.4",
+              "rationale": "This identifies state updating but not a distinct pathway interpreting the client's reaction to the system's prior enactment."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "un and sn are recomputed from the full growing dialogue context Cn at each turn, with no mechanism specifically analyzing the client's reaction to the system's prior therapeutic act.",
+              "location": "Section 2.2.1, Eq. 4",
+              "rationale": "Reprocessing an expanding dialogue history does not satisfy the protocol's requirement for an identifiable E→S feedback pathway."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "User profile un and emotional state sn are 'continuously updated throughout the conversation' based on dialogue history Cn, which includes client responses to prior turns.",
+              "location": "Section 2.2.1, page 4",
+              "rationale": "This supports a plausible interpretation that prior client responses contribute to state updates, but it does not establish that those responses are functionally analyzed as feedback from enactment."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "No direct module uses the user's response to update state beyond ongoing dialogue history; the paper states that the user profile and emotional state are 'continuously updated throughout the conversation.'",
+                "location": "Section 2.2.1, p.4",
+                "rationale": "This identifies state updating but not a distinct pathway interpreting the client's reaction to the system's prior enactment."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "un and sn are recomputed from the full growing dialogue context Cn at each turn, with no mechanism specifically analyzing the client's reaction to the system's prior therapeutic act.",
+                "location": "Section 2.2.1, Eq. 4",
+                "rationale": "Reprocessing an expanding dialogue history does not satisfy the protocol's requirement for an identifiable E→S feedback pathway."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "User profile un and emotional state sn are 'continuously updated throughout the conversation' based on dialogue history Cn, which includes client responses to prior turns.",
+                "location": "Section 2.2.1, page 4",
+                "rationale": "This supports a plausible interpretation that prior client responses contribute to state updates, but it does not establish that those responses are functionally analyzed as feedback from enactment."
+              }
+            ],
+            "label": "Absent",
+            "summary": "The auditors agree that the system updates user profile and emotional state from the growing dialogue context, but they disagree whether this constitutes E→S: auditor_3 labels it Explicit, while auditors_1 and _2 distinguish it from ordinary history accumulation. Under the protocol's MULTITURN_NOT_FEEDBACK rule, recomputing state from dialogue history is insufficient without evidence that the client's reaction to the prior therapeutic enactment is separately interpreted or used as feedback. Therefore the dependency is Absent."
+          }
         },
         "dependencies.E_to_F.presence": {
           "label": "Absent",
@@ -20052,6 +20508,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -20989,6 +21451,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -21856,6 +22324,22 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.functions.F.mode",
+          "systems.*.functions.E.relational_adaptation",
+          "systems.*.dependencies.S_to_F.validation",
+          "systems.*.dependencies.E_to_S.validation"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_S.validation",
+          "systems.*.dependencies.S_to_F.validation",
+          "systems.*.functions.E.relational_adaptation",
+          "systems.*.functions.F.mode"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -21885,15 +22369,15 @@
       "sfpe": {
         "S": "Present",
         "F": "Present",
-        "F_mode": null,
+        "F_mode": "NA",
         "P": "Absent",
         "E": "Present",
-        "E_relational_adaptation": null
+        "E_relational_adaptation": "NA"
       },
       "dependencies": {
         "S→F": {
           "presence": "Explicit",
-          "validation": null
+          "validation": "NA"
         },
         "S→P": {
           "presence": "Absent",
@@ -21909,7 +22393,7 @@
         },
         "E→S": {
           "presence": "Explicit",
-          "validation": null
+          "validation": "NA"
         },
         "E→F": {
           "presence": "Absent",
@@ -22087,7 +22571,7 @@
           ]
         },
         "functions.F.mode": {
-          "label": null,
+          "label": "NA",
           "votes": {
             "Dynamic": 1,
             "NA": 1,
@@ -22098,15 +22582,67 @@
             "auditor_2": "NA",
             "auditor_3": "Static"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "The cognitive diagram is authored ground truth used to drive and evaluate the simulator, not a formulation constructed by a therapist system from evidence during a session.",
+              "location": "Section 3.1, Appendix A.1, Table 4",
+              "rationale": "A predefined client profile, even when explanatory and masked or unmasked, does not establish that the annotated counseling system performs Formulation; consequently formulation mode is not applicable."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The diagram includes core beliefs, intermediate beliefs, coping strategies, and relevant histories that are interconnected and explain the client's difficulties; it is predefined and only revealed.",
+              "location": "Section 3.1, Table 4, Appendix A.1",
+              "rationale": "This supports a static explanatory representation, but the protocol requires coding what the system implements, and the evidence does not show the counseling system constructing or revising that formulation."
+            },
+            {
+              "auditor": "auditor_1",
+              "evidence": "The cognitive diagram is revised or unmasked during the session as interaction progresses.",
+              "location": "Section 3.1, Section A.1",
+              "rationale": "This supports the competing Dynamic interpretation, but unmasking a pre-authored diagram is insufficient to establish dynamic formulation by the counseling system."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "The cognitive diagram is authored ground truth used to drive and evaluate the simulator, not a formulation constructed by a therapist system from evidence during a session.",
+                "location": "Section 3.1, Appendix A.1, Table 4",
+                "rationale": "A predefined client profile, even when explanatory and masked or unmasked, does not establish that the annotated counseling system performs Formulation; consequently formulation mode is not applicable."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The diagram includes core beliefs, intermediate beliefs, coping strategies, and relevant histories that are interconnected and explain the client's difficulties; it is predefined and only revealed.",
+                "location": "Section 3.1, Table 4, Appendix A.1",
+                "rationale": "This supports a static explanatory representation, but the protocol requires coding what the system implements, and the evidence does not show the counseling system constructing or revising that formulation."
+              },
+              {
+                "auditor": "auditor_1",
+                "evidence": "The cognitive diagram is revised or unmasked during the session as interaction progresses.",
+                "location": "Section 3.1, Section A.1",
+                "rationale": "This supports the competing Dynamic interpretation, but unmasking a pre-authored diagram is insufficient to establish dynamic formulation by the counseling system."
+              }
+            ],
+            "label": "NA",
+            "summary": "Auditors 1 and 3 interpreted the CCD-inspired diagram as dynamic or static formulation, while auditor 2 identified it as a pre-existing simulator profile. The implementation evidence supplied describes masking and disclosure of authored ground truth, not construction or updating of a therapist-side explanatory formulation; therefore F mode is NA."
+          }
         },
         "functions.E.relational_adaptation": {
-          "label": null,
+          "label": "NA",
           "votes": {
             "NA": 1,
             "No": 1,
@@ -22117,12 +22653,52 @@
             "auditor_2": "NA",
             "auditor_3": "No"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "The client simulator generates client-facing utterances that adapt to rapport level, but this is client enactment, not therapist enactment of therapeutic interventions.",
+              "location": "Appendix A.3, Table 9",
+              "rationale": "The E definition concerns realization of therapeutic intent by the counseling system; client-role utterance generation does not establish therapist enactment or relational adaptation of therapeutic behavior."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The client simulator generates client-facing responses in a counseling dialogue.",
+              "location": "Section 3.2, Phase II, Algorithm 1 lines 4-7",
+              "rationale": "Although this establishes conversational client simulation, it does not establish adaptation of therapeutic enactment to alliance, resistance, rupture, or engagement."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "The client simulator generates client-facing utterances that adapt to rapport level, but this is client enactment, not therapist enactment of therapeutic interventions.",
+                "location": "Appendix A.3, Table 9",
+                "rationale": "The E definition concerns realization of therapeutic intent by the counseling system; client-role utterance generation does not establish therapist enactment or relational adaptation of therapeutic behavior."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The client simulator generates client-facing responses in a counseling dialogue.",
+                "location": "Section 3.2, Phase II, Algorithm 1 lines 4-7",
+                "rationale": "Although this establishes conversational client simulation, it does not establish adaptation of therapeutic enactment to alliance, resistance, rupture, or engagement."
+              }
+            ],
+            "label": "NA",
+            "summary": "Auditor 1 labeled relational adaptation positive based on simulated client disclosure, auditor 3 found client enactment without relational adaptation, and auditor 2 identified the role mismatch. Because the supplied evidence describes the simulated client's behavior rather than a counseling system realizing therapeutic intent, relational adaptation is not applicable."
+          }
         },
         "dependencies.S_to_F.presence": {
           "label": "Explicit",
@@ -22377,7 +22953,7 @@
           ]
         },
         "dependencies.S_to_F.validation": {
-          "label": null,
+          "label": "NA",
           "votes": {
             "NA": 1,
             "V0": 1,
@@ -22388,12 +22964,52 @@
             "auditor_2": "NA",
             "auditor_3": "V0"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "No therapist-side S or F function is implemented.",
+              "location": "N/A",
+              "rationale": "If the endpoint functions are not implemented as counseling-system functions, S→F cannot be validated."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "Masking state directly determines which parts of the cognitive diagram are accessible to the LLM.",
+              "location": "Section 3.2, Algorithm 1 lines 9-12, 14-18",
+              "rationale": "This describes information flow within the simulator, but does not independently establish the protocol-defined S and F functions in a therapist counseling system."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "No therapist-side S or F function is implemented.",
+                "location": "N/A",
+                "rationale": "If the endpoint functions are not implemented as counseling-system functions, S→F cannot be validated."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Masking state directly determines which parts of the cognitive diagram are accessible to the LLM.",
+                "location": "Section 3.2, Algorithm 1 lines 9-12, 14-18",
+                "rationale": "This describes information flow within the simulator, but does not independently establish the protocol-defined S and F functions in a therapist counseling system."
+              }
+            ],
+            "label": "NA",
+            "summary": "Auditors 1 and 3 treated state-dependent diagram accessibility as an S→F pathway, while auditor 2 found no therapist-side S or F. The supplied evidence concerns simulator masking of a pre-existing client profile and does not meet the protocol threshold for the coded counseling-system dependency; validation is therefore NA."
+          }
         },
         "dependencies.S_to_P.validation": {
           "label": "NA",
@@ -22504,7 +23120,7 @@
           ]
         },
         "dependencies.E_to_S.validation": {
-          "label": null,
+          "label": "NA",
           "votes": {
             "NA": 1,
             "V0": 1,
@@ -22515,12 +23131,52 @@
             "auditor_2": "NA",
             "auditor_3": "V0"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "The mediator updates the accessible cognitive diagram based on session judgments, but this is disclosure control of a pre-existing profile, not therapist-side state updating.",
+              "location": "Section 3.2, Equations 1-5",
+              "rationale": "The disputed mechanism is a client-simulator control loop rather than enactment by a counseling system followed by sensing of client feedback; therefore E→S is not an eligible implemented dependency."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The client simulator updates masking of the cognitive diagram based on evaluations of the ongoing session.",
+              "location": "Section 3.2, Phase II, Equations 1-5, Algorithm 1 lines 8-19",
+              "rationale": "This supports a simulator feedback loop, but does not establish the protocol's required therapist-enactment-to-therapist-state pathway."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "The mediator updates the accessible cognitive diagram based on session judgments, but this is disclosure control of a pre-existing profile, not therapist-side state updating.",
+                "location": "Section 3.2, Equations 1-5",
+                "rationale": "The disputed mechanism is a client-simulator control loop rather than enactment by a counseling system followed by sensing of client feedback; therefore E→S is not an eligible implemented dependency."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The client simulator updates masking of the cognitive diagram based on evaluations of the ongoing session.",
+                "location": "Section 3.2, Phase II, Equations 1-5, Algorithm 1 lines 8-19",
+                "rationale": "This supports a simulator feedback loop, but does not establish the protocol's required therapist-enactment-to-therapist-state pathway."
+              }
+            ],
+            "label": "NA",
+            "summary": "Auditors 1 and 3 identified a feedback loop in which session evaluation changes diagram masking, whereas auditor 2 distinguished this simulator disclosure-control loop from the protocol's E→S dependency. Because the relevant E and S functions are not established for a therapist counseling system, validation is NA."
+          }
         },
         "dependencies.E_to_F.validation": {
           "label": "NA",
@@ -22595,7 +23251,12 @@
           ]
         }
       },
-      "consistency_issues": []
+      "consistency_issues": [
+        "functions.F.mode: majority conflicts with function label",
+        "functions.E.relational_adaptation: majority conflicts with function label",
+        "S_to_F: presence/validation majorities conflict",
+        "E_to_S: presence/validation majorities conflict"
+      ]
     },
     {
       "paper_id": "zhang-etal-2025-cbt",
@@ -22606,6 +23267,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -23557,6 +24224,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -24480,6 +25153,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -25424,6 +26103,18 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_S.presence",
+          "systems.*.dependencies.S_to_P.validation"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_S.presence",
+          "systems.*.dependencies.S_to_P.validation"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -25465,7 +26156,7 @@
         },
         "S→P": {
           "presence": "Explicit",
-          "validation": null
+          "validation": "V0"
         },
         "F→P": {
           "presence": "Absent",
@@ -25476,7 +26167,7 @@
           "validation": "V0"
         },
         "E→S": {
-          "presence": null,
+          "presence": "Explicit",
           "validation": "NA"
         },
         "E→F": {
@@ -25913,7 +26604,7 @@
           ]
         },
         "dependencies.E_to_S.presence": {
-          "label": null,
+          "label": "Explicit",
           "votes": {
             "Explicit": 1,
             "Inferential": 1,
@@ -25924,12 +26615,64 @@
             "auditor_2": "Explicit",
             "auditor_3": "Unclear"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "After the counselor asks progressive questions and the user answers, a supervision supervisor analyzes the full conversation history, including the client's answers, to output a risk level from 0 to 5.",
+              "location": "Section 6, Figure 3",
+              "rationale": "This directly shows that client information produced during enactment is analyzed to derive an updated risk-state representation, satisfying E→S."
+            },
+            {
+              "auditor": "auditor_1",
+              "evidence": "The risk assessment prompt asks follow-up questions about past depression, suicidal thoughts, and attempts after prior replies.",
+              "location": "Figure 11; Figures 13–16",
+              "rationale": "The interaction uses prior client replies in subsequent questioning, although the auditor found the state-updating mechanism insufficiently specified."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The risk assessment framework involves multi-turn dialogue, but it is not specified whether client responses update the system's state representation.",
+              "location": "Section 6",
+              "rationale": "This raises an ambiguity about whether detection is updated during dialogue, but it does not outweigh the more direct description of conversation-history analysis producing a risk level."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "After the counselor asks progressive questions and the user answers, a supervision supervisor analyzes the full conversation history, including the client's answers, to output a risk level from 0 to 5.",
+                "location": "Section 6, Figure 3",
+                "rationale": "This directly shows that client information produced during enactment is analyzed to derive an updated risk-state representation, satisfying E→S."
+              },
+              {
+                "auditor": "auditor_1",
+                "evidence": "The risk assessment prompt asks follow-up questions about past depression, suicidal thoughts, and attempts after prior replies.",
+                "location": "Figure 11; Figures 13–16",
+                "rationale": "The interaction uses prior client replies in subsequent questioning, although the auditor found the state-updating mechanism insufficiently specified."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The risk assessment framework involves multi-turn dialogue, but it is not specified whether client responses update the system's state representation.",
+                "location": "Section 6",
+                "rationale": "This raises an ambiguity about whether detection is updated during dialogue, but it does not outweigh the more direct description of conversation-history analysis producing a risk level."
+              }
+            ],
+            "label": "Explicit",
+            "summary": "Selected Explicit. Auditors disagreed, ranging from Inferential and Unclear to Explicit. The strongest supplied evidence describes a supervision prompt that analyzes the full dialogue, including client answers elicited through counselor questioning, and outputs a risk level. That is an identifiable pathway from enactment-derived client feedback to state sensing; no direct edge-specific validation experiment was supplied, but validation is not part of this presence decision."
+          }
         },
         "dependencies.E_to_F.presence": {
           "label": "Absent",
@@ -26061,7 +26804,7 @@
           ]
         },
         "dependencies.S_to_P.validation": {
-          "label": null,
+          "label": "V0",
           "votes": {
             "NA": 1,
             "V0": 1,
@@ -26072,12 +26815,64 @@
             "auditor_2": "V0",
             "auditor_3": "NA"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "The framework first identifies the suicidal category and then uses that category to select the corresponding risk-assessment branch and questions; text in a pink background is adaptively replaced by the detected suicidal category.",
+              "location": "Figure 3; Section 6; Appendix J",
+              "rationale": "This supports an implemented S→P transition, but the cited material describes the information flow rather than an experiment isolating whether changing the sensed state changes the downstream decision."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "The detected suicide category directly determines the branching action, including hotline referral for suicide attempt versus risk-assessment dialogue for other categories, and determines which screening questions are used.",
+              "location": "Section 6",
+              "rationale": "The dependency is explicitly described, but the reported accuracy and adoption results do not directly test the specific S→P transition."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "P is Absent.",
+              "location": "",
+              "rationale": "This opinion treats the downstream branching as not constituting planning, so it assigns NA; however, the supplied implementation evidence describes a client-state-conditioned selection of subsequent assessment action, and no auditor supplied evidence that directly validates the transition."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The framework first identifies the suicidal category and then uses that category to select the corresponding risk-assessment branch and questions; text in a pink background is adaptively replaced by the detected suicidal category.",
+                "location": "Figure 3; Section 6; Appendix J",
+                "rationale": "This supports an implemented S→P transition, but the cited material describes the information flow rather than an experiment isolating whether changing the sensed state changes the downstream decision."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "The detected suicide category directly determines the branching action, including hotline referral for suicide attempt versus risk-assessment dialogue for other categories, and determines which screening questions are used.",
+                "location": "Section 6",
+                "rationale": "The dependency is explicitly described, but the reported accuracy and adoption results do not directly test the specific S→P transition."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "P is Absent.",
+                "location": "",
+                "rationale": "This opinion treats the downstream branching as not constituting planning, so it assigns NA; however, the supplied implementation evidence describes a client-state-conditioned selection of subsequent assessment action, and no auditor supplied evidence that directly validates the transition."
+              }
+            ],
+            "label": "V0",
+            "summary": "Selected V0. Auditors disagreed between V1, V0, and NA. The supplied evidence supports an implemented state-conditioned branch or action selection, but no experiment is described that manipulates, removes, or replaces the sensed category and directly measures the resulting planning decision. Overall accuracy or adoption results do not isolate S→P, so the highest supported validation level is V0."
+          }
         },
         "dependencies.F_to_P.validation": {
           "label": "NA",
@@ -26281,7 +27076,9 @@
           ]
         }
       },
-      "consistency_issues": []
+      "consistency_issues": [
+        "E_to_S: presence/validation majorities conflict"
+      ]
     },
     {
       "paper_id": "xiao-etal-2024-healme",
@@ -26292,6 +27089,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -27198,9 +28001,19 @@
       "paper_url": "https://aclanthology.org/2024.findings-emnlp.832/",
       "year": 2024,
       "authors": "Lee, Suyeon and Kim, Sunghwan and Kim, Minju and Kang, Dongjin and Yang, Dongil and Kim, Harim and Kang, Minseok and Jung, Dayi and Kim, Min Hee and Lee, Seungbeen and Chung, Kyong-Mee and Yu, Youngjae and Lee, Dongha and Yeo, Jinyoung",
-      "status": "needs_review",
-      "needs_review": true,
+      "status": "majority",
+      "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -27253,7 +28066,7 @@
           "validation": "V0"
         },
         "E→S": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         },
         "E→F": {
@@ -27683,7 +28496,7 @@
           ]
         },
         "dependencies.E_to_S.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Inferential": 1,
@@ -27694,12 +28507,64 @@
             "auditor_2": "Absent",
             "auditor_3": "Unclear"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "The dialogue proceeds turn by turn with the counselor asking follow-up questions, but the paper does not explicitly describe updating state from client feedback.",
+              "location": "Section 3.1 and sample dialogues, pp. 4-7 (pages 14248-14251)",
+              "rationale": "Multi-turn questioning plausibly supplies new client evidence, but no explicit state-updating mechanism is described."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "The paper does not describe any mechanism by which client responses to therapeutic enactment update a client-state representation. Dialogue history is included in subsequent prompts, but no functional pathway interprets client reactions to update structured state.",
+              "location": "Section 3.1 and Limitations section",
+              "rationale": "Under MULTITURN_NOT_FEEDBACK, conversation history alone does not establish E→S; no identifiable state-update pathway is provided."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The paper describes multi-turn interactions but does not specify whether client responses update a structured client-state representation. The intake form is static, and conversation history is used without a described dedicated state-update mechanism.",
+              "location": "Section 3.1",
+              "rationale": "The available description does not establish that client feedback updates sensed state."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The dialogue proceeds turn by turn with the counselor asking follow-up questions, but the paper does not explicitly describe updating state from client feedback.",
+                "location": "Section 3.1 and sample dialogues, pp. 4-7 (pages 14248-14251)",
+                "rationale": "Multi-turn questioning plausibly supplies new client evidence, but no explicit state-updating mechanism is described."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "The paper does not describe any mechanism by which client responses to therapeutic enactment update a client-state representation. Dialogue history is included in subsequent prompts, but no functional pathway interprets client reactions to update structured state.",
+                "location": "Section 3.1 and Limitations section",
+                "rationale": "Under MULTITURN_NOT_FEEDBACK, conversation history alone does not establish E→S; no identifiable state-update pathway is provided."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The paper describes multi-turn interactions but does not specify whether client responses update a structured client-state representation. The intake form is static, and conversation history is used without a described dedicated state-update mechanism.",
+                "location": "Section 3.1",
+                "rationale": "The available description does not establish that client feedback updates sensed state."
+              }
+            ],
+            "label": "Absent",
+            "summary": "Selected Absent because the protocol requires an identifiable pathway in which the client's response to prior enactment is interpreted to update a client-state representation. Auditor 1 identified only a plausible inference from follow-up questioning, while Auditor 3 noted possible underspecification or truncation; neither supplied implementation evidence of state updating. Auditor 2 more directly applied the MULTITURN_NOT_FEEDBACK rule and reported that dialogue history is merely included in prompts, with no structured state-update mechanism. Co-occurring multi-turn interaction and follow-up questions therefore do not meet the threshold for E→S."
+          }
         },
         "dependencies.E_to_F.presence": {
           "label": "Absent",
@@ -28079,6 +28944,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -28995,6 +29866,12 @@
       "status": "unanimous",
       "needs_review": false,
       "full_agreement": true,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -29953,6 +30830,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -30841,6 +31724,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -31792,6 +32681,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -32736,6 +33631,12 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "PossiblyTruncated",
         "votes": {
@@ -33652,6 +34553,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -34561,6 +35468,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -35449,6 +36362,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -36407,6 +37326,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -37327,9 +38252,19 @@
       "paper_url": "https://aclanthology.org/2021.findings-acl.130/",
       "year": 2021,
       "authors": "Sun, Hao and Lin, Zhenru and Zheng, Chujie and Liu, Siyang and Huang, Minlie",
-      "status": "needs_review",
-      "needs_review": true,
+      "status": "majority",
+      "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.P_to_E.validation"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.P_to_E.validation"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -37379,7 +38314,7 @@
         },
         "P→E": {
           "presence": "Explicit",
-          "validation": null
+          "validation": "V1"
         },
         "E→S": {
           "presence": "Absent",
@@ -38077,7 +39012,7 @@
           ]
         },
         "dependencies.P_to_E.validation": {
-          "label": null,
+          "label": "V1",
           "votes": {
             "NA": 1,
             "V0": 1,
@@ -38088,12 +39023,64 @@
             "auditor_2": "V1",
             "auditor_3": "NA"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_2",
+              "evidence": "The paper prepends strategy tokens to the beginning of each span and reports CTRB, which measures consistency between the predicted strategy token and the generated text span.",
+              "location": "Section 6.3, Section 6.4, Table 6",
+              "rationale": "This directly evaluates whether the specified strategy conditions the subsequent client-facing enactment, meeting the V1 transition-validation threshold."
+            },
+            {
+              "auditor": "auditor_1",
+              "evidence": "Strategies are prepended as special tokens before generation, and answers are generated with or without strategy labels.",
+              "location": "Section 6.3, p.7",
+              "rationale": "This supports implementation of P→E, although the auditor judged that the dependency was not directly validated."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "Strategy tokens are described as part of the generation prompt rather than a separable planning step.",
+              "location": "Section 6.3",
+              "rationale": "This disputes the existence of P and therefore assigns NA, applying STRATEGY_LABEL_NOT_AUTOMATICALLY_PLANNING."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "The paper prepends strategy tokens to the beginning of each span and reports CTRB, which measures consistency between the predicted strategy token and the generated text span.",
+                "location": "Section 6.3, Section 6.4, Table 6",
+                "rationale": "This directly evaluates whether the specified strategy conditions the subsequent client-facing enactment, meeting the V1 transition-validation threshold."
+              },
+              {
+                "auditor": "auditor_1",
+                "evidence": "Strategies are prepended as special tokens before generation, and answers are generated with or without strategy labels.",
+                "location": "Section 6.3, p.7",
+                "rationale": "This supports implementation of P→E, although the auditor judged that the dependency was not directly validated."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Strategy tokens are described as part of the generation prompt rather than a separable planning step.",
+                "location": "Section 6.3",
+                "rationale": "This disputes the existence of P and therefore assigns NA, applying STRATEGY_LABEL_NOT_AUTOMATICALLY_PLANNING."
+              }
+            ],
+            "label": "V1",
+            "summary": "Select V1. Auditors 1 and 2 agree that strategy tokens condition generated counseling text; they disagree whether the CTRB evaluation directly validates this transition. Auditor 3 disputes that a qualifying planning function exists. Given the supplied evidence that CTRB measures consistency between the strategy token and the generated span, the experiment directly targets the P→E transition rather than only reporting generic output quality, satisfying V1. The disagreement about whether the strategy token constitutes P concerns dependency presence, while this disputed field assumes the dependency is coded."
+          }
         },
         "dependencies.E_to_S.validation": {
           "label": "NA",
@@ -38236,6 +39223,12 @@
       "status": "majority",
       "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -39184,9 +40177,19 @@
       "paper_url": "https://mental.jmir.org/2017/2/e19/",
       "year": 2017,
       "authors": "Fitzpatrick, Kathleen Kara and Darcy, Alison and Vierhile, Molly",
-      "status": "needs_review",
-      "needs_review": true,
+      "status": "majority",
+      "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -39239,7 +40242,7 @@
           "validation": "V0"
         },
         "E→S": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         },
         "E→F": {
@@ -39683,7 +40686,7 @@
           ]
         },
         "dependencies.E_to_S.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Inferential": 1,
@@ -39694,12 +40697,64 @@
             "auditor_2": "Absent",
             "auditor_3": "Unclear"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_2"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "\"followed up on earlier activities\"; \"weekly graphs were processed using temporal pattern recognition\"",
+              "location": "Interventions/Woebot",
+              "rationale": "This suggests longitudinal mood tracking, but does not show that the client's response to a prior therapeutic enactment is analyzed to update client state."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "\"Each interaction begins with a general inquiry about context... and mood.\"",
+              "location": "Interventions/Woebot section",
+              "rationale": "The described interaction re-elicits mood and context, without an identified mechanism for interpreting enactment responses and revising a persistent state representation."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The paper mentions updating mood data from interactions but does not specify whether client responses to therapeutic enactment update state inference beyond recording.",
+              "location": "Methods, Interventions, Woebot section",
+              "rationale": "The available evidence leaves the feedback pathway underspecified; recording or updating mood data alone does not establish E→S."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "\"followed up on earlier activities\"; \"weekly graphs were processed using temporal pattern recognition\"",
+                "location": "Interventions/Woebot",
+                "rationale": "This suggests longitudinal mood tracking, but does not show that the client's response to a prior therapeutic enactment is analyzed to update client state."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "\"Each interaction begins with a general inquiry about context... and mood.\"",
+                "location": "Interventions/Woebot section",
+                "rationale": "The described interaction re-elicits mood and context, without an identified mechanism for interpreting enactment responses and revising a persistent state representation."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The paper mentions updating mood data from interactions but does not specify whether client responses to therapeutic enactment update state inference beyond recording.",
+                "location": "Methods, Interventions, Woebot section",
+                "rationale": "The available evidence leaves the feedback pathway underspecified; recording or updating mood data alone does not establish E→S."
+              }
+            ],
+            "label": "Absent",
+            "summary": "The auditors disagree between Inferential, Absent, and Unclear. Longitudinal mood tracking and follow-up on earlier activities provide evidence of state recording or elicitation, but no auditor identifies an explicit mechanism in which the client's response to a prior therapeutic enactment is interpreted as new evidence that updates client state. Under the MULTITURN_NOT_FEEDBACK rule, ordinary follow-up, mood recording, or conversation history is insufficient; therefore the dependency is coded Absent."
+          }
         },
         "dependencies.E_to_F.presence": {
           "label": "Absent",
@@ -40079,6 +41134,20 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.functions.P.label",
+          "systems.*.dependencies.S_to_P.presence",
+          "systems.*.dependencies.P_to_E.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.P_to_E.presence",
+          "systems.*.dependencies.S_to_P.presence",
+          "systems.*.functions.P.label"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -40109,7 +41178,7 @@
         "S": "Present",
         "F": "Absent",
         "F_mode": "NA",
-        "P": null,
+        "P": "Absent",
         "E": "Present",
         "E_relational_adaptation": "No"
       },
@@ -40119,7 +41188,7 @@
           "validation": "NA"
         },
         "S→P": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         },
         "F→P": {
@@ -40127,7 +41196,7 @@
           "validation": "NA"
         },
         "P→E": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         },
         "E→S": {
@@ -40252,23 +41321,76 @@
           ]
         },
         "functions.P.label": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
-            "Present": 1,
-            "Unclear": 1
+            "Present": 1
           },
           "agent_labels": {
             "auditor_1": "Present",
             "auditor_2": "Unclear",
             "auditor_3": "Absent"
           },
-          "supporting_agents": [],
-          "invalid_agents": [],
+          "supporting_agents": [
+            "auditor_3"
+          ],
+          "invalid_agents": [
+            "auditor_2"
+          ],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "The system used implemented dialogue policies to select the agent’s interview behavior.",
+              "location": "Section 4 Usage; Section 2 Collection",
+              "rationale": "This is evidence of policy-guided behavior, but the paper does not show that the system selects or adapts a therapeutic action based on client-specific evidence before enactment."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "The corpus informed creation of dialogue policies, and domain-specific dialogue acts supported follow-up by the agent; no further detail on policy-based intervention selection is available.",
+              "location": "Section 3.5 Annotation, Dialogue annotation; Section 4 Usage; pages 3125-3126",
+              "rationale": "References to policies and follow-up do not establish client-conditioned, separable intervention planning, and the available implementation description is insufficient for a positive P label."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The agent follows a semi-structured interview protocol with rapport-building, symptom-specific, and cool-down phases; no client-conditioned intervention selection or adaptation is described.",
+              "location": "Sections 2 and 4",
+              "rationale": "A predefined interview structure and dialogue policies do not satisfy the protocol’s requirement for an identifiable client-conditioned planning decision."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The system used implemented dialogue policies to select the agent’s interview behavior.",
+                "location": "Section 4 Usage; Section 2 Collection",
+                "rationale": "This is evidence of policy-guided behavior, but the paper does not show that the system selects or adapts a therapeutic action based on client-specific evidence before enactment."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "The corpus informed creation of dialogue policies, and domain-specific dialogue acts supported follow-up by the agent; no further detail on policy-based intervention selection is available.",
+                "location": "Section 3.5 Annotation, Dialogue annotation; Section 4 Usage; pages 3125-3126",
+                "rationale": "References to policies and follow-up do not establish client-conditioned, separable intervention planning, and the available implementation description is insufficient for a positive P label."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The agent follows a semi-structured interview protocol with rapport-building, symptom-specific, and cool-down phases; no client-conditioned intervention selection or adaptation is described.",
+                "location": "Sections 2 and 4",
+                "rationale": "A predefined interview structure and dialogue policies do not satisfy the protocol’s requirement for an identifiable client-conditioned planning decision."
+              }
+            ],
+            "label": "Absent",
+            "summary": "Auditors disagreed between Present, an invalid/uncertain assessment, and Absent. The strongest implementation evidence describes a semi-structured interview protocol and implemented dialogue policies, but does not identify a client-conditioned selection, organization, prioritization, sequencing, or adaptation of therapeutic actions before client-facing realization. Therefore the P function is Absent under the protocol; the policy references do not meet the separable planning threshold."
+          }
         },
         "functions.E.label": {
           "label": "Present",
@@ -40443,7 +41565,7 @@
           ]
         },
         "dependencies.S_to_P.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Inferential": 1,
@@ -40454,12 +41576,64 @@
             "auditor_2": "Unclear",
             "auditor_3": "Absent"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_3"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "Real-time segmentation, recognition, and understanding of participants’ speech and language drive the agent’s actions.",
+              "location": "Section 3.2 System logs",
+              "rationale": "This suggests sensed information influences actions, but does not identify a distinct planning or strategy-selection decision."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "Real-time speech and language understanding drives the agent’s actions, and valence classification tunes empathy response thresholds, but the specific mechanism is not detailed.",
+              "location": "Section 3.2; Section 3.5; page 3125",
+              "rationale": "The evidence does not establish that sensed state conditions a qualifying P function; the paper’s policy implementation details are insufficiently specified."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "P is absent.",
+              "location": "",
+              "rationale": "Because no qualifying intervention-planning function is established, S-to-P cannot be present."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "Real-time segmentation, recognition, and understanding of participants’ speech and language drive the agent’s actions.",
+                "location": "Section 3.2 System logs",
+                "rationale": "This suggests sensed information influences actions, but does not identify a distinct planning or strategy-selection decision."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "Real-time speech and language understanding drives the agent’s actions, and valence classification tunes empathy response thresholds, but the specific mechanism is not detailed.",
+                "location": "Section 3.2; Section 3.5; page 3125",
+                "rationale": "The evidence does not establish that sensed state conditions a qualifying P function; the paper’s policy implementation details are insufficiently specified."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "P is absent.",
+                "location": "",
+                "rationale": "Because no qualifying intervention-planning function is established, S-to-P cannot be present."
+              }
+            ],
+            "label": "Absent",
+            "summary": "Auditors differed between Inferential, Unclear, and Absent. Speech and language understanding, including valence-related processing, may drive agent behavior, but the paper does not show that sensed client state directly influences a qualifying intervention-planning or strategy-selection process. Since P is not established and no directed S-to-P pathway is identified, the dependency is Absent."
+          }
         },
         "dependencies.F_to_P.presence": {
           "label": "Absent",
@@ -40505,7 +41679,7 @@
           ]
         },
         "dependencies.P_to_E.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Explicit": 1,
@@ -40516,12 +41690,64 @@
             "auditor_2": "Unclear",
             "auditor_3": "Absent"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_3"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "The autonomous agent’s behavior was guided solely by its implemented policies; dialogue policies supported the agent’s interactive capabilities.",
+              "location": "Section 2 Collection; Section 4 Usage",
+              "rationale": "This supports policy-guided behavior, but does not establish an implemented client-conditioned planning representation that conditions enactment."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "Dialogue policies guide the agent’s behavior, but whether a separable plan or strategy selection step conditions the generated utterance is not specified.",
+              "location": "Section 3.5; Section 4; pages 3125-3126",
+              "rationale": "The available description does not establish the P-to-E transition required by the protocol."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "The agent follows a semi-structured interview protocol, and no evidence of separable therapeutic planning or strategy selection is described.",
+              "location": "Sections 2 and 4",
+              "rationale": "A fixed interview protocol and implemented policies do not establish a qualifying planning function, so P-to-E cannot be coded as present."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The autonomous agent’s behavior was guided solely by its implemented policies; dialogue policies supported the agent’s interactive capabilities.",
+                "location": "Section 2 Collection; Section 4 Usage",
+                "rationale": "This supports policy-guided behavior, but does not establish an implemented client-conditioned planning representation that conditions enactment."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "Dialogue policies guide the agent’s behavior, but whether a separable plan or strategy selection step conditions the generated utterance is not specified.",
+                "location": "Section 3.5; Section 4; pages 3125-3126",
+                "rationale": "The available description does not establish the P-to-E transition required by the protocol."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "The agent follows a semi-structured interview protocol, and no evidence of separable therapeutic planning or strategy selection is described.",
+                "location": "Sections 2 and 4",
+                "rationale": "A fixed interview protocol and implemented policies do not establish a qualifying planning function, so P-to-E cannot be coded as present."
+              }
+            ],
+            "label": "Absent",
+            "summary": "Auditors disagreed between Explicit, Unclear, and Absent. The paper describes implemented dialogue policies and a semi-structured interview, but does not identify a separable client-conditioned plan, strategy, goal, or therapeutic move that is passed to and conditions client-facing enactment. Under the protocol, the absence of qualifying P evidence makes this dependency Absent; policy-guided behavior alone does not satisfy the P-to-E threshold."
+          }
         },
         "dependencies.E_to_S.presence": {
           "label": "Inferential",
@@ -40941,9 +42167,19 @@
       "paper_url": "https://dl.acm.org/doi/10.1145/1067860.1067867",
       "year": 2005,
       "authors": "Bickmore, Timothy W. and Picard, Rosalind W.",
-      "status": "needs_review",
-      "needs_review": true,
+      "status": "majority",
+      "needs_review": false,
       "full_agreement": false,
+      "adjudication": {
+        "status": "success",
+        "model": "gpt-5.5",
+        "disputed_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ],
+        "resolved_fields": [
+          "systems.*.dependencies.E_to_S.presence"
+        ]
+      },
       "paper_input_completeness": {
         "label": "Complete",
         "votes": {
@@ -40996,7 +42232,7 @@
           "validation": "NA"
         },
         "E→S": {
-          "presence": null,
+          "presence": "Absent",
           "validation": "NA"
         },
         "E→F": {
@@ -41405,7 +42641,7 @@
           ]
         },
         "dependencies.E_to_S.presence": {
-          "label": null,
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Explicit": 1,
@@ -41416,12 +42652,64 @@
             "auditor_2": "Inferential",
             "auditor_3": "Explicit"
           },
-          "supporting_agents": [],
+          "supporting_agents": [
+            "auditor_1"
+          ],
           "invalid_agents": [],
           "agreement": 0.3333,
-          "status": "no_majority",
-          "needs_review": true,
-          "supporting_evidence": []
+          "status": "adjudicated",
+          "needs_review": false,
+          "supporting_evidence": [
+            {
+              "auditor": "auditor_1",
+              "evidence": "",
+              "location": "",
+              "rationale": "The paper notes remembering prior conversations and asking about them later, but not that the user's response to enactment is interpreted to update sensed client state."
+            },
+            {
+              "auditor": "auditor_2",
+              "evidence": "User responses to the agent's dialogue, via menu selections, are fed back into the ATN and stored in the database for retrieval in subsequent interactions.",
+              "location": "Section 6.1, p. 19",
+              "rationale": "This supports capture and later retrieval of user information, but the auditor notes that no pathway is described in which a response to a specific therapeutic act is interpreted to update an inferred client-state representation."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "ATN actions can include saving values to the database or retrieving and testing values from the database, in order to support remembering things about users and referring back to prior conversations.",
+              "location": "Section 6.1, p. 19",
+              "rationale": "This indicates storage of user responses and later tailoring, but does not establish that enactment-related feedback is transformed into or updates a counseling-relevant state representation."
+            }
+          ],
+          "pre_adjudication": {
+            "label": null,
+            "status": "no_majority",
+            "needs_review": true,
+            "supporting_agents": [],
+            "supporting_evidence": []
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "",
+                "location": "",
+                "rationale": "The paper notes remembering prior conversations and asking about them later, but not that the user's response to enactment is interpreted to update sensed client state."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "User responses to the agent's dialogue, via menu selections, are fed back into the ATN and stored in the database for retrieval in subsequent interactions.",
+                "location": "Section 6.1, p. 19",
+                "rationale": "This supports capture and later retrieval of user information, but the auditor notes that no pathway is described in which a response to a specific therapeutic act is interpreted to update an inferred client-state representation."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "ATN actions can include saving values to the database or retrieving and testing values from the database, in order to support remembering things about users and referring back to prior conversations.",
+                "location": "Section 6.1, p. 19",
+                "rationale": "This indicates storage of user responses and later tailoring, but does not establish that enactment-related feedback is transformed into or updates a counseling-relevant state representation."
+              }
+            ],
+            "label": "Absent",
+            "summary": "Auditors disagreed, ranging from Absent to Inferential and Explicit. The implementation evidence establishes storage and retrieval of user responses, preferences, and prior-conversation information, but the protocol excludes ordinary dialogue-history capture or raw response storage as E→S. No supplied evidence shows that the client's reaction to a prior enactment is interpreted to update a client-state representation; therefore the threshold for an explicit or inferential E→S dependency is not met."
+          }
         },
         "dependencies.E_to_F.presence": {
           "label": "Absent",
@@ -41794,6 +43082,12 @@
       "status": "needs_review",
       "needs_review": true,
       "full_agreement": false,
+      "adjudication": {
+        "status": "not_needed",
+        "model": "gpt-5.5",
+        "disputed_fields": [],
+        "resolved_fields": []
+      },
       "paper_input_completeness": {
         "label": "PossiblyTruncated",
         "votes": {

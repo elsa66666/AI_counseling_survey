@@ -3,9 +3,10 @@ import json
 from pathlib import Path
 
 from .auditor import AuditResult, audit_signature, load_existing, run_single_auditor
-from .config import AUDITOR_IDS
+from .config import AUDITOR_IDS, JUDGE_ID
 from .data_loader import load_papers, load_prompt
 from .fulltext import retrieve
+from .judge import JudgeResult, collect_disputes, load_saved_decisions, run_judge
 from .schema import build_schema
 from .stats import export_batch
 from .storage import OutputLock, fingerprint, load_json, save_json, atomic_write
@@ -22,13 +23,14 @@ def select_papers(papers, paper_id, limit):
 
 def run_batch(*, papers_path, prompt_path, output, cache, configs, limit=1, paper_id=None,
               overwrite=False, workers=1, sources_path=None, auditor_fn=run_single_auditor,
-              retrieve_fn=retrieve, log=print):
+              judge_fn=run_judge, retrieve_fn=retrieve, log=print):
     protocol = load_prompt(prompt_path)
     schema = build_schema(protocol)
     papers = select_papers(load_papers(papers_path), paper_id, limit)
     sources = load_json(sources_path) if sources_path else {}
     manifest = {"protocol_sha256": fingerprint(protocol), "schema": schema,
                 "auditors": {a: configs[a].public() for a in AUDITOR_IDS},
+                "judge": configs[JUDGE_ID].public() if JUDGE_ID in configs else None,
                 "input_dataset": str(Path(papers_path).resolve())}
     with OutputLock(output):
         manifest_path = output / "experiment.json"
@@ -42,7 +44,7 @@ def run_batch(*, papers_path, prompt_path, output, cache, configs, limit=1, pape
         save_json(manifest_path, manifest)
         atomic_write(output / "protocol.md", protocol)
         save_json(output / "audit.schema.json", schema)
-        calls = 0
+        calls = judge_calls = 0
         for index, paper in enumerate(papers, 1):
             log(f"[paper {index}/{len(papers)}] paper_id={paper.paper_id}")
             directory = output / paper.paper_id
@@ -78,10 +80,29 @@ def run_batch(*, papers_path, prompt_path, output, cache, configs, limit=1, pape
                     for result in results:
                         log(f"  {result.auditor_id}: {result.status}" + (f" ({result.error_type})" if result.error_type else ""))
             calls += sum(r.calls for r in results)
-            consensus = build_consensus(paper.metadata, {r.auditor_id: r.audit for r in results})
+            audits = {r.auditor_id: r.audit for r in results}
+            initial = build_consensus(paper.metadata, audits)
+            disputes = collect_disputes(initial, audits)
+            judge_config = configs.get(JUDGE_ID)
+            if disputes and judge_config is not None:
+                judged = judge_fn(paper.metadata, disputes, judge_config, protocol=protocol,
+                                  output=output, overwrite=overwrite)
+            elif disputes:
+                judged = JudgeResult("configuration_missing", {})
+            else:
+                judged = JudgeResult("not_needed", {})
+            judge_calls += judged.calls
+            judge_meta = {"status": judged.status,
+                          "model": judge_config.model if judge_config else None,
+                          "disputed_fields": [item["field"] for item in disputes],
+                          "resolved_fields": list(judged.decisions)}
+            if judged.error_type:
+                judge_meta["error_type"] = judged.error_type
+            consensus = build_consensus(paper.metadata, audits, judged.decisions, judge_meta)
             save_json(directory / "consensus.json", consensus)
+            log(f"  judge: {judged.status}" if disputes else "  judge: not_needed")
             log(f"  consensus: {consensus['status']}")
-        return export_batch(output, schema, calls)
+        return export_batch(output, schema, calls, judge_calls)
 
 
 def rebuild_consensus(output, *, paper_id=None, limit=None, log=print):
@@ -103,7 +124,13 @@ def rebuild_consensus(output, *, paper_id=None, limit=None, log=print):
             # A failed/new input must not resurrect stale audits of a previous input.
             if (path.parent / "input_error.json").exists():
                 audits = dict.fromkeys(AUDITOR_IDS)
-            result = build_consensus(metadata, audits)
+            initial = build_consensus(metadata, audits)
+            disputes = collect_disputes(initial, audits)
+            decisions = load_saved_decisions(path.parent / "judge", disputes) if disputes else {}
+            judge_meta = {"status": "loaded" if decisions else "not_needed" if not disputes else "not_run",
+                          "model": None, "disputed_fields": [item["field"] for item in disputes],
+                          "resolved_fields": list(decisions)}
+            result = build_consensus(metadata, audits, decisions, judge_meta)
             save_json(path.parent / "consensus.json", result)
             log(f"{metadata['paper_id']}: {result['status']} (offline)")
-        return export_batch(output, schema, 0)
+        return export_batch(output, schema, 0, 0)

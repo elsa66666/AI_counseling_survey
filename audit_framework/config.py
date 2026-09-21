@@ -6,6 +6,8 @@ from pathlib import Path
 from dotenv import dotenv_values
 
 AUDITOR_IDS = ("auditor_1", "auditor_2", "auditor_3")
+JUDGE_ID = "judge"
+CONFIG_IDS = (*AUDITOR_IDS, JUDGE_ID)
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -30,8 +32,8 @@ def load_configs(path: Path, env_path: Path):
     # itself export OPENAI_* variables for an unrelated API/account.
     env = {**os.environ, **dotenv_values(env_path)}
     entries = json.loads(path.read_text(encoding="utf-8"))
-    if set(entries) != set(AUDITOR_IDS):
-        raise ValueError("Configuration must define exactly auditor_1, auditor_2, auditor_3")
+    if set(entries) != set(CONFIG_IDS):
+        raise ValueError("Configuration must define auditor_1, auditor_2, auditor_3, and judge")
     result = {}
     for agent, entry in entries.items():
         entry = dict(entry)

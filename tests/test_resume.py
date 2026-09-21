@@ -19,7 +19,8 @@ class ResumeTests(unittest.TestCase):
         with TemporaryDirectory() as tmp:
             directory = Path(tmp)
             entries = {a: {"model": "test", "api": "openai", "output_mode": "json_schema",
-                           "api_key_env": "OPENAI_API_KEY", "base_url_env": "OPENAI_BASE_URL"} for a in AUDITOR_IDS}
+                           "api_key_env": "OPENAI_API_KEY", "base_url_env": "OPENAI_BASE_URL"}
+                       for a in (*AUDITOR_IDS, "judge")}
             save_json(directory / "auditors.json", entries)
             (directory / ".env").write_text("OPENAI_API_KEY=local-key\nOPENAI_BASE_URL=https://local.example/v1\n")
             with patch.dict("os.environ", {"OPENAI_API_KEY": "hosting-key", "OPENAI_BASE_URL": "https://hosting.example/v1"}):

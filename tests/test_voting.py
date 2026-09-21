@@ -26,8 +26,8 @@ class VotingTests(unittest.TestCase):
 
     def test_nested_fields_and_evidence(self):
         records = {a: audit() for a in AUDITOR_IDS}
-        for agent, s, f, v in zip(AUDITOR_IDS, ["Present", "Present", "Unclear"],
-                                 ["Unclear", "Present", "Unclear"], ["V0", "V1", "V2"]):
+        for agent, s, f, v in zip(AUDITOR_IDS, ["Present", "Present", "Absent"],
+                                 ["Absent", "Present", "INVALID"], ["V0", "V1", "V2"]):
             system = records[agent]["systems"][0]
             system["functions"]["S"].update(label=s, evidence=agent)
             system["functions"]["F"]["label"] = f
@@ -36,7 +36,7 @@ class VotingTests(unittest.TestCase):
         result = build_consensus(paper().metadata, records)
         fields = result["systems"][0]["fields"]
         self.assertEqual(fields["functions.S.label"]["label"], "Present")
-        self.assertEqual(fields["functions.F.label"]["label"], "Unclear")
+        self.assertIsNone(fields["functions.F.label"]["label"])
         self.assertIsNone(fields["dependencies.P_to_E.validation"]["label"])
         self.assertEqual([e["evidence"] for e in fields["functions.S.label"]["supporting_evidence"]], ["auditor_1", "auditor_2"])
         self.assertEqual(records, before)
@@ -68,10 +68,29 @@ class VotingTests(unittest.TestCase):
         records["auditor_1"]["systems"][0]["functions"]["F"].update(label="Absent", mode="NA")
         for edge in ("S_to_F", "F_to_P", "E_to_F"):
             records["auditor_1"]["systems"][0]["dependencies"][edge].update(presence="Absent", validation="NA")
-        records["auditor_2"]["systems"][0]["functions"]["F"].update(label="Unclear", mode="NA")
+        records["auditor_2"]["systems"][0]["functions"]["F"].update(label="INVALID", mode="NA")
         fields = build_consensus(paper().metadata, records)["systems"][0]
         self.assertIsNone(fields["fields"]["functions.F.label"]["label"])
         self.assertTrue(fields["needs_review"])
+
+    def test_judge_adjudication_preserves_first_stage_votes_and_adds_evidence(self):
+        records = {a: audit() for a in AUDITOR_IDS}
+        records["auditor_1"]["systems"][0]["functions"]["S"].update(label="Present", evidence="positive")
+        records["auditor_2"]["systems"][0]["functions"]["S"].update(label="Absent", evidence="negative")
+        records["auditor_3"]["systems"][0]["functions"]["S"]["label"] = "INVALID"
+        decision = {"label": "Present", "evidence": [{"auditor": "auditor_1", "evidence": "positive",
+                    "location": "Methods", "rationale": "Implements state inference"}],
+                    "summary": "The positive evidence satisfies S."}
+        result = build_consensus(paper().metadata, records,
+                                 {"systems.*.functions.S.label": decision},
+                                 {"status": "success", "model": "gpt-5.5"})
+        field = result["systems"][0]["fields"]["functions.S.label"]
+        self.assertEqual(field["label"], "Present")
+        self.assertEqual(field["status"], "adjudicated")
+        self.assertEqual(field["agent_labels"], {"auditor_1": "Present", "auditor_2": "Absent",
+                                                  "auditor_3": "INVALID"})
+        self.assertEqual(field["supporting_evidence"], decision["evidence"])
+        self.assertEqual(field["pre_adjudication"]["status"], "no_majority")
 
 
 if __name__ == "__main__":
