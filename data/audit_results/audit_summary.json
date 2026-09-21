@@ -1,0 +1,16 @@
+{
+  "total_papers": 47,
+  "completed_papers": 47,
+  "failed_papers": 0,
+  "total_auditor_calls": 305,
+  "auditor_calls_this_run": 0,
+  "auditor_failures": 0,
+  "unanimous_fields": 675,
+  "majority_fields": 341,
+  "no_majority_fields": 18,
+  "papers_with_full_agreement": 1,
+  "papers_with_at_least_one_disagreement": 46,
+  "papers_requiring_manual_review": 16,
+  "field_count_scope": "Core audit fields plus paper/system completeness; confidence is not voted",
+  "disagreement_count_includes_missing_votes": true
+}

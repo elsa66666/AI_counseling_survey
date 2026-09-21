@@ -1,0 +1,32 @@
+{
+  "auditor_1": {
+    "model": "gpt-5.4-mini",
+    "api": "openai",
+    "output_mode": "json_schema",
+    "api_key_env": "OPENAI_API_KEY",
+    "base_url_env": "OPENAI_BASE_URL",
+    "temperature": null,
+    "max_tokens": 16384,
+    "timeout": 180
+  },
+  "auditor_2": {
+    "model": "claude-sonnet-5",
+    "api": "anthropic",
+    "output_mode": "json_schema",
+    "api_key_env": "OPENAI_API_KEY",
+    "base_url_env": "OPENAI_BASE_URL",
+    "temperature": null,
+    "max_tokens": 16384,
+    "timeout": 180
+  },
+  "auditor_3": {
+    "model": "deepseek-v3.2",
+    "api": "openai",
+    "output_mode": "json_object",
+    "api_key_env": "OPENAI_API_KEY",
+    "base_url_env": "OPENAI_BASE_URL",
+    "temperature": null,
+    "max_tokens": 16384,
+    "timeout": 180
+  }
+}

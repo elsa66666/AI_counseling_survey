@@ -1,0 +1,642 @@
+{
+  "type": "object",
+  "properties": {
+    "paper_title": {
+      "type": "string"
+    },
+    "paper_input_completeness": {
+      "type": "string",
+      "enum": [
+        "Complete",
+        "PossiblyTruncated"
+      ]
+    },
+    "systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "system_name": {
+            "type": "string"
+          },
+          "system_input_completeness": {
+            "type": "string",
+            "enum": [
+              "Complete",
+              "PossiblyTruncated",
+              "NotApplicable"
+            ]
+          },
+          "annotation_unit_notes": {
+            "type": "string"
+          },
+          "functions": {
+            "type": "object",
+            "properties": {
+              "S": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "enum": [
+                      "Present",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "label",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "F": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "enum": [
+                      "Present",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "Static",
+                      "Dynamic",
+                      "Unclear",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "label",
+                  "mode",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "P": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "enum": [
+                      "Present",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "label",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "E": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "enum": [
+                      "Present",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "relational_adaptation": {
+                    "type": "string",
+                    "enum": [
+                      "Yes",
+                      "No",
+                      "Unclear",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "label",
+                  "relational_adaptation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "S",
+              "F",
+              "P",
+              "E"
+            ],
+            "additionalProperties": false
+          },
+          "dependencies": {
+            "type": "object",
+            "properties": {
+              "S_to_F": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "S_to_P": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "F_to_P": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "P_to_E": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "E_to_S": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "E_to_F": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              },
+              "E_to_P": {
+                "type": "object",
+                "properties": {
+                  "presence": {
+                    "type": "string",
+                    "enum": [
+                      "Explicit",
+                      "Inferential",
+                      "Absent",
+                      "Unclear"
+                    ]
+                  },
+                  "validation": {
+                    "type": "string",
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "NA"
+                    ]
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "High",
+                      "Medium",
+                      "Low"
+                    ]
+                  }
+                },
+                "required": [
+                  "presence",
+                  "validation",
+                  "evidence",
+                  "location",
+                  "rationale",
+                  "confidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "S_to_F",
+              "S_to_P",
+              "F_to_P",
+              "P_to_E",
+              "E_to_S",
+              "E_to_F",
+              "E_to_P"
+            ],
+            "additionalProperties": false
+          },
+          "borderline_cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rule_id": {
+                  "type": "string",
+                  "enum": [
+                    "PROFILE_NOT_SENSING",
+                    "MEMORY_NOT_FORMULATION",
+                    "DIAGNOSIS_NOT_FORMULATION",
+                    "SUMMARY_NOT_FORMULATION",
+                    "STRATEGY_LABEL_NOT_AUTOMATICALLY_PLANNING",
+                    "RESPONSE_GENERATION_NOT_PLANNING",
+                    "MULTITURN_NOT_FEEDBACK",
+                    "ARCHITECTURE_NAME_NOT_EVIDENCE",
+                    "P_VS_E_INTERMEDIATE_PLAN",
+                    "STATIC_VS_DYNAMIC_FORMULATION",
+                    "RELATIONAL_ADAPTATION_BOUNDARY",
+                    "COMPONENT_COOCCURRENCE_NOT_DEPENDENCY",
+                    "ABSTRACT_METHOD_CONFLICT",
+                    "INPUT_TRUNCATION",
+                    "OTHER"
+                  ]
+                },
+                "item": {
+                  "type": "string"
+                },
+                "decision": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "rule_id",
+                "item",
+                "decision",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "overall_notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "system_name",
+          "system_input_completeness",
+          "annotation_unit_notes",
+          "functions",
+          "dependencies",
+          "borderline_cases",
+          "overall_notes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "paper_title",
+    "paper_input_completeness",
+    "systems"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,425 @@
+[
+  {
+    "paper_id": "weizenbaum1966eliza",
+    "title": "ELIZA---A Computer Program for the Study of Natural Language Communication Between Man and Machine",
+    "year": 1966,
+    "authors": "Weizenbaum, Joseph",
+    "paper_url": "https://dl.acm.org/doi/10.1145/365153.365168",
+    "url": "https://dl.acm.org/doi/10.1145/365153.365168",
+    "bib": "@article{weizenbaum1966eliza,\n  title = {{ELIZA}---A Computer Program for the Study of Natural Language Communication Between Man and Machine},\n  author = {Weizenbaum, Joseph},\n  journal = {Communications of the ACM},\n  volume = {9},\n  number = {1},\n  pages = {36--45},\n  year = {1966},\n  publisher = {Association for Computing Machinery},\n  doi = {10.1145/365153.365168},\n  url = {https://dl.acm.org/doi/10.1145/365153.365168}\n}"
+  },
+  {
+    "paper_id": "bickmore2005relationships",
+    "title": "Establishing and Maintaining Long-Term Human--Computer Relationships",
+    "year": 2005,
+    "authors": "Bickmore, Timothy W. and Picard, Rosalind W.",
+    "paper_url": "https://dl.acm.org/doi/10.1145/1067860.1067867",
+    "url": "https://dl.acm.org/doi/10.1145/1067860.1067867",
+    "bib": "@article{bickmore2005relationships,\n  title = {Establishing and Maintaining Long-Term Human--Computer Relationships},\n  author = {Bickmore, Timothy W. and Picard, Rosalind W.},\n  journal = {ACM Transactions on Computer-Human Interaction},\n  volume = {12},\n  number = {2},\n  pages = {293--327},\n  year = {2005},\n  publisher = {Association for Computing Machinery},\n  doi = {10.1145/1067860.1067867},\n  url = {https://dl.acm.org/doi/10.1145/1067860.1067867}\n}"
+  },
+  {
+    "paper_id": "fitzpatrick2017woebot",
+    "title": "Delivering Cognitive Behavior Therapy to Young Adults With Symptoms of Depression and Anxiety Using a Fully Automated Conversational Agent (Woebot): A Randomized Controlled Trial",
+    "year": 2017,
+    "authors": "Fitzpatrick, Kathleen Kara and Darcy, Alison and Vierhile, Molly",
+    "paper_url": "https://mental.jmir.org/2017/2/e19/",
+    "url": "https://mental.jmir.org/2017/2/e19/",
+    "bib": "@article{fitzpatrick2017woebot,\n  title = {Delivering Cognitive Behavior Therapy to Young Adults With Symptoms of Depression and Anxiety Using a Fully Automated Conversational Agent ({Woebot}): A Randomized Controlled Trial},\n  author = {Fitzpatrick, Kathleen Kara and Darcy, Alison and Vierhile, Molly},\n  journal = {JMIR Mental Health},\n  volume = {4},\n  number = {2},\n  pages = {e19},\n  year = {2017},\n  doi = {10.2196/mental.7785},\n  url = {https://mental.jmir.org/2017/2/e19/}\n}"
+  },
+  {
+    "paper_id": "rashkin-etal-2019-towards",
+    "title": "Towards Empathetic Open-domain Conversation Models: A New Benchmark and Dataset",
+    "year": 2019,
+    "authors": "Rashkin, Hannah and Smith, Eric Michael and Li, Margaret and Boureau, Y-Lan",
+    "paper_url": "https://aclanthology.org/P19-1534/",
+    "url": "https://aclanthology.org/P19-1534/",
+    "bib": "@inproceedings{rashkin-etal-2019-towards,\n  title = {Towards Empathetic Open-domain Conversation Models: A New Benchmark and Dataset},\n  author = {Rashkin, Hannah and Smith, Eric Michael and Li, Margaret and Boureau, Y-Lan},\n  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\n  pages = {5370--5381},\n  year = {2019},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/P19-1534},\n  url = {https://aclanthology.org/P19-1534/}\n}"
+  },
+  {
+    "paper_id": "liu-etal-2021-towards",
+    "title": "Towards Emotional Support Dialog Systems",
+    "year": 2021,
+    "authors": "Liu, Siyang and Zheng, Chujie and Demasi, Orianna and Sabour, Sahand and Li, Yu and Yu, Zhou and Jiang, Yong and Huang, Minlie",
+    "paper_url": "https://aclanthology.org/2021.acl-long.269/",
+    "url": "https://aclanthology.org/2021.acl-long.269/",
+    "bib": "@inproceedings{liu-etal-2021-towards,\n  title = {Towards Emotional Support Dialog Systems},\n  author = {Liu, Siyang and Zheng, Chujie and Demasi, Orianna and Sabour, Sahand and Li, Yu and Yu, Zhou and Jiang, Yong and Huang, Minlie},\n  booktitle = {Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers)},\n  pages = {3469--3483},\n  year = {2021},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2021.acl-long.269},\n  url = {https://aclanthology.org/2021.acl-long.269/}\n}"
+  },
+  {
+    "paper_id": "sun-etal-2021-psyqa",
+    "title": "PsyQA: A Chinese Dataset for Generating Long Counseling Text for Mental Health Support",
+    "year": 2021,
+    "authors": "Sun, Hao and Lin, Zhenru and Zheng, Chujie and Liu, Siyang and Huang, Minlie",
+    "paper_url": "https://aclanthology.org/2021.findings-acl.130/",
+    "url": "https://aclanthology.org/2021.findings-acl.130/",
+    "bib": "@inproceedings{sun-etal-2021-psyqa,\n  title = {{PsyQA}: A {Chinese} Dataset for Generating Long Counseling Text for Mental Health Support},\n  author = {Sun, Hao and Lin, Zhenru and Zheng, Chujie and Liu, Siyang and Huang, Minlie},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021},\n  pages = {1489--1503},\n  year = {2021},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2021.findings-acl.130},\n  url = {https://aclanthology.org/2021.findings-acl.130/}\n}"
+  },
+  {
+    "paper_id": "cheng-etal-2022-improving",
+    "title": "Improving Multi-turn Emotional Support Dialogue Generation with Lookahead Strategy Planning",
+    "year": 2022,
+    "authors": "Cheng, Yi and Liu, Wenge and Li, Wenjie and Wang, Jiashuo and Zhao, Ruihui and Liu, Bang and Liang, Xiaodan and Zheng, Yefeng",
+    "paper_url": "https://aclanthology.org/2022.emnlp-main.195/",
+    "url": "https://aclanthology.org/2022.emnlp-main.195/",
+    "bib": "@inproceedings{cheng-etal-2022-improving,\n  title = {Improving Multi-turn Emotional Support Dialogue Generation with Lookahead Strategy Planning},\n  author = {Cheng, Yi and Liu, Wenge and Li, Wenjie and Wang, Jiashuo and Zhao, Ruihui and Liu, Bang and Liang, Xiaodan and Zheng, Yefeng},\n  booktitle = {Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing},\n  pages = {3014--3026},\n  year = {2022},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2022.emnlp-main.195},\n  url = {https://aclanthology.org/2022.emnlp-main.195/}\n}"
+  },
+  {
+    "paper_id": "li-etal-2023-understanding",
+    "title": "Understanding Client Reactions in Online Mental Health Counseling",
+    "year": 2023,
+    "authors": "Li, Anqi and Ma, Lizhi and Mei, Yaling and He, Hongliang and Zhang, Shuai and Qiu, Huachuan and Lan, Zhenzhong",
+    "paper_url": "https://aclanthology.org/2023.acl-long.577/",
+    "url": "https://aclanthology.org/2023.acl-long.577/",
+    "bib": "@inproceedings{li-etal-2023-understanding,\n  title = {Understanding Client Reactions in Online Mental Health Counseling},\n  author = {Li, Anqi and Ma, Lizhi and Mei, Yaling and He, Hongliang and Zhang, Shuai and Qiu, Huachuan and Lan, Zhenzhong},\n  booktitle = {Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {10358--10376},\n  year = {2023},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2023.acl-long.577},\n  url = {https://aclanthology.org/2023.acl-long.577/}\n}"
+  },
+  {
+    "paper_id": "zhao-etal-2023-transesc",
+    "title": "TransESC: Smoothing Emotional Support Conversation via Turn-Level State Transition",
+    "year": 2023,
+    "authors": "Zhao, Weixiang and Zhao, Yanyan and Wang, Shilong and Qin, Bing",
+    "paper_url": "https://aclanthology.org/2023.findings-acl.420/",
+    "url": "https://aclanthology.org/2023.findings-acl.420/",
+    "bib": "@inproceedings{zhao-etal-2023-transesc,\n  title = {{TransESC}: Smoothing Emotional Support Conversation via Turn-Level State Transition},\n  author = {Zhao, Weixiang and Zhao, Yanyan and Wang, Shilong and Qin, Bing},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2023},\n  pages = {6725--6739},\n  year = {2023},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2023.findings-acl.420},\n  url = {https://aclanthology.org/2023.findings-acl.420/}\n}"
+  },
+  {
+    "paper_id": "deng-etal-2023-knowledge",
+    "title": "Knowledge-Enhanced Mixed-Initiative Dialogue System for Emotional Support Conversations",
+    "year": 2023,
+    "authors": "Deng, Yang and Zhang, Wenxuan and Yuan, Yifei and Lam, Wai",
+    "paper_url": "https://aclanthology.org/2023.acl-long.225/",
+    "url": "https://aclanthology.org/2023.acl-long.225/",
+    "bib": "@inproceedings{deng-etal-2023-knowledge,\n  title = {Knowledge-Enhanced Mixed-Initiative Dialogue System for Emotional Support Conversations},\n  author = {Deng, Yang and Zhang, Wenxuan and Yuan, Yifei and Lam, Wai},\n  booktitle = {Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {4079--4095},\n  year = {2023},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2023.acl-long.225},\n  url = {https://aclanthology.org/2023.acl-long.225/}\n}"
+  },
+  {
+    "paper_id": "zhou-etal-2023-facilitating",
+    "title": "Facilitating Multi-turn Emotional Support Conversation with Positive Emotion Elicitation: A Reinforcement Learning Approach",
+    "year": 2023,
+    "authors": "Zhou, Jinfeng and Chen, Zhuang and Wang, Bo and Huang, Minlie",
+    "paper_url": "https://aclanthology.org/2023.acl-long.96/",
+    "url": "https://aclanthology.org/2023.acl-long.96/",
+    "bib": "@inproceedings{zhou-etal-2023-facilitating,\n  title = {Facilitating Multi-turn Emotional Support Conversation with Positive Emotion Elicitation: A Reinforcement Learning Approach},\n  author = {Zhou, Jinfeng and Chen, Zhuang and Wang, Bo and Huang, Minlie},\n  booktitle = {Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {1714--1729},\n  year = {2023},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2023.acl-long.96},\n  url = {https://aclanthology.org/2023.acl-long.96/}\n}"
+  },
+  {
+    "paper_id": "chen-etal-2023-soulchat",
+    "title": "SoulChat: Improving LLMs' Empathy, Listening, and Comfort Abilities through Fine-Tuning with Multi-turn Empathy Conversations",
+    "year": 2023,
+    "authors": "Chen, Yirong and Xing, Xiaofen and Lin, Jingkai and Zheng, Huimin and Wang, Zhenyu and Liu, Qi and Xu, Xiangmin",
+    "paper_url": "https://aclanthology.org/2023.findings-emnlp.83/",
+    "url": "https://aclanthology.org/2023.findings-emnlp.83/",
+    "bib": "@inproceedings{chen-etal-2023-soulchat,\n  title = {{SoulChat}: Improving {LLMs}' Empathy, Listening, and Comfort Abilities through Fine-Tuning with Multi-turn Empathy Conversations},\n  author = {Chen, Yirong and Xing, Xiaofen and Lin, Jingkai and Zheng, Huimin and Wang, Zhenyu and Liu, Qi and Xu, Xiangmin},\n  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2023},\n  pages = {1170--1183},\n  year = {2023},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2023.findings-emnlp.83},\n  url = {https://aclanthology.org/2023.findings-emnlp.83/}\n}"
+  },
+  {
+    "paper_id": "sharma2023hailey",
+    "title": "Human--AI Collaboration Enables More Empathic Conversations in Text-Based Peer-to-Peer Mental Health Support",
+    "year": 2023,
+    "authors": "Sharma, Ashish and Lin, Inna W. and Miner, Adam S. and Atkins, David C. and Althoff, Tim",
+    "paper_url": "https://www.nature.com/articles/s42256-022-00593-2",
+    "url": "https://www.nature.com/articles/s42256-022-00593-2",
+    "bib": "@article{sharma2023hailey,\n  title = {Human--AI Collaboration Enables More Empathic Conversations in Text-Based Peer-to-Peer Mental Health Support},\n  author = {Sharma, Ashish and Lin, Inna W. and Miner, Adam S. and Atkins, David C. and Althoff, Tim},\n  journal = {Nature Machine Intelligence},\n  volume = {5},\n  number = {1},\n  pages = {46--57},\n  year = {2023},\n  doi = {10.1038/s42256-022-00593-2},\n  url = {https://www.nature.com/articles/s42256-022-00593-2}\n}"
+  },
+  {
+    "paper_id": "zhang-etal-2024-cpsycoun",
+    "title": "CPsyCoun: A Report-Based Multi-turn Dialogue Reconstruction and Evaluation Framework for Chinese Psychological Counseling",
+    "year": 2024,
+    "authors": "Zhang, Chenhao and Li, Renhao and Tan, Minghuan and Yang, Min and Zhu, Jingwei and Yang, Di and Zhao, Jiahao and Ye, Guancheng and Li, Chengming and Hu, Xiping",
+    "paper_url": "https://aclanthology.org/2024.findings-acl.830/",
+    "url": "https://aclanthology.org/2024.findings-acl.830/",
+    "bib": "@inproceedings{zhang-etal-2024-cpsycoun,\n  title = {{CPsyCoun}: A Report-Based Multi-turn Dialogue Reconstruction and Evaluation Framework for {Chinese} Psychological Counseling},\n  author = {Zhang, Chenhao and Li, Renhao and Tan, Minghuan and Yang, Min and Zhu, Jingwei and Yang, Di and Zhao, Jiahao and Ye, Guancheng and Li, Chengming and Hu, Xiping},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},\n  pages = {13947--13966},\n  year = {2024},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2024.findings-acl.830},\n  url = {https://aclanthology.org/2024.findings-acl.830/}\n}"
+  },
+  {
+    "paper_id": "qiu-etal-2024-smile",
+    "title": "SMILE: Single-turn to Multi-turn Inclusive Language Expansion via ChatGPT for Mental Health Support",
+    "year": 2024,
+    "authors": "Qiu, Huachuan and He, Hongliang and Zhang, Shuai and Li, Anqi and Lan, Zhenzhong",
+    "paper_url": "https://aclanthology.org/2024.findings-emnlp.34/",
+    "url": "https://aclanthology.org/2024.findings-emnlp.34/",
+    "bib": "@inproceedings{qiu-etal-2024-smile,\n  title = {{SMILE}: Single-turn to Multi-turn Inclusive Language Expansion via {ChatGPT} for Mental Health Support},\n  author = {Qiu, Huachuan and He, Hongliang and Zhang, Shuai and Li, Anqi and Lan, Zhenzhong},\n  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2024},\n  pages = {615--636},\n  year = {2024},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2024.findings-emnlp.34},\n  url = {https://aclanthology.org/2024.findings-emnlp.34/}\n}"
+  },
+  {
+    "paper_id": "xiao-etal-2024-healme",
+    "title": "HealMe: Harnessing Cognitive Reframing in Large Language Models for Psychotherapy",
+    "year": 2024,
+    "authors": "Xiao, Mengxi and Xie, Qianqian and Kuang, Ziyan and Liu, Zhicheng and Yang, Kailai and Peng, Min and Han, Weiguang and Huang, Jimin",
+    "paper_url": "https://aclanthology.org/2024.acl-long.93/",
+    "url": "https://aclanthology.org/2024.acl-long.93/",
+    "bib": "@inproceedings{xiao-etal-2024-healme,\n  title = {{HealMe}: Harnessing Cognitive Reframing in Large Language Models for Psychotherapy},\n  author = {Xiao, Mengxi and Xie, Qianqian and Kuang, Ziyan and Liu, Zhicheng and Yang, Kailai and Peng, Min and Han, Weiguang and Huang, Jimin},\n  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {1707--1725},\n  year = {2024},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2024.acl-long.93},\n  url = {https://aclanthology.org/2024.acl-long.93/}\n}"
+  },
+  {
+    "paper_id": "lee-etal-2024-cactus",
+    "title": "Cactus: Towards Psychological Counseling Conversations Using Cognitive Behavioral Theory",
+    "year": 2024,
+    "authors": "Lee, Suyeon and Kim, Sunghwan and Kim, Minju and Kang, Dongjin and Yang, Dongil and Kim, Harim and Kang, Minseok and Jung, Dayi and Kim, Min Hee and Lee, Seungbeen and Chung, Kyong-Mee and Yu, Youngjae and Lee, Dongha and Yeo, Jinyoung",
+    "paper_url": "https://aclanthology.org/2024.findings-emnlp.832/",
+    "url": "https://aclanthology.org/2024.findings-emnlp.832/",
+    "bib": "@inproceedings{lee-etal-2024-cactus,\n  title = {Cactus: Towards Psychological Counseling Conversations Using Cognitive Behavioral Theory},\n  author = {Lee, Suyeon and Kim, Sunghwan and Kim, Minju and Kang, Dongjin and Yang, Dongil and Kim, Harim and Kang, Minseok and Jung, Dayi and Kim, Min Hee and Lee, Seungbeen and Chung, Kyong-Mee and Yu, Youngjae and Lee, Dongha and Yeo, Jinyoung},\n  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2024},\n  pages = {14245--14274},\n  year = {2024},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2024.findings-emnlp.832},\n  url = {https://aclanthology.org/2024.findings-emnlp.832/}\n}"
+  },
+  {
+    "paper_id": "qiu-etal-2024-psyguard",
+    "title": "PsyGUARD: An Automated System for Suicide Detection and Risk Assessment in Psychological Counseling",
+    "year": 2024,
+    "authors": "Qiu, Huachuan and Ma, Lizhi and Lan, Zhenzhong",
+    "paper_url": "https://aclanthology.org/2024.emnlp-main.264/",
+    "url": "https://aclanthology.org/2024.emnlp-main.264/",
+    "bib": "@inproceedings{qiu-etal-2024-psyguard,\n  title = {{PsyGUARD}: An Automated System for Suicide Detection and Risk Assessment in Psychological Counseling},\n  author = {Qiu, Huachuan and Ma, Lizhi and Lan, Zhenzhong},\n  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},\n  pages = {4581--4607},\n  year = {2024},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2024.emnlp-main.264},\n  url = {https://aclanthology.org/2024.emnlp-main.264/}\n}"
+  },
+  {
+    "paper_id": "yang-etal-2025-cami",
+    "title": "CAMI: A Counselor Agent Supporting Motivational Interviewing through State Inference and Topic Exploration",
+    "year": 2025,
+    "authors": "Yang, Yizhe and Achananuparp, Palakorn and Huang, Heyan and Jiang, Jing and Kit, Phey Ling and Lim, Nicholas Gabriel and Ern, Cameron Tan Shi and Lim, Ee-Peng",
+    "paper_url": "https://aclanthology.org/2025.acl-long.1024/",
+    "url": "https://aclanthology.org/2025.acl-long.1024/",
+    "bib": "@inproceedings{yang-etal-2025-cami,\n  title = {{CAMI}: A Counselor Agent Supporting Motivational Interviewing through State Inference and Topic Exploration},\n  author = {Yang, Yizhe and Achananuparp, Palakorn and Huang, Heyan and Jiang, Jing and Kit, Phey Ling and Lim, Nicholas Gabriel and Ern, Cameron Tan Shi and Lim, Ee-Peng},\n  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {21037--21081},\n  year = {2025},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2025.acl-long.1024},\n  url = {https://aclanthology.org/2025.acl-long.1024/}\n}"
+  },
+  {
+    "paper_id": "kim-etal-2025-story",
+    "title": "Can You Share Your Story? Modeling Clients' Metacognition and Openness for LLM Therapist Evaluation",
+    "year": 2025,
+    "authors": "Kim, Minju and Yoo, Dongje and Hwang, Yeonjun and Kang, Minseok and Kim, Namyoung and Gwak, Minju and Kwak, Beong-woo and Chae, Hyungjoo and Kim, Harim and Lee, Yunjoong and Kim, Min Hee and Jung, Dayi and Chung, Kyong-Mee and Yeo, Jinyoung",
+    "paper_url": "https://aclanthology.org/2025.findings-acl.1332/",
+    "url": "https://aclanthology.org/2025.findings-acl.1332/",
+    "bib": "@inproceedings{kim-etal-2025-story,\n  title = {Can You Share Your Story? Modeling Clients' Metacognition and Openness for {LLM} Therapist Evaluation},\n  author = {Kim, Minju and Yoo, Dongje and Hwang, Yeonjun and Kang, Minseok and Kim, Namyoung and Gwak, Minju and Kwak, Beong-woo and Chae, Hyungjoo and Kim, Harim and Lee, Yunjoong and Kim, Min Hee and Jung, Dayi and Chung, Kyong-Mee and Yeo, Jinyoung},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2025},\n  pages = {25943--25962},\n  year = {2025},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2025.findings-acl.1332},\n  url = {https://aclanthology.org/2025.findings-acl.1332/}\n}"
+  },
+  {
+    "paper_id": "qiu-lan-2025-psydial",
+    "title": "PsyDial: A Large-Scale Long-Term Conversational Dataset for Mental Health Support",
+    "year": 2025,
+    "authors": "Qiu, Huachuan and Lan, Zhenzhong",
+    "paper_url": "https://aclanthology.org/2025.acl-long.1049/",
+    "url": "https://aclanthology.org/2025.acl-long.1049/",
+    "bib": "@inproceedings{qiu-lan-2025-psydial,\n  title = {{PsyDial}: A Large-Scale Long-Term Conversational Dataset for Mental Health Support},\n  author = {Qiu, Huachuan and Lan, Zhenzhong},\n  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {21624--21655},\n  year = {2025},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2025.acl-long.1049},\n  url = {https://aclanthology.org/2025.acl-long.1049/}\n}"
+  },
+  {
+    "paper_id": "heinz2025therabot",
+    "title": "Randomized Trial of a Generative AI Chatbot for Mental Health Treatment",
+    "year": 2025,
+    "authors": "Heinz, Michael V. and Mackin, Daniel M. and Trudeau, Brianna M. and Bhattacharya, Sukanya and Wang, Yinzhou and Banta, Haley A. and Jewett, Abi D. and Salzhauer, Abigail J. and Griffin, Tess Z. and Jacobson, Nicholas C.",
+    "paper_url": "https://ai.nejm.org/doi/full/10.1056/AIoa2400802",
+    "url": "https://ai.nejm.org/doi/full/10.1056/AIoa2400802",
+    "bib": "@article{heinz2025therabot,\n  title = {Randomized Trial of a Generative {AI} Chatbot for Mental Health Treatment},\n  author = {Heinz, Michael V. and Mackin, Daniel M. and Trudeau, Brianna M. and Bhattacharya, Sukanya and Wang, Yinzhou and Banta, Haley A. and Jewett, Abi D. and Salzhauer, Abigail J. and Griffin, Tess Z. and Jacobson, Nicholas C.},\n  journal = {NEJM AI},\n  volume = {2},\n  number = {4},\n  year = {2025},\n  doi = {10.1056/AIoa2400802},\n  url = {https://ai.nejm.org/doi/full/10.1056/AIoa2400802}\n}"
+  },
+  {
+    "paper_id": "ye-etal-2025-generic",
+    "title": "From Generic Empathy to Personalized Emotional Support: A Self-Evolution Framework for User Preference Alignment",
+    "year": 2025,
+    "authors": "Ye, Jing and Xiang, Lu and Zhang, Yaping and Zong, Chengqing",
+    "paper_url": "https://aclanthology.org/2025.findings-emnlp.1024/",
+    "url": "https://aclanthology.org/2025.findings-emnlp.1024/",
+    "bib": "@inproceedings{ye-etal-2025-generic,\n  title = {From Generic Empathy to Personalized Emotional Support: A Self-Evolution Framework for User Preference Alignment},\n  author = {Ye, Jing and Xiang, Lu and Zhang, Yaping and Zong, Chengqing},\n  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2025},\n  pages = {18826--18853},\n  year = {2025},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2025.findings-emnlp.1024},\n  url = {https://aclanthology.org/2025.findings-emnlp.1024/}\n}"
+  },
+  {
+    "paper_id": "kim-etal-2025-mirror",
+    "title": "MIRROR: Multimodal Cognitive Reframing Therapy for Rolling with Resistance",
+    "year": 2025,
+    "authors": "Kim, Subin and Kim, Hoonrae and Lee, Jihyun and Jeon, Yejin and Lee, Gary",
+    "paper_url": "https://aclanthology.org/2025.emnlp-main.751/",
+    "url": "https://aclanthology.org/2025.emnlp-main.751/",
+    "bib": "@inproceedings{kim-etal-2025-mirror,\n    title = \"{MIRROR}: Multimodal Cognitive Reframing Therapy for Rolling with Resistance\",\n    author = \"Kim, Subin  and\n      Kim, Hoonrae  and\n      Lee, Jihyun  and\n      Jeon, Yejin  and\n      Lee, Gary\",\n    booktitle = \"Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing\",\n    month = nov,\n    year = \"2025\",\n    address = \"Suzhou, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2025.emnlp-main.751/\",\n    doi = \"10.18653/v1/2025.emnlp-main.751\",\n    pages = \"14840--14869\"\n}"
+  },
+  {
+    "paper_id": "meng-etal-2026-storymi",
+    "title": "StoryMI: Steerable Multi-Agent Therapeutic Dialogue Generation",
+    "year": 2026,
+    "authors": "Meng, Qingyu and Chen, Min and Liu, Dingming and Mo, Yifan and Su, Yue and Sun, Xin and Hindriks, Koen and Pei, Jiahuan",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.468/",
+    "url": "https://aclanthology.org/2026.findings-acl.468/",
+    "bib": "@inproceedings{meng-etal-2026-storymi,\n  title = {{StoryMI}: Steerable Multi-Agent Therapeutic Dialogue Generation},\n  author = {Meng, Qingyu and Chen, Min and Liu, Dingming and Mo, Yifan and Su, Yue and Sun, Xin and Hindriks, Koen and Pei, Jiahuan},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},\n  pages = {9606--9623},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.findings-acl.468},\n  url = {https://aclanthology.org/2026.findings-acl.468/}\n}"
+  },
+  {
+    "paper_id": "qiu-lan-2026-interactive",
+    "title": "Interactive Agents: Simulating Counselor--Client Psychological Counseling via Role-Playing LLM-to-LLM Interactions",
+    "year": 2026,
+    "authors": "Qiu, Huachuan and Lan, Zhenzhong",
+    "paper_url": "https://aclanthology.org/2026.starsem-conference.29/",
+    "url": "https://aclanthology.org/2026.starsem-conference.29/",
+    "bib": "@inproceedings{qiu-lan-2026-interactive,\n  title = {Interactive Agents: Simulating Counselor--Client Psychological Counseling via Role-Playing {LLM}-to-{LLM} Interactions},\n  author = {Qiu, Huachuan and Lan, Zhenzhong},\n  booktitle = {Proceedings of the 15th Joint Conference on Lexical and Computational Semantics (*SEM 2026)},\n  pages = {410--427},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.starsem-conference.29},\n  url = {https://aclanthology.org/2026.starsem-conference.29/}\n}"
+  },
+  {
+    "paper_id": "wang-etal-2026-psychological",
+    "title": "Psychological Counseling Cannot Be Achieved Overnight: Automated Psychological Counseling Through Multi-Session Conversations",
+    "year": 2026,
+    "authors": "Wang, Bichen and Wang, Junzhe and Sun, Yixin and Fu, Xing and Zhao, Yanyan and Qin, Bing",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.818/",
+    "url": "https://aclanthology.org/2026.findings-acl.818/",
+    "bib": "@inproceedings{wang-etal-2026-psychological,\n  title = {Psychological Counseling Cannot Be Achieved Overnight: Automated Psychological Counseling Through Multi-Session Conversations},\n  author = {Wang, Bichen and Wang, Junzhe and Sun, Yixin and Fu, Xing and Zhao, Yanyan and Qin, Bing},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},\n  pages = {16593--16609},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.findings-acl.818},\n  url = {https://aclanthology.org/2026.findings-acl.818/}\n}"
+  },
+  {
+    "paper_id": "tang-etal-2026-trace",
+    "title": "TRACE: Two-Phase RL for Causal Graph Exploration and Deeper Psychological Intervention in Dynamic Counseling Scenarios",
+    "year": 2026,
+    "authors": "Tang, Shilin and Yin, Zunyi and Liang, Xuefeng and Shi, Guanghui and Tong, Song and Guangyu, Chen",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.1711/",
+    "url": "https://aclanthology.org/2026.findings-acl.1711/",
+    "bib": "@inproceedings{tang-etal-2026-trace,\n    title = \"{TRACE}: Two-Phase {RL} for Causal Graph Exploration and Deeper Psychological Intervention in Dynamic Counseling Scenarios\",\n    author = \"Tang, Shilin  and\n      Yin, Zunyi  and\n      Liang, Xuefeng  and\n      Shi, Guanghui  and\n      Tong, Song  and\n      Guangyu, Chen\",\n    booktitle = \"Findings of the {A}ssociation for {C}omputational {L}inguistics: {ACL} 2026\",\n    month = jul,\n    year = \"2026\",\n    address = \"San Diego, California, United States\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.findings-acl.1711/\",\n    doi = \"10.18653/v1/2026.findings-acl.1711\",\n    pages = \"34229--34260\"\n}"
+  },
+  {
+    "paper_id": "zhong-etal-2026-cognitive",
+    "title": "Cognitive Policy-Driven LLM for Diagnosis and Intervention of Cognitive Distortions in Emotional Support Conversation",
+    "year": 2026,
+    "authors": "Zhong, Lin and Zhu, Renjin and Ma, Shujuan and Cui, Jinhao and Wang, Lingzhi and Chen, Hao and Liao, Qing",
+    "paper_url": "https://aclanthology.org/2026.acl-long.806/",
+    "url": "https://aclanthology.org/2026.acl-long.806/",
+    "bib": "@inproceedings{zhong-etal-2026-cognitive,\n    title = \"Cognitive Policy-Driven {LLM} for Diagnosis and Intervention of Cognitive Distortions in Emotional Support Conversation\",\n    author = \"Zhong, Lin  and\n      Zhu, Renjin  and\n      Ma, Shujuan  and\n      Cui, Jinhao  and\n      Wang, Lingzhi  and\n      Chen, Hao  and\n      Liao, Qing\",\n    booktitle = \"Proceedings of the 64th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2026\",\n    address = \"San Diego, California, United States\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.acl-long.806/\",\n    doi = \"10.18653/v1/2026.acl-long.806\",\n    pages = \"17717--17746\"\n}"
+  },
+  {
+    "paper_id": "yang-etal-2026-mithinker",
+    "title": "MIThinker: A Plug-and-Play Policy-Optimized Thinker For Motivational Interviewing Counseling",
+    "year": 2026,
+    "authors": "Yang, Yizhe and Achananuparp, Palakorn and Huang, Heyan and Jiang, Jing and Lim, Ee-Peng",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.163/",
+    "url": "https://aclanthology.org/2026.findings-acl.163/",
+    "bib": "@inproceedings{yang-etal-2026-mithinker,\n    title = \"{MIT}hinker: A Plug-and-Play Policy-Optimized Thinker For Motivational Interviewing Counseling\",\n    author = \"Yang, Yizhe  and\n      Achananuparp, Palakorn  and\n      Huang, Heyan  and\n      Jiang, Jing  and\n      Lim, Ee-Peng\",\n    booktitle = \"Findings of the {A}ssociation for {C}omputational {L}inguistics: {ACL} 2026\",\n    month = jul,\n    year = \"2026\",\n    address = \"San Diego, California, United States\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.findings-acl.163/\",\n    doi = \"10.18653/v1/2026.findings-acl.163\",\n    pages = \"3292--3328\"\n}"
+  },
+  {
+    "paper_id": "zeng-nakano-2026-schema",
+    "title": "Schema-Guided Response Generation using Multi-Frame Dialogue State for Motivational Interviewing Systems",
+    "year": 2026,
+    "authors": "Zeng, Jie and Nakano, Yukiko",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.2063/",
+    "url": "https://aclanthology.org/2026.findings-acl.2063/",
+    "bib": "@inproceedings{zeng-nakano-2026-schema,\n  title = {Schema-Guided Response Generation using Multi-Frame Dialogue State for Motivational Interviewing Systems},\n  author = {Zeng, Jie and Nakano, Yukiko},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},\n  pages = {41493--41524},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.findings-acl.2063},\n  url = {https://aclanthology.org/2026.findings-acl.2063/}\n}"
+  },
+  {
+    "paper_id": "hu2026theramind",
+    "title": "TheraMind: A Strategic and Adaptive Agent for Longitudinal Psychological Counseling",
+    "year": 2026,
+    "authors": "Hu, He and Ma, Chiyuan and Wang, Qianning and Liu, Lin and Zhou, Yucheng and Cui, Laizhong and Ma, Fei and Tian, Qi",
+    "paper_url": "https://dl.acm.org/doi/10.1145/3774904.3793049",
+    "url": "https://dl.acm.org/doi/10.1145/3774904.3793049",
+    "bib": "@inproceedings{hu2026theramind,\n  title = {{TheraMind}: A Strategic and Adaptive Agent for Longitudinal Psychological Counseling},\n  author = {Hu, He and Ma, Chiyuan and Wang, Qianning and Liu, Lin and Zhou, Yucheng and Cui, Laizhong and Ma, Fei and Tian, Qi},\n  booktitle = {Proceedings of the ACM Web Conference 2026},\n  pages = {9136--9147},\n  year = {2026},\n  publisher = {Association for Computing Machinery},\n  doi = {10.1145/3774904.3793049},\n  url = {https://dl.acm.org/doi/10.1145/3774904.3793049}\n}"
+  },
+  {
+    "paper_id": "gratch2014distress",
+    "title": "The Distress Analysis Interview Corpus of Human and Computer Interviews",
+    "year": 2014,
+    "authors": "Gratch, Jonathan and Artstein, Ron and Lucas, Gale M. and Stratou, Giota and Scherer, Stefan and Nazarian, Angela and Wood, Rachel and Boberg, Jill and DeVault, David and Marsella, Stacy and Traum, David and Rizzo, Albert and Morency, Louis-Philippe",
+    "paper_url": "https://www.lrec-conf.org/proceedings/lrec2014/summaries/508.html",
+    "url": "https://www.lrec-conf.org/proceedings/lrec2014/summaries/508.html",
+    "bib": "@inproceedings{gratch2014distress,\n  title = {The Distress Analysis Interview Corpus of Human and Computer Interviews},\n  author = {Gratch, Jonathan and Artstein, Ron and Lucas, Gale M. and Stratou, Giota and Scherer, Stefan and Nazarian, Angela and Wood, Rachel and Boberg, Jill and DeVault, David and Marsella, Stacy and Traum, David and Rizzo, Albert and Morency, Louis-Philippe},\n  booktitle = {Proceedings of the Ninth International Conference on Language Resources and Evaluation ({LREC}'14)},\n  pages = {3123--3128},\n  year = {2014},\n  address = {Reykjavik, Iceland},\n  publisher = {European Language Resources Association},\n  url = {https://www.lrec-conf.org/proceedings/lrec2014/summaries/508.html}\n}"
+  },
+  {
+    "paper_id": "wu2022annomi",
+    "title": "Anno-MI: A Dataset of Expert-Annotated Counselling Dialogues",
+    "year": 2022,
+    "authors": "Wu, Zixiu and Balloccu, Simone and Kumar, Vivek and Helaoui, Rim and Reiter, Ehud and Reforgiato Recupero, Diego and Riboni, Daniele",
+    "paper_url": "https://ieeexplore.ieee.org/document/9746035",
+    "url": "https://ieeexplore.ieee.org/document/9746035",
+    "bib": "@inproceedings{wu2022annomi,\n  title = {{Anno-MI}: A Dataset of Expert-Annotated Counselling Dialogues},\n  author = {Wu, Zixiu and Balloccu, Simone and Kumar, Vivek and Helaoui, Rim and Reiter, Ehud and Reforgiato Recupero, Diego and Riboni, Daniele},\n  booktitle = {2022 IEEE International Conference on Acoustics, Speech and Signal Processing ({ICASSP})},\n  pages = {6177--6181},\n  year = {2022},\n  publisher = {IEEE},\n  doi = {10.1109/ICASSP43922.2022.9746035},\n  url = {https://ieeexplore.ieee.org/document/9746035}\n}"
+  },
+  {
+    "paper_id": "yang-etal-2025-consistent",
+    "title": "Consistent Client Simulation for Motivational Interviewing-Based Counseling",
+    "year": 2025,
+    "authors": "Yang, Yizhe and Achananuparp, Palakorn and Huang, Heyan and Jiang, Jing and Lim, Nicholas Gabriel and Ern, Cameron Tan Shi and Kit, Phey Ling and Giam, Xiuhui Jenny and Pinto, John and Lim, Ee-Peng",
+    "paper_url": "https://aclanthology.org/2025.acl-long.1021/",
+    "url": "https://aclanthology.org/2025.acl-long.1021/",
+    "bib": "@inproceedings{yang-etal-2025-consistent,\n  title = {Consistent Client Simulation for Motivational Interviewing-Based Counseling},\n  author = {Yang, Yizhe and Achananuparp, Palakorn and Huang, Heyan and Jiang, Jing and Lim, Nicholas Gabriel and Ern, Cameron Tan Shi and Kit, Phey Ling and Giam, Xiuhui Jenny and Pinto, John and Lim, Ee-Peng},\n  booktitle = {Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {20959--20998},\n  year = {2025},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2025.acl-long.1021},\n  url = {https://aclanthology.org/2025.acl-long.1021/}\n}"
+  },
+  {
+    "paper_id": "aghakhani-etal-2025-conversation",
+    "title": "From Conversation to Automation: Leveraging LLMs for Problem-Solving Therapy Analysis",
+    "year": 2025,
+    "authors": "Aghakhani, Elham and Wang, Lu and Washington, Karla T. and Demiris, George and Huh-Yoo, Jina and Rezapour, Rezvaneh",
+    "paper_url": "https://aclanthology.org/2025.findings-acl.1292/",
+    "url": "https://aclanthology.org/2025.findings-acl.1292/",
+    "bib": "@inproceedings{aghakhani-etal-2025-conversation,\n  title = {From Conversation to Automation: Leveraging {LLMs} for Problem-Solving Therapy Analysis},\n  author = {Aghakhani, Elham and Wang, Lu and Washington, Karla T. and Demiris, George and Huh-Yoo, Jina and Rezapour, Rezvaneh},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2025},\n  pages = {25189--25207},\n  year = {2025},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2025.findings-acl.1292},\n  url = {https://aclanthology.org/2025.findings-acl.1292/}\n}"
+  },
+  {
+    "paper_id": "heo-etal-2026-stress",
+    "title": "Stress-Testing Emotional Support Models: Moving from Homogeneous to Diverse Help Seekers",
+    "year": 2026,
+    "authors": "Heo, Chaewon and Jin, Cheyon and Jo, Yohan",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.1146/",
+    "url": "https://aclanthology.org/2026.findings-acl.1146/",
+    "bib": "@inproceedings{heo-etal-2026-stress,\n  title = {Stress-Testing Emotional Support Models: Moving from Homogeneous to Diverse Help Seekers},\n  author = {Heo, Chaewon and Jin, Cheyon and Jo, Yohan},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},\n  pages = {22842--22869},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.findings-acl.1146},\n  url = {https://aclanthology.org/2026.findings-acl.1146/}\n}"
+  },
+  {
+    "paper_id": "ye-etal-2026-emoharbor",
+    "title": "EmoHarbor: Evaluating Personalized Emotional Support by Simulating the User's Internal World",
+    "year": 2026,
+    "authors": "Ye, Jing and Xiang, Lu and Zhang, Yaping and Zong, Chengqing",
+    "paper_url": "https://aclanthology.org/2026.acl-long.53/",
+    "url": "https://aclanthology.org/2026.acl-long.53/",
+    "bib": "@inproceedings{ye-etal-2026-emoharbor,\n  title = {{EmoHarbor}: Evaluating Personalized Emotional Support by Simulating the User's Internal World},\n  author = {Ye, Jing and Xiang, Lu and Zhang, Yaping and Zong, Chengqing},\n  booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {1176--1202},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.acl-long.53},\n  url = {https://aclanthology.org/2026.acl-long.53/}\n}"
+  },
+  {
+    "paper_id": "li-etal-2026-recap",
+    "title": "RECAP: Resistance Capture in Text-based Mental Health Counseling with Large Language Models",
+    "year": 2026,
+    "authors": "Li, Anqi and Chen, Yuqian and Lu, Yu and Chen, Zhaoming and Zhu, Yi and Xie, Yuan and Lan, Zhenzhong",
+    "paper_url": "https://aclanthology.org/2026.conll-main.33/",
+    "url": "https://aclanthology.org/2026.conll-main.33/",
+    "bib": "@inproceedings{li-etal-2026-recap,\n  title = {{RECAP}: Resistance Capture in Text-based Mental Health Counseling with Large Language Models},\n  author = {Li, Anqi and Chen, Yuqian and Lu, Yu and Chen, Zhaoming and Zhu, Yi and Xie, Yuan and Lan, Zhenzhong},\n  booktitle = {Proceedings of the 30th Conference on Computational Natural Language Learning},\n  pages = {555--573},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.conll-main.33},\n  url = {https://aclanthology.org/2026.conll-main.33/}\n}"
+  },
+  {
+    "paper_id": "puspo-etal-2026-role",
+    "title": "On the Role of Context in LLM Alignment to Mental Health Counseling Competencies",
+    "year": 2026,
+    "authors": "Puspo, Sadiya Sayara Chowdhury and Zampieri, Marcos and Uzuner, \\\"Ozlem",
+    "paper_url": "https://aclanthology.org/2026.clpsych-1.6/",
+    "url": "https://aclanthology.org/2026.clpsych-1.6/",
+    "bib": "@inproceedings{puspo-etal-2026-role,\n  title = {On the Role of Context in {LLM} Alignment to Mental Health Counseling Competencies},\n  author = {Puspo, Sadiya Sayara Chowdhury and Zampieri, Marcos and Uzuner, {\\\"O}zlem},\n  booktitle = {Proceedings of the 11th Workshop on Computational Linguistics and Clinical Psychology (CLPsych 2026)},\n  pages = {76--87},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.clpsych-1.6},\n  url = {https://aclanthology.org/2026.clpsych-1.6/}\n}"
+  },
+  {
+    "paper_id": "hoang-etal-2026-llms",
+    "title": "LLMs as Standardised Patients for Motivational Interviewing: How Faithful Are They?",
+    "year": 2026,
+    "authors": "Hoang, Van and Rogers, Eoin and Ross, Robert",
+    "paper_url": "https://aclanthology.org/2026.clpsych-1.21/",
+    "url": "https://aclanthology.org/2026.clpsych-1.21/",
+    "bib": "@inproceedings{hoang-etal-2026-llms,\n  title = {{LLMs} as Standardised Patients for Motivational Interviewing: How Faithful Are They?},\n  author = {Hoang, Van and Rogers, Eoin and Ross, Robert},\n  booktitle = {Proceedings of the 10th Workshop on Computational Linguistics and Clinical Psychology (CLPsych 2026)},\n  pages = {258--270},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.clpsych-1.21},\n  url = {https://aclanthology.org/2026.clpsych-1.21/}\n}"
+  },
+  {
+    "paper_id": "chen-etal-2026-psychepass",
+    "title": "PsychePass: Calibrating LLM Therapeutic Competence via Trajectory-Anchored Tournaments",
+    "year": 2026,
+    "authors": "Chen, Zhuang and Wan, Dazhen and Zheng, Zhangkai and Bi, Guanqun and Xiao, Xiyao and Li, Binghang and Huang, Minlie",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.1993/",
+    "url": "https://aclanthology.org/2026.findings-acl.1993/",
+    "bib": "@inproceedings{chen-etal-2026-psychepass,\n  title = {{PsychePass}: Calibrating {LLM} Therapeutic Competence via Trajectory-Anchored Tournaments},\n  author = {Chen, Zhuang and Wan, Dazhen and Zheng, Zhangkai and Bi, Guanqun and Xiao, Xiyao and Li, Binghang and Huang, Minlie},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},\n  pages = {40082--40098},\n  year = {2026},\n  publisher = {Association for Computational Linguistics},\n  doi = {10.18653/v1/2026.findings-acl.1993},\n  url = {https://aclanthology.org/2026.findings-acl.1993/}\n}"
+  },
+  {
+    "paper_id": "zhang-etal-2025-cbt",
+    "title": "CBT-Bench: Evaluating Large Language Models on Assisting Cognitive Behavior Therapy",
+    "year": 2025,
+    "authors": "Zhang, Mian and Yang, Xianjun and Zhang, Xinlu and Labrum, Travis and Chiu, Jamie C. and Eack, Shaun M. and Fang, Fei and Wang, William Yang and Chen, Zhiyu",
+    "paper_url": "https://aclanthology.org/2025.naacl-long.196/",
+    "url": "https://aclanthology.org/2025.naacl-long.196/",
+    "bib": "@inproceedings{zhang-etal-2025-cbt,\n    title = \"{CBT}-Bench: Evaluating Large Language Models on Assisting Cognitive Behavior Therapy\",\n    author = \"Zhang, Mian  and\n      Yang, Xianjun  and\n      Zhang, Xinlu  and\n      Labrum, Travis  and\n      Chiu, Jamie C.  and\n      Eack, Shaun M.  and\n      Fang, Fei  and\n      Wang, William Yang  and\n      Chen, Zhiyu\",\n    booktitle = \"Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)\",\n    month = apr,\n    year = \"2025\",\n    address = \"Albuquerque, New Mexico\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2025.naacl-long.196/\",\n    doi = \"10.18653/v1/2025.naacl-long.196\",\n    pages = \"3864--3900\"\n}"
+  },
+  {
+    "paper_id": "mazhar-etal-2026-measuring",
+    "title": "Measuring What Matters!! Assessing Therapeutic Principles in Mental-Health Conversation",
+    "year": 2026,
+    "authors": "Mazhar, Abdullah and Shah, Het Riteshkumar and Srivastava, Aseem and Joshi, Smriti and Akhtar, Md Shad",
+    "paper_url": "https://aclanthology.org/2026.acl-long.731/",
+    "url": "https://aclanthology.org/2026.acl-long.731/",
+    "bib": "@inproceedings{mazhar-etal-2026-measuring,\n    title = \"Measuring What Matters!! Assessing Therapeutic Principles in Mental-Health Conversation\",\n    author = \"Mazhar, Abdullah  and\n      Shah, Het Riteshkumar  and\n      Srivastava, Aseem  and\n      Joshi, Smriti  and\n      Akhtar, Md Shad\",\n    booktitle = \"Proceedings of the 64th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2026\",\n    address = \"San Diego, California, United States\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.acl-long.731/\",\n    doi = \"10.18653/v1/2026.acl-long.731\",\n    pages = \"16094--16112\"\n}"
+  },
+  {
+    "paper_id": "xu-etal-2026-puppet",
+    "title": "PUPPET: Neural-Symbolic Standardized Patients for Mental Health",
+    "year": 2026,
+    "authors": "Xu, Chen and ji, Yu and Lv, Zhenyu and Yi, Yang and Yang, Yizhe and Ji, Luyao and Chen, Chaoyi and Wang, Xianyang and Lan, Tian and Wang, Zhihua and Wang, Juan and Dong, Xunde and Tian, Fuze and Dong, Qunxi and Hu, Bin",
+    "paper_url": "https://aclanthology.org/2026.acl-long.121/",
+    "url": "https://aclanthology.org/2026.acl-long.121/",
+    "bib": "@inproceedings{xu-etal-2026-puppet,\n    title = \"{PUPPET}: Neural-Symbolic Standardized Patients for Mental Health\",\n    author = \"Xu, Chen  and\n      ji, Yu  and\n      Lv, Zhenyu  and\n      Yi, Yang  and\n      Yang, Yizhe  and\n      Ji, Luyao  and\n      Chen, Chaoyi  and\n      Wang, Xianyang  and\n      Lan, Tian  and\n      Wang, Zhihua  and\n      Wang, Juan  and\n      Dong, Xunde  and\n      Tian, Fuze  and\n      Dong, Qunxi  and\n      Hu, Bin\",\n    booktitle = \"Proceedings of the 64th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2026\",\n    address = \"San Diego, California, United States\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.acl-long.121/\",\n    doi = \"10.18653/v1/2026.acl-long.121\",\n    pages = \"2599--2634\"\n}"
+  },
+  {
+    "paper_id": "lee-etal-2026-mhsafeeval",
+    "title": "MHSafeEval: Role-Aware Interaction-Level Evaluation of Mental Health Safety in Large Language Models",
+    "year": 2026,
+    "authors": "Lee, Suhyun and Achananuparp, Palakorn and Yadav, Neemesh and Lim, Ee-Peng and Deng, Yang",
+    "paper_url": "https://aclanthology.org/2026.findings-acl.1382/",
+    "url": "https://aclanthology.org/2026.findings-acl.1382/",
+    "bib": "@inproceedings{lee-etal-2026-mhsafeeval,\n    title = \"{MHS}afe{E}val: Role-Aware Interaction-Level Evaluation of Mental Health Safety in Large Language Models\",\n    author = \"Lee, Suhyun  and\n      Achananuparp, Palakorn  and\n      Yadav, Neemesh  and\n      Lim, Ee-Peng  and\n      Deng, Yang\",\n    booktitle = \"Findings of the {A}ssociation for {C}omputational {L}inguistics: {ACL} 2026\",\n    month = jul,\n    year = \"2026\",\n    address = \"San Diego, California, United States\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.findings-acl.1382/\",\n    doi = \"10.18653/v1/2026.findings-acl.1382\",\n    pages = \"27760--27793\"\n}"
+  },
+  {
+    "paper_id": "byun-etal-2026-cradle",
+    "title": "CRADLE Bench: A Clinician-Annotated Benchmark for Multi-Faceted Mental Health Crisis and Safety Risk Detection",
+    "year": 2026,
+    "authors": "Byun, Grace and Lipschutz, Rebecca and Minton, Sean T. and Powers, Abigail and Choi, Jinho D.",
+    "paper_url": "https://aclanthology.org/2026.eacl-long.73/",
+    "url": "https://aclanthology.org/2026.eacl-long.73/",
+    "bib": "@inproceedings{byun-etal-2026-cradle,\n    title = \"{CRADLE} Bench: A Clinician-Annotated Benchmark for Multi-Faceted Mental Health Crisis and Safety Risk Detection\",\n    author = \"Byun, Grace  and\n      Lipschutz, Rebecca  and\n      Minton, Sean T.  and\n      Powers, Abigail  and\n      Choi, Jinho D.\",\n    booktitle = \"Proceedings of the 19th Conference of the {E}uropean Chapter of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)\",\n    month = mar,\n    year = \"2026\",\n    address = \"Rabat, Morocco\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2026.eacl-long.73/\",\n    doi = \"10.18653/v1/2026.eacl-long.73\",\n    pages = \"1572--1590\"\n}"
+  }
+]

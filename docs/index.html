@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browsable SFPE audits of LLM-based mental health counseling systems.">
+  <title>SFPE Audit Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Independent multi-agent paper audit</p>
+      <h1>SFPE Audit Explorer</h1>
+      <p class="lede">Structured evidence on sensing, formulation, planning, enactment, directed dependencies, and validation.</p>
+    </div>
+    <a class="protocol-link" href="protocol.md">Read the frozen protocol</a>
+  </header>
+
+  <main>
+    <section id="stats" class="stats" aria-label="Dataset summary"></section>
+
+    <section class="controls" aria-label="Audit table filters">
+      <label class="search">Search
+        <input id="search" type="search" placeholder="Title, author, system, or paper ID">
+      </label>
+      <label>Year<select id="year"><option value="">All</option></select></label>
+      <label>S<select id="S"><option value="">All</option></select></label>
+      <label>F<select id="F"><option value="">All</option></select></label>
+      <label>P<select id="P"><option value="">All</option></select></label>
+      <label>E<select id="E"><option value="">All</option></select></label>
+      <label>Validation<select id="validation"><option value="">All</option></select></label>
+      <button id="reset" type="button">Reset</button>
+    </section>
+
+    <div class="table-meta"><strong id="count">Loading…</strong><span>Click a column heading to sort. Open Details for evidence and votes.</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><button data-sort="title">Paper</button></th>
+            <th><button data-sort="year">Year</button></th>
+            <th><button data-sort="S">S</button></th>
+            <th><button data-sort="F">F</button></th>
+            <th><button data-sort="F_mode">F mode</button></th>
+            <th><button data-sort="P">P</button></th>
+            <th><button data-sort="E">E</button></th>
+            <th><button data-sort="E_relational_adaptation">Relational</button></th>
+            <th>S→F</th><th>S→P</th><th>F→P</th><th>P→E</th><th>E→S</th><th>E→F</th><th>E→P</th>
+            <th><button data-sort="status">Consensus</button></th>
+            <th>Evidence</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <dialog id="detail">
+    <form method="dialog"><button class="close" aria-label="Close details">×</button></form>
+    <div id="detail-content"></div>
+  </dialog>
+
+  <footer>Generated from <code>data/audit_results/all_consensus.jsonl</code>. The web table contains no hand-maintained judgments.</footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
