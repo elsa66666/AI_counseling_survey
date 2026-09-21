@@ -31,11 +31,15 @@ function addOptions(id, values) {
   });
 }
 
-function edgeCell(edge) {
+function stackedBadges(first, second) {
   const wrap = document.createElement("div");
   wrap.className = "edge";
-  wrap.append(badge(edge.presence), document.createElement("br"), badge(edge.validation));
+  wrap.append(badge(first), document.createElement("br"), badge(second));
   return wrap;
+}
+
+function edgeCell(edge) {
+  return stackedBadges(edge.presence, edge.validation);
 }
 
 function fieldValue(paper, key) {
@@ -78,7 +82,13 @@ function render() {
     id.textContent = paper.paper_id;
     title.append(link, id);
     tr.append(cell(title), cell(paper.year));
-    for (const key of ["S", "F", "F_mode", "P", "E", "E_relational_adaptation"]) tr.append(cell(badge(paper.sfpe[key])));
+    tr.append(
+      cell(badge(paper.sfpe.S)),
+      cell(stackedBadges(paper.sfpe.F, paper.sfpe.F_mode)),
+      cell(badge(paper.sfpe.P)),
+      cell(badge(paper.sfpe.E)),
+      cell(badge(paper.sfpe.E_relational_adaptation)),
+    );
     for (const edge of EDGES) tr.append(cell(edgeCell(paper.dependencies[edge])));
     tr.append(cell(badge(paper.status)));
     const button = document.createElement("button");
