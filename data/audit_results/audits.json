@@ -9,16 +9,16 @@
     "auditor_calls_this_run": 0,
     "auditor_failures": 0,
     "unanimous_fields": 675,
-    "majority_fields": 339,
+    "majority_fields": 338,
     "no_majority_fields": 0,
     "papers_with_full_agreement": 1,
     "papers_with_at_least_one_disagreement": 46,
     "papers_requiring_manual_review": 10,
     "field_count_scope": "Core audit fields plus paper/system completeness; confidence is not voted",
     "disagreement_count_includes_missing_votes": true,
-    "total_judge_calls": 13,
+    "total_judge_calls": 14,
     "judge_calls_this_run": 1,
-    "adjudicated_fields": 20
+    "adjudicated_fields": 21
   },
   "papers": [
     {
@@ -16782,11 +16782,13 @@
         "model": "gpt-5.5",
         "disputed_fields": [
           "systems.*.functions.S.label",
-          "systems.*.functions.E.relational_adaptation"
+          "systems.*.functions.E.relational_adaptation",
+          "systems.*.dependencies.E_to_S.presence"
         ],
         "resolved_fields": [
           "systems.*.functions.S.label",
-          "systems.*.functions.E.relational_adaptation"
+          "systems.*.functions.E.relational_adaptation",
+          "systems.*.dependencies.E_to_S.presence"
         ]
       },
       "paper_input_completeness": {
@@ -16841,7 +16843,7 @@
           "validation": "NA"
         },
         "E→S": {
-          "presence": "Unclear",
+          "presence": "Absent",
           "validation": "NA"
         },
         "E→F": {
@@ -17378,7 +17380,7 @@
           ]
         },
         "dependencies.E_to_S.presence": {
-          "label": "Unclear",
+          "label": "Absent",
           "votes": {
             "Absent": 1,
             "Unclear": 2
@@ -17389,29 +17391,81 @@
             "auditor_3": "Unclear"
           },
           "supporting_agents": [
-            "auditor_2",
-            "auditor_3"
+            "auditor_1"
           ],
           "invalid_agents": [],
           "agreement": 0.6667,
-          "status": "majority",
-          "needs_review": true,
+          "status": "adjudicated",
+          "needs_review": false,
           "supporting_evidence": [
             {
+              "auditor": "auditor_1",
+              "evidence": "The paper does not describe post-response client behavior being analyzed to update client state; only conversation history is used as prompt context.",
+              "location": "Methods, Model Training and Inference; Intervention",
+              "rationale": "Ordinary continuation of dialogue is not enough for feedback sensing under the protocol."
+            },
+            {
               "auditor": "auditor_2",
-              "evidence": "\"For inference, the conversation history was used to prompt the fine-tuned models\" (Methods - Model Training and Inference); crisis classification presumably runs on ongoing user messages (Fig. 1 Panel C) but mechanism is undescribed.",
+              "evidence": "For inference, the conversation history was used to prompt the fine-tuned models; the crisis-classifier mechanism is undescribed.",
               "location": "Methods - Model Training and Inference; Fig. 1",
-              "rationale": "Per RULE: MULTITURN_NOT_FEEDBACK, appending conversation history alone does not establish E→S. The crisis classifier could represent an E→S-like update (client message triggers updated risk state), but insufficient methodological detail is given to confirm this operates as a state-update mechanism rather than a simple per-message classifier with no persistent state. Potential input truncation regarding classifier design.",
-              "confidence": "Low"
+              "rationale": "The auditor considered the classifier potentially relevant but acknowledged that the available evidence does not establish a state-update pathway."
             },
             {
               "auditor": "auditor_3",
               "evidence": "Conversation history is used in prompting, but no specific update mechanism for client state is described.",
               "location": "Methods, INTERVENTION section",
-              "rationale": "Client responses become part of history, but it's unclear if this updates a structured client-state representation. Potential input truncation.",
-              "confidence": "Low"
+              "rationale": "The auditor identified insufficient evidence that client responses update a structured client-state representation."
             }
-          ]
+          ],
+          "pre_adjudication": {
+            "label": "Unclear",
+            "status": "majority",
+            "needs_review": true,
+            "supporting_agents": [
+              "auditor_2",
+              "auditor_3"
+            ],
+            "supporting_evidence": [
+              {
+                "auditor": "auditor_2",
+                "evidence": "\"For inference, the conversation history was used to prompt the fine-tuned models\" (Methods - Model Training and Inference); crisis classification presumably runs on ongoing user messages (Fig. 1 Panel C) but mechanism is undescribed.",
+                "location": "Methods - Model Training and Inference; Fig. 1",
+                "rationale": "Per RULE: MULTITURN_NOT_FEEDBACK, appending conversation history alone does not establish E→S. The crisis classifier could represent an E→S-like update (client message triggers updated risk state), but insufficient methodological detail is given to confirm this operates as a state-update mechanism rather than a simple per-message classifier with no persistent state. Potential input truncation regarding classifier design.",
+                "confidence": "Low"
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Conversation history is used in prompting, but no specific update mechanism for client state is described.",
+                "location": "Methods, INTERVENTION section",
+                "rationale": "Client responses become part of history, but it's unclear if this updates a structured client-state representation. Potential input truncation.",
+                "confidence": "Low"
+              }
+            ]
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "The paper does not describe post-response client behavior being analyzed to update client state; only conversation history is used as prompt context.",
+                "location": "Methods, Model Training and Inference; Intervention",
+                "rationale": "Ordinary continuation of dialogue is not enough for feedback sensing under the protocol."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "For inference, the conversation history was used to prompt the fine-tuned models; the crisis-classifier mechanism is undescribed.",
+                "location": "Methods - Model Training and Inference; Fig. 1",
+                "rationale": "The auditor considered the classifier potentially relevant but acknowledged that the available evidence does not establish a state-update pathway."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Conversation history is used in prompting, but no specific update mechanism for client state is described.",
+                "location": "Methods, INTERVENTION section",
+                "rationale": "The auditor identified insufficient evidence that client responses update a structured client-state representation."
+              }
+            ],
+            "label": "Absent",
+            "summary": "Absent. Auditor 1 directly coded the dependency as Absent, while Auditors 2 and 3 marked it Unclear because a crisis classifier might be relevant but its mechanism is undescribed. Under the protocol, conversation-history prompting or ordinary multi-turn continuation does not establish E→S, and no identifiable pathway is supplied showing that the client's response to enactment is analyzed to update client state. The available evidence therefore does not meet the threshold for Explicit or Inferential dependency; any possible missing classifier details are insufficient to override the absence of documented directed information flow."
+          }
         },
         "dependencies.E_to_F.presence": {
           "label": "Absent",

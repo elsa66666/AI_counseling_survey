@@ -27,10 +27,11 @@ class SiteDataTests(unittest.TestCase):
             self.assertTrue(all(paper["sfpe"][key] in {"Present", "Absent"}
                                 for paper in payload["papers"] for key in "SFPE"))
             self.assertEqual(payload["summary"]["no_majority_fields"], 0)
-            self.assertEqual(payload["summary"]["adjudicated_fields"], 20)
+            self.assertEqual(payload["summary"]["adjudicated_fields"], 21)
             by_id = {paper["paper_id"]: paper for paper in payload["papers"]}
             self.assertEqual(by_id["heinz2025therabot"]["sfpe"]["S"], "Present")
             self.assertEqual(by_id["heinz2025therabot"]["sfpe"]["E_relational_adaptation"], "No")
+            self.assertEqual(by_id["heinz2025therabot"]["dependencies"]["E→S"]["presence"], "Absent")
             self.assertEqual(by_id["gratch2014distress"]["sfpe"]["P"], "Absent")
 
     def test_rejects_f_mode_that_conflicts_with_f_presence(self):

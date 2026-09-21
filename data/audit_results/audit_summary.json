@@ -6,14 +6,14 @@
   "auditor_calls_this_run": 0,
   "auditor_failures": 0,
   "unanimous_fields": 675,
-  "majority_fields": 339,
+  "majority_fields": 338,
   "no_majority_fields": 0,
   "papers_with_full_agreement": 1,
   "papers_with_at_least_one_disagreement": 46,
   "papers_requiring_manual_review": 10,
   "field_count_scope": "Core audit fields plus paper/system completeness; confidence is not voted",
   "disagreement_count_includes_missing_votes": true,
-  "total_judge_calls": 13,
+  "total_judge_calls": 14,
   "judge_calls_this_run": 1,
-  "adjudicated_fields": 20
+  "adjudicated_fields": 21
 }
