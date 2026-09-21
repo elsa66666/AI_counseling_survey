@@ -181,7 +181,7 @@ function showDetail(paper) {
 }
 
 async function init() {
-  const response = await fetch("data/audits.json");
+  const response = await fetch(`data/audits.json?v=${Date.now()}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`Could not load audit data: ${response.status}`);
   const payload = await response.json();
   data = payload.papers;
