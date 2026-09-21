@@ -46,6 +46,12 @@ def collect_disputes(consensus, audits):
         if vote["status"] != "no_majority":
             continue
         allowed = ALLOWED_LABELS[field]
+        if field == "systems.*.functions.F.mode" and consensus["systems"]:
+            final_f = consensus["systems"][0]["fields"]["functions.F.label"]["label"]
+            if final_f == "Present":
+                allowed = tuple(label for label in allowed if label != "NA")
+            elif final_f == "Absent":
+                allowed = ("NA",)
         opinions = []
         legal_count = 0
         for auditor in AUDITOR_IDS:
@@ -82,7 +88,7 @@ def build_judge_schema(disputes):
             "required": ["label", "evidence", "summary"],
             "additionalProperties": False,
         }
-    return {
+    schema = {
         "type": "object",
         "properties": {
             "decisions": {
@@ -95,6 +101,28 @@ def build_judge_schema(disputes):
         "required": ["decisions"],
         "additionalProperties": False,
     }
+    f_label = "systems.*.functions.F.label"
+    f_mode = "systems.*.functions.F.mode"
+    if f_label in decision_properties and f_mode in decision_properties:
+        schema["allOf"] = [
+            {
+                "if": {"properties": {"decisions": {"properties": {
+                    f_label: {"properties": {"label": {"const": "Present"}}}
+                }}}},
+                "then": {"properties": {"decisions": {"properties": {
+                    f_mode: {"properties": {"label": {"enum": ["Static", "Dynamic", "Unclear"]}}}
+                }}}},
+            },
+            {
+                "if": {"properties": {"decisions": {"properties": {
+                    f_label: {"properties": {"label": {"const": "Absent"}}}
+                }}}},
+                "then": {"properties": {"decisions": {"properties": {
+                    f_mode: {"properties": {"label": {"const": "NA"}}}
+                }}}},
+            },
+        ]
+    return schema
 
 
 def build_judge_messages(protocol, paper_metadata, disputes):
@@ -104,6 +132,8 @@ label, evidence statement, location, rationale, and confidence. Choose exactly o
 of the allowed labels for every field. Do not return null or INVALID. For S/F/P/E
 function presence, the only legal labels are Present and Absent. Synthesize only
 evidence already supplied by the auditors; do not invent quotations or locations.
+When the final F label is Present, F mode must be Static, Dynamic, or Unclear and
+must not be NA. When the final F label is Absent, F mode must be NA.
 Preserve disagreements in the summary and explain why the selected evidence meets
 the protocol threshold. Return only JSON conforming to the judge schema."""
     protocol_without_output_template = protocol.split("# 16. REQUIRED OUTPUT SCHEMA", 1)[0]
@@ -120,6 +150,8 @@ def load_saved_decisions(directory, disputes):
         data = load_json(Path(directory) / "decision.json")["decisions"]
         expected = {item["field"]: set(item["allowed_labels"]) for item in disputes}
         if set(data) != set(expected) or any(data[field]["label"] not in labels for field, labels in expected.items()):
+            return {}
+        if list(Draft202012Validator(build_judge_schema(disputes)).iter_errors({"decisions": data})):
             return {}
         return data
     except (OSError, ValueError, KeyError, TypeError):

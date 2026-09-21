@@ -22369,7 +22369,7 @@
       "sfpe": {
         "S": "Present",
         "F": "Present",
-        "F_mode": "NA",
+        "F_mode": "Static",
         "P": "Absent",
         "E": "Present",
         "E_relational_adaptation": "NA"
@@ -22571,7 +22571,7 @@
           ]
         },
         "functions.F.mode": {
-          "label": "NA",
+          "label": "Static",
           "votes": {
             "Dynamic": 1,
             "NA": 1,
@@ -22583,7 +22583,7 @@
             "auditor_3": "Static"
           },
           "supporting_agents": [
-            "auditor_2"
+            "auditor_3"
           ],
           "invalid_agents": [],
           "agreement": 0.3333,
@@ -22637,8 +22637,8 @@
                 "rationale": "This supports the competing Dynamic interpretation, but unmasking a pre-authored diagram is insufficient to establish dynamic formulation by the counseling system."
               }
             ],
-            "label": "NA",
-            "summary": "Auditors 1 and 3 interpreted the CCD-inspired diagram as dynamic or static formulation, while auditor 2 identified it as a pre-existing simulator profile. The implementation evidence supplied describes masking and disclosure of authored ground truth, not construction or updating of a therapist-side explanatory formulation; therefore F mode is NA."
+            "label": "Static",
+            "summary": "The final F label is Present. The CCD-inspired diagram is a predefined explanatory representation that is masked and disclosed during interaction, but the supplied evidence does not show revision from new client evidence; therefore F mode is Static."
           }
         },
         "functions.E.relational_adaptation": {
@@ -23252,7 +23252,6 @@
         }
       },
       "consistency_issues": [
-        "functions.F.mode: majority conflicts with function label",
         "functions.E.relational_adaptation: majority conflicts with function label",
         "S_to_F: presence/validation majorities conflict",
         "E_to_S: presence/validation majorities conflict"
