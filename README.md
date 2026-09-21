@@ -85,6 +85,52 @@ A winner requires at least two matching legal labels. Missing or invalid outputs
 
 The current dataset contains one canonical audited system per paper folder. The three system descriptions in that folder are merged as the same system even when the auditors phrase its name differently; the original names remain in `system_names` for provenance. Cross-field consistency checks flag contradictions but never overwrite a majority label. Human adjudication can review flagged records outside this automatic vote; the published data preserves the unmodified automatic consensus.
 
+## Label reference
+
+The following table is a single reference for every categorical audit value and consensus outcome. `INVALID` is a voting-layer availability marker used in the examples, not a legal label that an auditor may assign. It means that the auditor supplied no schema-valid vote for that field; it does not mean `Absent` or `Unclear`.
+
+| Label family | Label or value | Meaning | Voting and review behavior |
+|---|---|---|---|
+| Paper input completeness | `Complete` | The supplied paper text is sufficiently complete for the audit. A complete paper may still omit a particular implementation detail. | Legal vote; does not by itself require review. |
+| Paper input completeness | `PossiblyTruncated` | Relevant paper content may be missing because the input is truncated, inaccessible, extraction-damaged, or otherwise incomplete. | Legal vote; a winning label requires review. |
+| System input completeness | `Complete` | The eligible system is described with sufficient material for the system-level audit. | Legal vote; does not by itself require review. |
+| System input completeness | `PossiblyTruncated` | Relevant material about the eligible system may be missing. | Legal vote; a winning label requires review. |
+| System input completeness | `NotApplicable` | No eligible implemented counseling system is available for system-level coding. | Legal vote for system completeness only. |
+| SFPE function | `Present` | Identifiable implementation evidence satisfies the definition of S, F, P, or E. Positive labels require supporting evidence. | Counted as a positive function label. |
+| SFPE function | `Absent` | The paper is sufficiently complete, but no qualifying implementation is found. | Counted as a negative function label. |
+| SFPE function | `Unclear` | Missing, inaccessible, truncated, or genuinely ambiguous implementation evidence prevents a reliable Present/Absent judgment. Difficulty alone is insufficient. | Excluded from positive counts; a winning label requires review. |
+| F formulation mode | `Static` | An explanatory formulation exists, but the paper does not show it changing in response to new client evidence. | Legal only when F is `Present`. |
+| F formulation mode | `Dynamic` | New client evidence can revise, replace, update, or refine the explanatory formulation. Multi-turn interaction alone is insufficient. | Legal only when F is `Present`. |
+| F formulation mode | `Unclear` | F is present, but the paper does not provide enough evidence to determine whether the formulation is static or dynamically updated. | Legal only when F is `Present`; a winning label requires review. |
+| F formulation mode | `NA` | Formulation mode does not apply because F is not `Present`. | Required exactly when F is not `Present`. |
+| E relational adaptation | `Yes` | Client-facing enactment is explicitly conditioned on a relational signal such as resistance, alliance, rupture, trust, engagement, receptivity, or interpersonal reaction. | Legal only when E is `Present`. |
+| E relational adaptation | `No` | E is present, but no qualifying relational-adaptation mechanism is shown. | Legal only when E is `Present`. |
+| E relational adaptation | `Unclear` | E is present, but the evidence is insufficient to determine whether qualifying relational adaptation occurs. | Legal only when E is `Present`; a winning label requires review. |
+| E relational adaptation | `NA` | Relational adaptation does not apply because E is not `Present`. | Required exactly when E is not `Present`. |
+| Dependency presence | `Explicit` | Architecture, algorithm, prompt construction, module I/O, implementation detail, or an equivalent source directly shows that information produced by A conditions B. | Counted as a present dependency; receives `V0`, `V1`, or `V2`. |
+| Dependency presence | `Inferential` | The A→B link is plausible, but direct evidence that A conditions B is missing. | Retained for audit but excluded from primary positive dependency counts; validation is `NA`. |
+| Dependency presence | `Absent` | An endpoint is absent, or both functions exist without evidence of directed information flow. Co-occurrence alone is Absent. | Counted as a negative dependency label; validation is `NA`. |
+| Dependency presence | `Unclear` | Missing, inaccessible, truncated, or genuinely ambiguous evidence prevents a reliable dependency judgment. | Excluded from positive counts; validation is `NA`; a winning label requires review. |
+| Dependency validation | `V0` | The explicit dependency is implemented or described, but no experiment isolates whether A affects B. | Lowest validation level; used only with `Explicit`. |
+| Dependency validation | `V1` | An experiment changes, removes, degrades, or replaces A and directly measures or isolates its effect on downstream process B. | Transition-level validation; used only with `Explicit`. |
+| Dependency validation | `V2` | The specific dependency is linked to longitudinal behavior, adaptation, therapeutic trajectory, or counseling outcome. | Highest validation level; used only with `Explicit`. |
+| Dependency validation | `NA` | Edge validation does not apply because dependency presence is `Inferential`, `Absent`, or `Unclear`. | Required exactly when dependency presence is not `Explicit`. |
+| Auditor confidence | `High` | The auditor considers the evidence and threshold application clear and well supported. | Preserved as provenance; never changes vote weight. |
+| Auditor confidence | `Medium` | The judgment is supported but contains some interpretive uncertainty. | Preserved as provenance; never changes vote weight. |
+| Auditor confidence | `Low` | The auditor can still make a label judgment, but the evidence or boundary application is weak or difficult. | Preserved as provenance; does not automatically mean `Unclear`. |
+| Vote availability | `INVALID` | The auditor has no schema-valid vote for the field because its audit is missing, failed, malformed, or otherwise unavailable. It is conceptual shorthand in voting examples, not a stored rubric label. | Contributes no legal label and does not reduce the denominator of three; represented by the missing/null `agent_labels` entry and membership in `invalid_agents`. |
+| Consensus label | `null` | No legal label received the required two matching votes. | Paired with `status: "no_majority"` and `needs_review: true`. |
+| Field consensus status | `unanimous` | All three auditors supplied the same legal label. | Agreement is `1.0`. |
+| Field consensus status | `majority` | Exactly two auditors supplied the same legal label. The third may disagree or be unavailable. | Agreement is `0.6667`. |
+| Field consensus status | `no_majority` | No legal label received two votes, including `A/B/C`, `A/B/INVALID`, and `A/INVALID/INVALID`. | Consensus label is `null`; review is required. |
+| System alignment status | `matched` | All three available auditor records contain the canonical system represented by the paper folder. Differences in `system_name` wording do not affect this status. | System fields are merged and voted normally. |
+| System alignment status | `needs_review` | At least one auditor lacks a usable system record for the paper folder. | The system and paper consensus are flagged for review. |
+| Record consensus status | `unanimous` | Inventory alignment is complete and every votable field is unanimous, with no review condition. | Final paper-level status. |
+| Record consensus status | `majority` | The record has no review condition but does not have full three-agent agreement on every field. | Final paper-level status. |
+| Record consensus status | `needs_review` | At least one missing auditor, inventory mismatch, no-majority field, review-triggering label, or consistency issue exists. | Final paper-level status; stored judgments are not overwritten. |
+| Review flag | `needs_review: true` | The field or record lacks a majority, has a review-triggering winning label, contains a failed auditor, or has a consistency/alignment issue. | Routes the result to adjudication or human review without changing the stored vote. |
+| Review flag | `needs_review: false` | None of the framework's review conditions is present. | The automatic consensus can be used without a review flag. |
+
 ## Coding criteria
 
 ### General decision rule
