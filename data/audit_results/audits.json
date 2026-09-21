@@ -9,16 +9,16 @@
     "auditor_calls_this_run": 0,
     "auditor_failures": 0,
     "unanimous_fields": 675,
-    "majority_fields": 340,
+    "majority_fields": 339,
     "no_majority_fields": 0,
     "papers_with_full_agreement": 1,
     "papers_with_at_least_one_disagreement": 46,
     "papers_requiring_manual_review": 10,
     "field_count_scope": "Core audit fields plus paper/system completeness; confidence is not voted",
     "disagreement_count_includes_missing_votes": true,
-    "total_judge_calls": 12,
-    "judge_calls_this_run": 12,
-    "adjudicated_fields": 19
+    "total_judge_calls": 13,
+    "judge_calls_this_run": 1,
+    "adjudicated_fields": 20
   },
   "papers": [
     {
@@ -16781,10 +16781,12 @@
         "status": "success",
         "model": "gpt-5.5",
         "disputed_fields": [
-          "systems.*.functions.S.label"
+          "systems.*.functions.S.label",
+          "systems.*.functions.E.relational_adaptation"
         ],
         "resolved_fields": [
-          "systems.*.functions.S.label"
+          "systems.*.functions.S.label",
+          "systems.*.functions.E.relational_adaptation"
         ]
       },
       "paper_input_completeness": {
@@ -16819,7 +16821,7 @@
         "F_mode": "NA",
         "P": "Absent",
         "E": "Present",
-        "E_relational_adaptation": "Unclear"
+        "E_relational_adaptation": "No"
       },
       "dependencies": {
         "S→F": {
@@ -17116,7 +17118,7 @@
           ]
         },
         "functions.E.relational_adaptation": {
-          "label": "Unclear",
+          "label": "No",
           "votes": {
             "No": 1,
             "Unclear": 2
@@ -17127,29 +17129,81 @@
             "auditor_3": "No"
           },
           "supporting_agents": [
-            "auditor_1",
-            "auditor_2"
+            "auditor_3"
           ],
           "invalid_agents": [],
           "agreement": 0.6667,
-          "status": "majority",
-          "needs_review": true,
+          "status": "adjudicated",
+          "needs_review": false,
           "supporting_evidence": [
             {
               "auditor": "auditor_1",
-              "evidence": "'Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration.'",
+              "evidence": "Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration.",
               "location": "Methods, Intervention",
-              "rationale": "Therabot clearly generates client-facing therapeutic messages and questions.",
-              "confidence": "High"
+              "rationale": "This supports client-facing enactment, but does not identify adaptation to relational context."
             },
             {
               "auditor": "auditor_2",
-              "evidence": "\"Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration\" (Methods - Intervention); \"the Gen-AI approach promoted the therapeutic alliance\" (Discussion)",
+              "evidence": "Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration; alliance was discussed as an outcome.",
               "location": "Methods - Intervention; Discussion",
-              "rationale": "The system generates client-facing therapeutic behavior (empathetic responses, validation, interventions, elicitation questions), satisfying E. However, the paper does not describe a mechanism by which response style is explicitly conditioned on detected resistance, rupture, alliance, or engagement signals; alliance scores are only measured as an outcome, not shown to feed back into generation. Per RULE: RELATIONAL_ADAPTATION_BOUNDARY, general claims that Gen-AI 'promoted alliance' are not sufficient evidence of an implemented adaptation mechanism.",
-              "confidence": "Medium"
+              "rationale": "The reported outputs establish enactment, while alliance was measured or discussed rather than used as an explicit signal conditioning response generation."
+            },
+            {
+              "auditor": "auditor_3",
+              "evidence": "Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration.",
+              "location": "Methods, Intervention section",
+              "rationale": "The system generates therapeutic responses, but no evidence shows adaptation to resistance, alliance, rupture, engagement, or another relational state."
             }
-          ]
+          ],
+          "pre_adjudication": {
+            "label": "Unclear",
+            "status": "majority",
+            "needs_review": true,
+            "supporting_agents": [
+              "auditor_1",
+              "auditor_2"
+            ],
+            "supporting_evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "'Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration.'",
+                "location": "Methods, Intervention",
+                "rationale": "Therabot clearly generates client-facing therapeutic messages and questions.",
+                "confidence": "High"
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "\"Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration\" (Methods - Intervention); \"the Gen-AI approach promoted the therapeutic alliance\" (Discussion)",
+                "location": "Methods - Intervention; Discussion",
+                "rationale": "The system generates client-facing therapeutic behavior (empathetic responses, validation, interventions, elicitation questions), satisfying E. However, the paper does not describe a mechanism by which response style is explicitly conditioned on detected resistance, rupture, alliance, or engagement signals; alliance scores are only measured as an outcome, not shown to feed back into generation. Per RULE: RELATIONAL_ADAPTATION_BOUNDARY, general claims that Gen-AI 'promoted alliance' are not sufficient evidence of an implemented adaptation mechanism.",
+                "confidence": "Medium"
+              }
+            ]
+          },
+          "adjudication": {
+            "evidence": [
+              {
+                "auditor": "auditor_1",
+                "evidence": "Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration.",
+                "location": "Methods, Intervention",
+                "rationale": "This supports client-facing enactment, but does not identify adaptation to relational context."
+              },
+              {
+                "auditor": "auditor_2",
+                "evidence": "Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration; alliance was discussed as an outcome.",
+                "location": "Methods - Intervention; Discussion",
+                "rationale": "The reported outputs establish enactment, while alliance was measured or discussed rather than used as an explicit signal conditioning response generation."
+              },
+              {
+                "auditor": "auditor_3",
+                "evidence": "Common output included empathetic responses, validation, targeted interventions, or questions prompting elaboration.",
+                "location": "Methods, Intervention section",
+                "rationale": "The system generates therapeutic responses, but no evidence shows adaptation to resistance, alliance, rupture, engagement, or another relational state."
+              }
+            ],
+            "label": "No",
+            "summary": "The auditors agree that the system performs client-facing therapeutic enactment, but auditor_1 and auditor_2 marked relational adaptation Unclear while auditor_3 marked it No. The allowed labels are Yes or No, and the evidence supplied identifies empathetic and therapeutic outputs without an implemented mechanism that conditions response behavior on relational signals. Alliance appears as an outcome claim or measurement, not as an input to generation. Under RELATIONAL_ADAPTATION_BOUNDARY, generic empathy, validation, personalization, or alliance improvement does not establish relational adaptation; therefore the protocol threshold for Yes is not met."
+          }
         },
         "dependencies.S_to_F.presence": {
           "label": "Absent",
