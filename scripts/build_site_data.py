@@ -39,6 +39,10 @@ def paper_record(record):
     missing = [name for name in required if name not in fields]
     if missing:
         raise ValueError(f"{record['paper_id']}: missing consensus fields: {', '.join(missing)}")
+    f_label = label(fields, "functions.F.label")
+    f_mode = label(fields, "functions.F.mode")
+    if (f_label == "Present" and f_mode == "NA") or (f_label == "Absent" and f_mode != "NA"):
+        raise ValueError(f"{record['paper_id']}: F={f_label} conflicts with F_mode={f_mode}")
     return {
         "paper_id": record["paper_id"],
         "title": metadata["title"],
@@ -53,8 +57,8 @@ def paper_record(record):
         "system_names": system.get("system_names", {}),
         "sfpe": {
             "S": label(fields, "functions.S.label"),
-            "F": label(fields, "functions.F.label"),
-            "F_mode": label(fields, "functions.F.mode"),
+            "F": f_label,
+            "F_mode": f_mode,
             "P": label(fields, "functions.P.label"),
             "E": label(fields, "functions.E.label"),
             "E_relational_adaptation": label(fields, "functions.E.relational_adaptation"),

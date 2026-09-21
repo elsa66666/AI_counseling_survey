@@ -3,7 +3,7 @@ from tempfile import TemporaryDirectory
 import json
 import unittest
 
-from scripts.build_site_data import ROOT, build
+from scripts.build_site_data import ROOT, build, paper_record, read_jsonl
 
 
 class SiteDataTests(unittest.TestCase):
@@ -31,6 +31,14 @@ class SiteDataTests(unittest.TestCase):
             by_id = {paper["paper_id"]: paper for paper in payload["papers"]}
             self.assertEqual(by_id["heinz2025therabot"]["sfpe"]["S"], "Present")
             self.assertEqual(by_id["gratch2014distress"]["sfpe"]["P"], "Absent")
+
+    def test_rejects_f_mode_that_conflicts_with_f_presence(self):
+        record = read_jsonl(ROOT / "data/audit_results/all_consensus.jsonl")[0]
+        fields = record["systems"][0]["fields"]
+        fields["functions.F.label"]["label"] = "Present"
+        fields["functions.F.mode"]["label"] = "NA"
+        with self.assertRaisesRegex(ValueError, "F=Present conflicts with F_mode=NA"):
+            paper_record(record)
 
 
 if __name__ == "__main__":

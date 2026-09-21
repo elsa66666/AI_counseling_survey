@@ -7516,7 +7516,7 @@
       "sfpe": {
         "S": "Present",
         "F": "Present",
-        "F_mode": "NA",
+        "F_mode": "Static",
         "P": "Absent",
         "E": "Present",
         "E_relational_adaptation": "No"
@@ -7732,7 +7732,7 @@
           ]
         },
         "functions.F.mode": {
-          "label": "NA",
+          "label": "Static",
           "votes": {
             "Dynamic": 1,
             "NA": 1,
@@ -7744,7 +7744,7 @@
             "auditor_3": "Dynamic"
           },
           "supporting_agents": [
-            "auditor_2"
+            "auditor_1"
           ],
           "invalid_agents": [],
           "agreement": 0.3333,
@@ -7798,8 +7798,8 @@
                 "rationale": "Although this was interpreted as dynamic formulation by the auditor, the supplied description concerns updates to a probabilistic state machine and does not establish revision of an explanatory client formulation."
               }
             ],
-            "label": "NA",
-            "summary": "Auditor 1 labeled the mechanism Static and auditor 3 labeled it Dynamic, but auditor 2 correctly identified the protocol distinction: trainer-implanted intervention-to-state rules and probabilistic state tracking do not by themselves form an individualized explanatory representation of the client's difficulties, mechanisms, or maintaining processes. Because F is not established, F_mode is NA."
+            "label": "Static",
+            "summary": "The final F label is Present. The system uses trainer-implanted causal rules linking interventions to patient-state transitions, but the supplied evidence shows updates to the probabilistic state rather than revision of those explanatory rules; therefore F mode is Static."
           }
         },
         "functions.E.relational_adaptation": {
@@ -8393,7 +8393,6 @@
         }
       },
       "consistency_issues": [
-        "functions.F.mode: majority conflicts with function label",
         "S_to_F: presence/validation majorities conflict"
       ]
     },
