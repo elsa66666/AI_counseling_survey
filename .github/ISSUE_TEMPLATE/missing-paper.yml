@@ -1,0 +1,40 @@
+name: Missing paper
+description: Nominate a formally published counseling/support model or client simulator.
+title: "[Paper nomination] "
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Paper title
+    validations:
+      required: true
+  - type: input
+    id: publication
+    attributes:
+      label: Official publication URL or DOI
+      description: Use the publisher or proceedings record; an arXiv URL alone does not verify formal publication.
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Modeled role
+      options:
+        - Counselor or mental-health-support process
+        - Client or help-seeker simulation
+        - Both
+        - Supporting dataset, detection, or evaluation resource
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Eligibility evidence
+      description: Explain the modeled process and give the method/experiment section or page. A nomination is screened before inclusion.
+    validations:
+      required: true
+  - type: input
+    id: duplicate
+    attributes:
+      label: Earlier version or existing paper ID, if any
+      description: This helps us merge preprint and published versions.

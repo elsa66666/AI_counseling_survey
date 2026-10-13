@@ -1,0 +1,17 @@
+name: Screening or annotation correction
+description: Suggest an evidence-backed correction to a released record.
+title: "[Correction] "
+body:
+  - type: input
+    id: record
+    attributes:
+      label: Paper ID and snapshot/release
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction and evidence
+      description: State the current decision, proposed change, publication/full-text source, and exact location. Please do not submit private client data.
+    validations:
+      required: true

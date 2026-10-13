@@ -1,0 +1,10 @@
+{
+  "snapshot_date": "2026-10-13",
+  "protocol_version": "selection-v1.0",
+  "candidate_sha256": "f165507674a02df2b8a968d90b1a2da62abe726cf009dba732dbfd66f85ae348",
+  "input_n": 47,
+  "candidate_origin": "GPT-assisted legacy discovery; original discovery prompts and queries unavailable",
+  "scope": "Published counselor/mental-health-support modeling or client simulation; standalone resources counted separately",
+  "retrieval_runs": [],
+  "note": "This is a retrospective screening input snapshot, not a completed systematic search. No initial database hit count is inferred from the 47 candidates."
+}

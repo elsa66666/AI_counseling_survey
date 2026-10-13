@@ -391,6 +391,18 @@ Open `http://localhost:8000`. The build validates paper counts, unique IDs, requ
 `.env`, output directories, downloaded full text, virtual environments, caches, and common key files are ignored. Before publication, run the documented secret scan in [docs/IMPLEMENTATION_NOTES.md](docs/IMPLEMENTATION_NOTES.md). The repository contains no real API keys, tokens, private endpoints, or personal filesystem paths.
 
 
+## Reproducible selection and living updates
+
+The original 47 candidates were discovered with GPT assistance. We now freeze that seed input and publish a [selection protocol](docs/selection_protocol.md), a [per-paper screening ledger](data/selection/2026-10-13/screening.json), and its [computed accounting](data/selection/2026-10-13/screening_summary.json). This is a retrospective screening snapshot; no original database hit count, query log, or exclusion count is reconstructed from the bibliography.
+
+The eligibility rule is formal publication plus counselor/mental-health-support modeling or client simulation. Standalone datasets, detection methods, and evaluation resources are supporting literature. Publication has been verified for all 47 candidates. Scope eligibility is still unresolved in this new ledger; the existing 47-record SFPE release remains a mixed candidate audit, not a completed core-eligibility cohort.
+
+```sh
+python scripts/screening_ledger.py summarize data/selection/2026-10-13/screening.json --output data/selection/2026-10-13/screening_summary.json
+```
+
+Missing papers and evidence-backed corrections can be nominated through the repository's **Issues → New issue** templates. Nominations are screened under the same rules as database results. Our maintenance policy is to perform an update batch after each relevant conference publishes its official proceedings/paper list, with journal papers and older omissions also accepted through searches and community nominations. This is a maintenance commitment, not a claim that past updates already followed that schedule. Each batch should preserve its retrieval exports, eligibility evidence, exclusions and pending cases, code/protocol/model versions, and a dated release; frozen submission snapshots remain distinct from later updates. The anonymous mirror provides readable artifacts but does not itself provide the GitHub issue interface.
+
 ## Recompute the classification analysis
 
 Run the descriptive analysis directly from the released records, without API calls:
