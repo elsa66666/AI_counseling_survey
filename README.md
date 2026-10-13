@@ -429,3 +429,5 @@ python scripts/build_selection_site.py --snapshot 2026-10-13-reviewed
 ```
 
 The website and manuscript distinguish paper-level inclusion from the canonical system selected by the legacy SFPE audit. Recomputed subgroup counts reuse those saved labels; they are not a fresh counselor-only annotation.
+
+Both public explorers and their downloadable display datasets use English. The original source-language quotation remains in the unchanged consensus JSONL; one quotation is rendered in English by the display builder without changing any categorical label or vote.

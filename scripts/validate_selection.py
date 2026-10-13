@@ -9,7 +9,7 @@ assert summary==published,'Saved summary differs from recomputation'
 assert summary['record_outcomes']=={'Included':35,'Supporting':12,'Excluded':0,'Pending':0,'Duplicate':0}
 assert summary['counselor_or_support_model_n']+summary['client_simulation_n']-summary['included_exclusive_roles']['BOTH']==35
 assert all(r['screening_votes']==[] and r['screening_model_versions']==[] for r in rows),'Uncollected eligibility votes'
-assert all(r['role_evidence'] and r['role_evidence_zh'] and r['boundary_note'] and r['role_evidence_location'] for r in rows)
+assert all(r['role_evidence'] and r['boundary_note'] and r['role_evidence_location'] for r in rows)
 assert sum(r['review_source']['format']=='PDF' for r in rows)==46
 for r in rows:
  src=r['review_source'];assert src['fulltext_url']==r['role_evidence_url']
@@ -24,4 +24,7 @@ with (folder/'screening.csv').open(newline='') as f:csv_rows=list(csv.DictReader
 assert len(csv_rows)==47 and {x['paper_id'] for x in csv_rows}=={x['paper_id'] for x in rows}
 assert (ROOT/'docs/data/selection.csv').read_bytes()==(folder/'screening.csv').read_bytes()
 assert (ROOT/'docs/data/selection.js').read_text().startswith('window.SFPE_SELECTION_DATA = ')
-print('PASS: 47 evidence-backed decisions, 35 core / 12 supporting, role overlap, 46 source hashes, CSV/JSON consistency and preserved SFPE provenance')
+import re
+for path in [ROOT/'docs/selection.html',ROOT/'docs/selection.js',ROOT/'docs/data/selection.json',ROOT/'docs/index.html',ROOT/'docs/app.js',ROOT/'docs/data/audits.json']:
+ assert not re.search('[\u3400-\u9fff]',path.read_text()),f'Non-English display text in {path}'
+print('PASS: English-only web content, 47 evidence-backed decisions, 35 core / 12 supporting, role overlap, 46 source hashes, CSV/JSON consistency and preserved SFPE provenance')

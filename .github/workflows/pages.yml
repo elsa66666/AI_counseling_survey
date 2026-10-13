@@ -26,6 +26,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/build_site_data.py
+      - run: python scripts/build_selection_site.py
+      - run: python scripts/validate_selection.py
       - uses: actions/configure-pages@v5
         with:
           enablement: true

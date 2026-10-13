@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import copy
 import json
 from pathlib import Path
 from urllib.parse import urlparse
@@ -30,7 +31,14 @@ def paper_record(record):
     if len(systems) != 1:
         raise ValueError(f"{record['paper_id']}: expected one canonical consensus system")
     system = systems[0]
-    fields = system["fields"]
+    fields = copy.deepcopy(system["fields"])
+    # English rendering for the public explorer; original quotations remain in
+    # the unchanged consensus JSONL. No categorical vote or label is altered.
+    for field in fields.values():
+        for evidence in field.get("supporting_evidence", []):
+            original = evidence.get("evidence", "")
+            if "咨询一般分为前、中、后期三个阶段" in original:
+                evidence["evidence"] = "English rendering of the source quotations: counseling is generally divided into early, middle, and late stages; the model strictly follows the corresponding strategies for those three stages."
     required = [
         "functions.S.label", "functions.F.label", "functions.F.mode", "functions.P.label",
         "functions.E.label", "functions.E.relational_adaptation",
@@ -88,7 +96,7 @@ def write_csv(path, papers):
         *[f"{edge}_{item}" for edge in EDGES for item in ("presence", "validation")],
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=headers)
+        writer = csv.DictWriter(handle, fieldnames=headers, lineterminator="\n")
         writer.writeheader()
         for paper in papers:
             row = {key: paper.get(key, "") for key in headers}

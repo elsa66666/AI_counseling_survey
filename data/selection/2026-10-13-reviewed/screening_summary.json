@@ -25,6 +25,6 @@
   "counselor_or_support_model_n": 28,
   "client_simulation_n": 12,
   "final_screening_complete": true,
-  "ledger_sha256": "7959762d108925a7fcd2d87135d846e17e7b5baa77cad5990bf0b619b05b1513",
+  "ledger_sha256": "50fc36e7aae75307d51d9c319a90eeff9386e68d156bcad7b4f1b0bff98e8c5f",
   "counting_note": "Included + Supporting + Excluded + Pending + Duplicate = candidate_n. BOTH contributes once to Included and once to each role-specific count. Zero Included while decisions are pending is not a final inclusion result."
 }

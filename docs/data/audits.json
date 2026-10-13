@@ -13271,7 +13271,7 @@
           "supporting_evidence": [
             {
               "auditor": "auditor_2",
-              "evidence": "'咨询一般分为前、中、后期三个阶段' (counseling is generally divided into early/middle/late stages) and '严格遵循咨询的前、中、后三个阶段采用对应的策略' (strictly follow the corresponding strategies of the three stages).",
+              "evidence": "English rendering of the source quotations: counseling is generally divided into early, middle, and late stages; the model strictly follows the corresponding strategies for those three stages.",
               "location": "Section 3.5; Figure 9 (Appendix)",
               "rationale": "The three-stage therapeutic model is a fixed, predefined sequence applied identically across clients rather than a client-conditioned selection or adaptation of intervention; per protocol this static staged workflow does not constitute Planning. No separable intermediate representation of a selected therapeutic action prior to enactment is evidenced.",
               "confidence": "Medium"
