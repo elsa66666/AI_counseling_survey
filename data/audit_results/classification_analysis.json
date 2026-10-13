@@ -1,0 +1,466 @@
+{
+  "source_sha256": "e3abbe1f6ad2db34116dec1c3f162f669aa8da9b8ba3ab4baaa7f2c7c4648859",
+  "unit": "one canonical audited configuration per paper folder; no counselor-role eligibility filter",
+  "field_total": 1034,
+  "final_field_status": {
+    "majority": 338,
+    "unanimous": 675,
+    "adjudicated": 21
+  },
+  "first_stage_vote_status": {
+    "majority": 340,
+    "unanimous": 675,
+    "no_majority": 19
+  },
+  "legacy_majority_adjudications": [
+    {
+      "paper_id": "heinz2025therabot",
+      "field": "systems.*.functions.E.relational_adaptation",
+      "original_majority": "Unclear",
+      "released_judge_label": "No"
+    },
+    {
+      "paper_id": "heinz2025therabot",
+      "field": "systems.*.dependencies.E_to_S.presence",
+      "original_majority": "Unclear",
+      "released_judge_label": "Absent"
+    }
+  ],
+  "illegal_saved_function_votes": [
+    {
+      "paper_id": "gratch2014distress",
+      "field": "systems.*.functions.P.label",
+      "auditor": "auditor_2",
+      "label": "Unclear"
+    },
+    {
+      "paper_id": "heinz2025therabot",
+      "field": "systems.*.functions.S.label",
+      "auditor": "auditor_2",
+      "label": "Unclear"
+    },
+    {
+      "paper_id": "heinz2025therabot",
+      "field": "systems.*.functions.S.label",
+      "auditor": "auditor_3",
+      "label": "Unclear"
+    }
+  ],
+  "adjudicated_papers": 12,
+  "papers_with_full_agreement": 1,
+  "flagged_ids": [
+    "gratch2014distress",
+    "heinz2025therabot",
+    "heo-etal-2026-stress",
+    "kim-etal-2025-mirror",
+    "kim-etal-2025-story",
+    "qiu-etal-2024-psyguard",
+    "sharma2023hailey",
+    "tang-etal-2026-trace",
+    "weizenbaum1966eliza",
+    "xu-etal-2026-puppet"
+  ],
+  "consistency_issues": {
+    "kim-etal-2025-story": [
+      "functions.E.relational_adaptation: majority conflicts with function label",
+      "S_to_F: presence/validation majorities conflict",
+      "E_to_S: presence/validation majorities conflict"
+    ],
+    "qiu-etal-2024-psyguard": [
+      "E_to_S: presence/validation majorities conflict"
+    ],
+    "tang-etal-2026-trace": [
+      "E_to_P: presence/validation majorities conflict"
+    ],
+    "xu-etal-2026-puppet": [
+      "S_to_F: presence/validation majorities conflict"
+    ]
+  },
+  "incomplete_ids": [
+    "gratch2014distress",
+    "heinz2025therabot",
+    "heo-etal-2026-stress",
+    "kim-etal-2025-mirror",
+    "sharma2023hailey",
+    "weizenbaum1966eliza"
+  ],
+  "all_records": {
+    "n": 47,
+    "nodes": {
+      "S": 31,
+      "F": 3,
+      "P": 19,
+      "E": 38
+    },
+    "profiles": {
+      "None": 6,
+      "SE": 9,
+      "S": 3,
+      "E": 8,
+      "SPE": 16,
+      "SFE": 2,
+      "PE": 2,
+      "SFPE": 1
+    },
+    "edges": {
+      "S_to_F": {
+        "endpoint_cooccurrence": 3,
+        "presence": {
+          "Absent": 44,
+          "Explicit": 3
+        },
+        "explicit_validation": {
+          "NA": 2,
+          "V0": 1
+        },
+        "explicit_ids": [
+          "kim-etal-2025-story",
+          "tang-etal-2026-trace",
+          "xu-etal-2026-puppet"
+        ]
+      },
+      "S_to_P": {
+        "endpoint_cooccurrence": 17,
+        "presence": {
+          "Absent": 30,
+          "Explicit": 17
+        },
+        "explicit_validation": {
+          "V1": 2,
+          "V0": 15
+        },
+        "explicit_ids": [
+          "cheng-etal-2022-improving",
+          "deng-etal-2023-knowledge",
+          "fitzpatrick2017woebot",
+          "hu2026theramind",
+          "kim-etal-2025-mirror",
+          "lee-etal-2024-cactus",
+          "meng-etal-2026-storymi",
+          "qiu-etal-2024-psyguard",
+          "tang-etal-2026-trace",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent",
+          "yang-etal-2026-mithinker",
+          "zeng-nakano-2026-schema",
+          "zhao-etal-2023-transesc",
+          "zhong-etal-2026-cognitive",
+          "zhou-etal-2023-facilitating"
+        ]
+      },
+      "F_to_P": {
+        "endpoint_cooccurrence": 1,
+        "presence": {
+          "Absent": 46,
+          "Explicit": 1
+        },
+        "explicit_validation": {
+          "V0": 1
+        },
+        "explicit_ids": [
+          "tang-etal-2026-trace"
+        ]
+      },
+      "P_to_E": {
+        "endpoint_cooccurrence": 19,
+        "presence": {
+          "Absent": 28,
+          "Explicit": 19
+        },
+        "explicit_validation": {
+          "V1": 3,
+          "V0": 16
+        },
+        "explicit_ids": [
+          "cheng-etal-2022-improving",
+          "deng-etal-2023-knowledge",
+          "fitzpatrick2017woebot",
+          "hu2026theramind",
+          "kim-etal-2025-mirror",
+          "lee-etal-2024-cactus",
+          "liu-etal-2021-towards",
+          "meng-etal-2026-storymi",
+          "qiu-etal-2024-psyguard",
+          "sun-etal-2021-psyqa",
+          "tang-etal-2026-trace",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent",
+          "yang-etal-2026-mithinker",
+          "zeng-nakano-2026-schema",
+          "zhao-etal-2023-transesc",
+          "zhong-etal-2026-cognitive",
+          "zhou-etal-2023-facilitating"
+        ]
+      },
+      "E_to_S": {
+        "endpoint_cooccurrence": 28,
+        "presence": {
+          "Absent": 34,
+          "Inferential": 1,
+          "Explicit": 12
+        },
+        "explicit_validation": {
+          "V0": 10,
+          "NA": 2
+        },
+        "explicit_ids": [
+          "hu2026theramind",
+          "kim-etal-2025-story",
+          "meng-etal-2026-storymi",
+          "qiu-etal-2024-psyguard",
+          "tang-etal-2026-trace",
+          "wang-etal-2026-psychological",
+          "xu-etal-2026-puppet",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent",
+          "ye-etal-2026-emoharbor",
+          "zeng-nakano-2026-schema",
+          "zhou-etal-2023-facilitating"
+        ]
+      },
+      "E_to_F": {
+        "endpoint_cooccurrence": 3,
+        "presence": {
+          "Absent": 45,
+          "Explicit": 2
+        },
+        "explicit_validation": {
+          "V0": 2
+        },
+        "explicit_ids": [
+          "tang-etal-2026-trace",
+          "xu-etal-2026-puppet"
+        ]
+      },
+      "E_to_P": {
+        "endpoint_cooccurrence": 19,
+        "presence": {
+          "Absent": 41,
+          "Explicit": 6
+        },
+        "explicit_validation": {
+          "V0": 5,
+          "NA": 1
+        },
+        "explicit_ids": [
+          "hu2026theramind",
+          "meng-etal-2026-storymi",
+          "tang-etal-2026-trace",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent"
+        ]
+      }
+    },
+    "F_modes": {
+      "NA": 44,
+      "Static": 2,
+      "Dynamic": 1
+    },
+    "E_relational_adaptation": {
+      "NA": 10,
+      "Yes": 4,
+      "No": 33
+    },
+    "forward_pipeline_ids": [
+      "tang-etal-2026-trace"
+    ],
+    "V1_pairs": [
+      {
+        "paper_id": "cheng-etal-2022-improving",
+        "edge": "S_to_P"
+      },
+      {
+        "paper_id": "cheng-etal-2022-improving",
+        "edge": "P_to_E"
+      },
+      {
+        "paper_id": "sun-etal-2021-psyqa",
+        "edge": "P_to_E"
+      },
+      {
+        "paper_id": "zhong-etal-2026-cognitive",
+        "edge": "S_to_P"
+      },
+      {
+        "paper_id": "zhong-etal-2026-cognitive",
+        "edge": "P_to_E"
+      }
+    ]
+  },
+  "unflagged_records": {
+    "n": 37,
+    "nodes": {
+      "S": 22,
+      "F": 0,
+      "P": 16,
+      "E": 29
+    },
+    "profiles": {
+      "None": 6,
+      "SE": 6,
+      "S": 2,
+      "E": 7,
+      "SPE": 14,
+      "PE": 2
+    },
+    "edges": {
+      "S_to_F": {
+        "endpoint_cooccurrence": 0,
+        "presence": {
+          "Absent": 37
+        },
+        "explicit_validation": {},
+        "explicit_ids": []
+      },
+      "S_to_P": {
+        "endpoint_cooccurrence": 14,
+        "presence": {
+          "Absent": 23,
+          "Explicit": 14
+        },
+        "explicit_validation": {
+          "V1": 2,
+          "V0": 12
+        },
+        "explicit_ids": [
+          "cheng-etal-2022-improving",
+          "deng-etal-2023-knowledge",
+          "fitzpatrick2017woebot",
+          "hu2026theramind",
+          "lee-etal-2024-cactus",
+          "meng-etal-2026-storymi",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent",
+          "yang-etal-2026-mithinker",
+          "zeng-nakano-2026-schema",
+          "zhao-etal-2023-transesc",
+          "zhong-etal-2026-cognitive",
+          "zhou-etal-2023-facilitating"
+        ]
+      },
+      "F_to_P": {
+        "endpoint_cooccurrence": 0,
+        "presence": {
+          "Absent": 37
+        },
+        "explicit_validation": {},
+        "explicit_ids": []
+      },
+      "P_to_E": {
+        "endpoint_cooccurrence": 16,
+        "presence": {
+          "Absent": 21,
+          "Explicit": 16
+        },
+        "explicit_validation": {
+          "V1": 3,
+          "V0": 13
+        },
+        "explicit_ids": [
+          "cheng-etal-2022-improving",
+          "deng-etal-2023-knowledge",
+          "fitzpatrick2017woebot",
+          "hu2026theramind",
+          "lee-etal-2024-cactus",
+          "liu-etal-2021-towards",
+          "meng-etal-2026-storymi",
+          "sun-etal-2021-psyqa",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent",
+          "yang-etal-2026-mithinker",
+          "zeng-nakano-2026-schema",
+          "zhao-etal-2023-transesc",
+          "zhong-etal-2026-cognitive",
+          "zhou-etal-2023-facilitating"
+        ]
+      },
+      "E_to_S": {
+        "endpoint_cooccurrence": 20,
+        "presence": {
+          "Absent": 29,
+          "Explicit": 8
+        },
+        "explicit_validation": {
+          "V0": 8
+        },
+        "explicit_ids": [
+          "hu2026theramind",
+          "meng-etal-2026-storymi",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent",
+          "ye-etal-2026-emoharbor",
+          "zeng-nakano-2026-schema",
+          "zhou-etal-2023-facilitating"
+        ]
+      },
+      "E_to_F": {
+        "endpoint_cooccurrence": 0,
+        "presence": {
+          "Absent": 37
+        },
+        "explicit_validation": {},
+        "explicit_ids": []
+      },
+      "E_to_P": {
+        "endpoint_cooccurrence": 16,
+        "presence": {
+          "Absent": 32,
+          "Explicit": 5
+        },
+        "explicit_validation": {
+          "V0": 5
+        },
+        "explicit_ids": [
+          "hu2026theramind",
+          "meng-etal-2026-storymi",
+          "wang-etal-2026-psychological",
+          "yang-etal-2025-cami",
+          "yang-etal-2025-consistent"
+        ]
+      }
+    },
+    "F_modes": {
+      "NA": 37
+    },
+    "E_relational_adaptation": {
+      "NA": 8,
+      "Yes": 3,
+      "No": 26
+    },
+    "forward_pipeline_ids": [],
+    "V1_pairs": [
+      {
+        "paper_id": "cheng-etal-2022-improving",
+        "edge": "S_to_P"
+      },
+      {
+        "paper_id": "cheng-etal-2022-improving",
+        "edge": "P_to_E"
+      },
+      {
+        "paper_id": "sun-etal-2021-psyqa",
+        "edge": "P_to_E"
+      },
+      {
+        "paper_id": "zhong-etal-2026-cognitive",
+        "edge": "S_to_P"
+      },
+      {
+        "paper_id": "zhong-etal-2026-cognitive",
+        "edge": "P_to_E"
+      }
+    ]
+  },
+  "notes": [
+    "Agreement does not establish accuracy.",
+    "Exclude flagged records only for sensitivity analysis; retain raw released labels.",
+    "No manual gold standard is available.",
+    "A record without a mechanical flag can still have audited-unit or semantic errors."
+  ]
+}

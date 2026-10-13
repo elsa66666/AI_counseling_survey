@@ -389,3 +389,16 @@ Open `http://localhost:8000`. The build validates paper counts, unique IDs, requ
 ## Security
 
 `.env`, output directories, downloaded full text, virtual environments, caches, and common key files are ignored. Before publication, run the documented secret scan in [docs/IMPLEMENTATION_NOTES.md](docs/IMPLEMENTATION_NOTES.md). The repository contains no real API keys, tokens, private endpoints, or personal filesystem paths.
+
+
+## Recompute the classification analysis
+
+Run the descriptive analysis directly from the released records, without API calls:
+
+```bash
+python scripts/analyze_classification.py data/audit_results/all_consensus.jsonl --output data/audit_results/classification_analysis.json
+```
+
+The script checks the saved legal votes against the released schema, preserves final labels, and reports both all 47 records and a sensitivity subset of 37 unflagged records. It does not manually correct labels or establish classification accuracy. Review flags cover incomplete inputs and cross-field conflicts; absence of a flag does not validate the counselor or simulator role of the selected system.
+
+The final snapshot has 675 unanimous, 338 majority, and 21 adjudicated fields. Current-rule replay has 675 unanimous, 340 majority, and 19 no-majority fields: two historical Therabot fields with an Unclear majority were subsequently adjudicated. Three saved Unclear function-presence votes are outside the current binary label set and are excluded from legal vote counts. These historical details are retained explicitly rather than presented as outputs of the current no-majority-only judge trigger. The released example model configurations do not by themselves establish the per-call auditor versions used for this aggregate snapshot.
