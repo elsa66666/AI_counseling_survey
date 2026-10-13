@@ -233,9 +233,12 @@ function showDetail(paper) {
 }
 
 async function init() {
-  const response = await fetch(`data/audits.json?v=${Date.now()}`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Could not load audit data: ${response.status}`);
-  const payload = await response.json();
+  let payload = window.SFPE_AUDIT_DATA;
+  if (!payload) {
+    const response = await fetch(`data/audits.json?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Could not load audit data: ${response.status}`);
+    payload = await response.json();
+  }
   data = payload.papers;
   const summary = payload.summary;
   const stats = [

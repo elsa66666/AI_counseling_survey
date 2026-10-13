@@ -116,6 +116,12 @@ def build(input_path, summary_path, public_json, public_csv, site_json, protocol
     }
     write_json(public_json, payload)
     write_json(site_json, payload)
+    # Classic scripts can load in anonymous review pages with an opaque origin,
+    # where fetch() is blocked by the hosting service's CORS policy.
+    site_json.with_suffix(".js").write_text(
+        "window.SFPE_AUDIT_DATA = " + json.dumps(payload, ensure_ascii=True) + ";\n",
+        encoding="utf-8",
+    )
     write_csv(public_csv, papers)
     site_protocol.write_text(protocol_path.read_text(encoding="utf-8-sig"), encoding="utf-8")
     return {"papers": len(papers), "json": str(public_json), "csv": str(public_csv), "site": str(site_json)}
