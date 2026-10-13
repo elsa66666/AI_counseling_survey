@@ -1,4 +1,4 @@
-# Literature selection and update protocol (selection-v1.0)
+# Literature selection and update protocol (selection-v1.1)
 
 Protocol frozen on 2026-10-13 for retrospective screening of the existing candidates and future updates. It does not imply that these rules, queries, or steps were used in the original GPT-assisted discovery.
 
@@ -11,6 +11,16 @@ Protocol frozen on 2026-10-13 for retrospective screening of the existing candid
 Generic empathy without an explicit mental-health-support purpose does not automatically qualify. Offline symptom prediction without a link to counseling behavior is not counselor-process modeling. Human-in-the-loop support is eligible when the computational model directly produces or adapts support. No minimum number of turns, S/F/P/E positives, complete loop, positive outcome, or human-evaluation score is required.
 
 Technology is tagged separately. Historical non-LLM work can provide context; it must not be interpreted as contemporary LLM coverage. Do not silently add an LLM-only filter to the author's two scope criteria.
+
+## Boundary rules and the completed review
+
+Role labels describe the paper's proposed or specifically adapted models. Merely reusing an unchanged published simulator as an evaluation tool, or testing stock LLMs under a counselor prompt, does not add a role-modeling contribution. CAMI and MIThinker, for example, reuse the independently described consistent-client simulator; they receive COUNSELOR tags. The ledger preserves such auxiliary-tool distinctions.
+
+Evaluation work with a dedicated interactive client method can qualify: MindVoyager, EmoHarbor, Hoang's adapted standardized patients, and MHSafeEval are CLIENT. CACTUS, MIRROR and PsychePass implement both roles. Offline single-call transcript reconstruction or masked-utterance completion is corpus construction, not interactive client simulation; CPsyCoun, SMILE and PsyDial qualify through their trained counselor models. Foundational general-empathy or exercise-advisor studies remain SUPPORT when their implemented purpose does not meet the mental-health-support/MI boundary.
+
+The `2026-10-13-reviewed` snapshot contains 47 completed decisions: 23 COUNSELOR-only, 7 CLIENT-only, 5 BOTH, and 12 SUPPORT. Thus 35 unique core papers include 28 counselor-role papers and 12 client-role papers. There are no exclusions, unresolved decisions, or within-input duplicates. The core includes two historical non-LLM systems; technology tags are separate from role eligibility.
+
+This is one Codex AI eligibility review, with evidence from 46 PDF sources and one publisher full-text HTML source (Woebot). It is not human validation or a new three-agent eligibility vote. Exact reviewer model identity was not logged; `screening_votes` and `screening_model_versions` are empty rather than fabricated. The existing three-agent SFPE labels remain unchanged. PDF source hashes identify reviewed files; Woebot's HTML response could not be archived and has no claimed source hash. Source copies are linked, not redistributed. Evidence notes are paraphrases. The archived protocol, evidence, decisions and counting code reproduce the published accounting; they do not prove discovery completeness or identical future model judgments.
 
 ## Discovery and screening stages
 
@@ -36,7 +46,7 @@ For an official proceedings-list batch, archive the complete published list firs
 4. Verify formal publication; record Published, NotPublished, or Pending with evidence.
 5. Screen title/abstract conservatively, then consult the method/full text to assign COUNSELOR, CLIENT, BOTH, SUPPORT, OUTSIDE, or UNRESOLVED. Keep the decision method, evidence quotation/paraphrase, location, URL, and any agent votes/model versions. Missing text or an ambiguous role remains unresolved, not silently excluded.
 6. Apply the existing three-agent SFPE annotation to the eligible audited configurations. Eligibility decisions are a separate stage; existing SFPE votes do not establish scope eligibility. A three-agent eligibility implementation would require new independent judgments and their provenance; this repository does not yet claim such a run.
-7. Recompute outcome counts from the ledger, report pending cases, and release a versioned snapshot. The current 47-record SFPE export is a legacy mixed-candidate snapshot; it is not a completed core-eligibility cohort.
+7. Recompute outcome counts from the ledger, report pending cases, and release a versioned snapshot. The 47-record SFPE export remains a legacy mixed-candidate snapshot. The completed eligibility ledger selects 35 core papers and 12 supporting papers; the original pending ledger is preserved separately.
 
 ## Quantitative accounting
 
@@ -57,7 +67,7 @@ During anonymous review, the anonymous mirror provides readable snapshots; it is
 ## Recompute this snapshot
 
 ```sh
-python scripts/screening_ledger.py summarize data/selection/2026-10-13/screening.json --output data/selection/2026-10-13/screening_summary.json
+python scripts/screening_ledger.py summarize data/selection/2026-10-13-reviewed/screening.json --output data/selection/2026-10-13-reviewed/screening_summary.json
 ```
 
 The published summary explicitly marks whether screening is complete. It cannot turn Pending into a completed eligibility decision.

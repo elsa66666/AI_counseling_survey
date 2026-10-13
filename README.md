@@ -395,7 +395,7 @@ Open `http://localhost:8000`. The build validates paper counts, unique IDs, requ
 
 The original 47 candidates were discovered with GPT assistance. We now freeze that seed input and publish a [selection protocol](docs/selection_protocol.md), a [per-paper screening ledger](data/selection/2026-10-13/screening.json), and its [computed accounting](data/selection/2026-10-13/screening_summary.json). This is a retrospective screening snapshot; no original database hit count, query log, or exclusion count is reconstructed from the bibliography.
 
-The eligibility rule is formal publication plus counselor/mental-health-support modeling or client simulation. Standalone datasets, detection methods, and evaluation resources are supporting literature. Publication has been verified for all 47 candidates. Scope eligibility is still unresolved in this new ledger; the existing 47-record SFPE release remains a mixed candidate audit, not a completed core-eligibility cohort.
+The eligibility rule is formal publication plus counselor/mental-health-support modeling or client simulation. Standalone datasets, detection methods, and evaluation resources are supporting literature. Publication has been verified for all 47 candidates. The first ledger preserves pending scope decisions. The newer `2026-10-13-reviewed` ledger completes them with 35 core and 12 supporting papers; the existing 47-record SFPE release remains the unchanged legacy mixed-candidate audit.
 
 ```sh
 python scripts/screening_ledger.py summarize data/selection/2026-10-13/screening.json --output data/selection/2026-10-13/screening_summary.json
@@ -414,3 +414,18 @@ python scripts/analyze_classification.py data/audit_results/all_consensus.jsonl 
 The script checks the saved legal votes against the released schema, preserves final labels, and reports both all 47 records and a sensitivity subset of 37 unflagged records. It does not manually correct labels or establish classification accuracy. Review flags cover incomplete inputs and cross-field conflicts; absence of a flag does not validate the counselor or simulator role of the selected system.
 
 The final snapshot has 675 unanimous, 338 majority, and 21 adjudicated fields. Current-rule replay has 675 unanimous, 340 majority, and 19 no-majority fields: two historical Therabot fields with an Unclear majority were subsequently adjudicated. Three saved Unclear function-presence votes are outside the current binary label set and are excluded from legal vote counts. These historical details are retained explicitly rather than presented as outputs of the current no-majority-only judge trigger. The released example model configurations do not by themselves establish the per-call auditor versions used for this aggregate snapshot.
+
+## Completed screening and evidence explorer
+
+[Anonymous screening website](https://anonymous.4open.science/w/SFPE-Counseling-Audit/docs/selection.html) · [Anonymous repository](https://anonymous.4open.science/r/SFPE-Counseling-Audit/)
+
+The completed `data/selection/2026-10-13-reviewed/` snapshot retains all 47 per-paper decisions, publication proof, method locations, source versions/hashes and boundary reasons. It includes 35 core papers (23 counselor-only, 7 client-only, 5 both) and 12 supporting papers. The original pending snapshot remains available. This is a single AI eligibility review, separate from the saved three-agent SFPE annotation; no human gold set or new eligibility-agent votes are claimed.
+
+The visual page supports title/evidence search, role/outcome/technology/year filters, per-paper evidence details and CSV/JSON downloads. Its data are preloaded for the anonymous mirror's opaque origin. Use the issue templates for missing-paper nominations and evidence-backed corrections on the public repository; the anonymous mirror is read-only. Updates are planned after relevant conferences publish official proceedings/paper lists, with dated snapshots preserved.
+
+```sh
+python scripts/screening_ledger.py summarize data/selection/2026-10-13-reviewed/screening.json --output data/selection/2026-10-13-reviewed/screening_summary.json
+python scripts/build_selection_site.py --snapshot 2026-10-13-reviewed
+```
+
+The website and manuscript distinguish paper-level inclusion from the canonical system selected by the legacy SFPE audit. Recomputed subgroup counts reuse those saved labels; they are not a fresh counselor-only annotation.

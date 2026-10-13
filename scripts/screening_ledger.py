@@ -81,7 +81,7 @@ def summarize(ledger_path):
         elif r["role"] == "OUTSIDE":
             outcome, reason = "Excluded", "Outside counseling/support or client-simulation scope"
         elif r["role"] == "SUPPORT":
-            outcome, reason = "Supporting", "Standalone dataset, detection, or evaluation resource"
+            outcome, reason = "Supporting", "Supporting dataset, detection, evaluation, or foundational resource"
         elif r["role"] == "UNRESOLVED":
             outcome, reason = "Pending", "Scope evidence not finalized"
         else:

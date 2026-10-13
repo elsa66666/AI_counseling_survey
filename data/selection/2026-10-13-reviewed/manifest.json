@@ -1,0 +1,28 @@
+{
+  "snapshot_date": "2026-10-13",
+  "protocol_version": "selection-v1.1",
+  "candidate_sha256": "f165507674a02df2b8a968d90b1a2da62abe726cf009dba732dbfd66f85ae348",
+  "input_n": 47,
+  "candidate_origin": "GPT-assisted legacy discovery; original discovery prompts and queries unavailable",
+  "scope": "Published counselor/mental-health-support modeling or client simulation; standalone resources counted separately",
+  "retrieval_runs": [],
+  "note": "Completed retrospective screening of the frozen GPT-assisted seed list. Original retrieval counts remain unavailable; no new database search or exhaustive field coverage is claimed.",
+  "snapshot_id": "2026-10-13-reviewed",
+  "previous_snapshot": "2026-10-13",
+  "review_method": "One Codex AI eligibility review; existing three-agent SFPE codes are a separate stage",
+  "reviewer_model_identifier": "Not logged; exact model rerun is not claimed",
+  "source_coverage": {
+    "pdf_method_reviews": 46,
+    "publisher_html_method_reviews": 1,
+    "pdfs_distributed": false
+  },
+  "deduplication_review": "All 47 candidate titles and publication identifiers distinct; no within-input duplicate contribution identified",
+  "boundary_clarifications": [
+    "Only proposed or specifically adapted role models receive role tags; an unchanged reused simulator is an auxiliary tool",
+    "Evaluation papers with dedicated interactive client generation qualify",
+    "Offline whole-transcript reconstruction is not interactive client simulation",
+    "Resource papers with a trained support model qualify",
+    "Historical non-LLM role models remain included and technology is reported separately"
+  ],
+  "review_sources_sha256": "7733d02aebf2090a3c0a02a8e151d9bfb0892a9ed04bf93ac9e724f3c0972d6d"
+}

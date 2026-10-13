@@ -1,0 +1,120 @@
+{
+  "included": {
+    "n": 35,
+    "nodes": {
+      "S": 25,
+      "F": 3,
+      "P": 18,
+      "E": 33
+    },
+    "review_flags": 8,
+    "explicit_edges": {
+      "S→F": 3,
+      "S→P": 16,
+      "F→P": 1,
+      "P→E": 18,
+      "E→S": 11,
+      "E→F": 2,
+      "E→P": 6
+    },
+    "validation_instances": {
+      "V0": 48,
+      "V1": 5,
+      "NA": 4
+    }
+  },
+  "included_unflagged": {
+    "n": 27,
+    "nodes": {
+      "S": 18,
+      "F": 0,
+      "P": 16,
+      "E": 26
+    },
+    "review_flags": 0,
+    "explicit_edges": {
+      "S→F": 0,
+      "S→P": 14,
+      "F→P": 0,
+      "P→E": 16,
+      "E→S": 8,
+      "E→F": 0,
+      "E→P": 5
+    },
+    "validation_instances": {
+      "V0": 38,
+      "V1": 5
+    }
+  },
+  "counselor_role": {
+    "n": 28,
+    "nodes": {
+      "S": 20,
+      "F": 1,
+      "P": 17,
+      "E": 27
+    },
+    "review_flags": 5,
+    "explicit_edges": {
+      "S→F": 1,
+      "S→P": 15,
+      "F→P": 1,
+      "P→E": 17,
+      "E→S": 7,
+      "E→F": 1,
+      "E→P": 5
+    },
+    "validation_instances": {
+      "V0": 41,
+      "V1": 5,
+      "NA": 1
+    }
+  },
+  "supporting": {
+    "n": 12,
+    "nodes": {
+      "S": 6,
+      "F": 0,
+      "P": 1,
+      "E": 5
+    },
+    "review_flags": 2,
+    "explicit_edges": {
+      "S→F": 0,
+      "S→P": 1,
+      "F→P": 0,
+      "P→E": 1,
+      "E→S": 1,
+      "E→F": 0,
+      "E→P": 0
+    },
+    "validation_instances": {
+      "V0": 2,
+      "NA": 1
+    }
+  },
+  "legacy_all": {
+    "n": 47,
+    "nodes": {
+      "S": 31,
+      "F": 3,
+      "P": 19,
+      "E": 38
+    },
+    "review_flags": 10,
+    "explicit_edges": {
+      "S→F": 3,
+      "S→P": 17,
+      "F→P": 1,
+      "P→E": 19,
+      "E→S": 12,
+      "E→F": 2,
+      "E→P": 6
+    },
+    "validation_instances": {
+      "V0": 50,
+      "V1": 5,
+      "NA": 5
+    }
+  }
+}

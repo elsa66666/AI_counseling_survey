@@ -265,6 +265,8 @@ async function init() {
     sortKey = next;
     render();
   }));
+  const selectedPaper = new URLSearchParams(location.search).get("paper");
+  if (selectedPaper) el("search").value = selectedPaper;
   render();
 }
 

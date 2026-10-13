@@ -1,0 +1,30 @@
+{
+  "candidate_n": 47,
+  "unique_ids": 47,
+  "unique_normalized_titles": 47,
+  "unique_current_urls": 47,
+  "publication_states": {
+    "Published": 47
+  },
+  "record_outcomes": {
+    "Included": 35,
+    "Supporting": 12,
+    "Excluded": 0,
+    "Pending": 0,
+    "Duplicate": 0
+  },
+  "primary_reason_counts": {
+    "Eligible modeled role": 35,
+    "Supporting dataset, detection, evaluation, or foundational resource": 12
+  },
+  "included_exclusive_roles": {
+    "COUNSELOR": 23,
+    "BOTH": 5,
+    "CLIENT": 7
+  },
+  "counselor_or_support_model_n": 28,
+  "client_simulation_n": 12,
+  "final_screening_complete": true,
+  "ledger_sha256": "7959762d108925a7fcd2d87135d846e17e7b5baa77cad5990bf0b619b05b1513",
+  "counting_note": "Included + Supporting + Excluded + Pending + Duplicate = candidate_n. BOTH contributes once to Included and once to each role-specific count. Zero Included while decisions are pending is not a final inclusion result."
+}
