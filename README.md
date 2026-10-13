@@ -17,7 +17,7 @@ The four functions are:
 
 The seven directed dependencies are `S→F`, `S→P`, `F→P`, `P→E`, `E→S`, `E→F`, and `E→P`. Every explicit dependency is assigned validation level `V0`, `V1`, or `V2`.
 
-The frozen, executable specification is [prompts/sfpe_protocol.md](prompts/sfpe_protocol.md). The criteria below document that protocol in repository form; they do not replace or redefine it.
+The frozen, executable specification is [prompts/sfpe_protocol.md](https://anonymous.4open.science/r/SFPE-Counseling-Audit/prompts/sfpe_protocol.md). The criteria below document that protocol in repository form; they do not replace or redefine it.
 
 ## Audit pipeline
 
@@ -56,7 +56,7 @@ Each auditor receives the same inputs:
 3. the same strict JSON schema;
 4. a short instruction to work independently and return one complete audit.
 
-Each auditor must identify the eligible implemented system, assess paper and system completeness, code S/F/P/E, code all seven dependencies and applicable validation levels, and provide evidence, location, rationale, and confidence. An auditor never sees another auditor's answer. The default example configuration uses GPT-5.4-mini, Claude Sonnet 5, and DeepSeek V3.2, followed by GPT-5.5 as the second-stage judge; model IDs and endpoints remain explicit in [configs/auditors.example.json](configs/auditors.example.json).
+Each auditor must identify the eligible implemented system, assess paper and system completeness, code S/F/P/E, code all seven dependencies and applicable validation levels, and provide evidence, location, rationale, and confidence. An auditor never sees another auditor's answer. The default example configuration uses GPT-5.4-mini, Claude Sonnet 5, and DeepSeek V3.2, followed by GPT-5.5 as the second-stage judge; model IDs and endpoints remain explicit in [configs/auditors.example.json](https://anonymous.4open.science/r/SFPE-Counseling-Audit/configs/auditors.example.json).
 
 Raw responses are saved before parsing. The parser removes only leading/trailing whitespace and a single outer Markdown JSON fence. It does not repair quotes, commas, keys, labels, truncated JSON, or schema violations. Rate limits and transient upstream failures use finite exponential backoff and respect `Retry-After` when present. A final auditor failure is recorded as unavailable and does not abort the paper or batch.
 
@@ -141,7 +141,7 @@ The following table is a single reference for every categorical audit value and 
 
 For S/F/P/E presence, use **Present** when identifiable implementation evidence satisfies the definition and **Absent** otherwise. These four labels are binary and never use `Unclear`. Missing, inaccessible, truncated, or ambiguous material must be recorded through completeness, evidence, rationale, and Low confidence. Other fields may use **Unclear** only when their allowed label set explicitly includes it.
 
-The annotation unit is an implemented counseling system. Annotate the full system rather than its ablations. Baselines are excluded unless explicitly requested. The current consensus implementation expects no more than one eligible system per auditor within a paper folder; see [docs/IMPLEMENTATION_NOTES.md](docs/IMPLEMENTATION_NOTES.md).
+The annotation unit is an implemented counseling system. Annotate the full system rather than its ablations. Baselines are excluded unless explicitly requested. The current consensus implementation expects no more than one eligible system per auditor within a paper folder; see [docs/IMPLEMENTATION_NOTES.md](https://anonymous.4open.science/r/SFPE-Counseling-Audit/docs/IMPLEMENTATION_NOTES.md).
 
 ### S — State Sensing and Evidence Elicitation
 
@@ -330,11 +330,11 @@ To rebuild consensus from saved, validated auditor outputs without network calls
 python scripts/run_audit.py --rebuild-consensus --output outputs
 ```
 
-Use `--papers`, `--prompt`, `--config`, `--env`, `--cache`, and `--sources` to override paths. A sources file maps paper IDs to verified PDFs, extracted text, or alternate URLs; see [examples/sources.example.json](examples/sources.example.json).
+Use `--papers`, `--prompt`, `--config`, `--env`, `--cache`, and `--sources` to override paths. A sources file maps paper IDs to verified PDFs, extracted text, or alternate URLs; see [examples/sources.example.json](https://anonymous.4open.science/r/SFPE-Counseling-Audit/examples/sources.example.json).
 
 ## Output schema
 
-Each audit has `paper_title`, `paper_input_completeness`, and a `systems` array. Each system contains its name, completeness, annotation notes, four function objects, seven dependency objects, borderline cases, and overall notes. Function and dependency objects contain evidence, location, rationale, and confidence. The exact generated JSON Schema is checked in at [data/audit_results/audit.schema.json](data/audit_results/audit.schema.json).
+Each audit has `paper_title`, `paper_input_completeness`, and a `systems` array. Each system contains its name, completeness, annotation notes, four function objects, seven dependency objects, borderline cases, and overall notes. Function and dependency objects contain evidence, location, rationale, and confidence. The exact generated JSON Schema is checked in at [data/audit_results/audit.schema.json](https://anonymous.4open.science/r/SFPE-Counseling-Audit/data/audit_results/audit.schema.json).
 
 The consensus record adds, for every votable field, `votes`, `agent_labels`, `supporting_agents`, `invalid_agents`, `agreement`, `label`, `status`, `needs_review`, and supporting evidence. Adjudicated fields also contain `pre_adjudication` and an `adjudication` object with the GPT-5.5 label, merged evidence, and summary. Raw judge responses and structured decisions are saved under `paper_folder/judge/`. The published files are:
 
@@ -350,7 +350,7 @@ python scripts/build_site_data.py
 python -m http.server 8000 --directory docs
 ```
 
-Open `http://localhost:8000`. The build validates paper counts, unique IDs, required SFPE/dependency fields, and all public paper URLs before writing the public JSON and CSV. GitHub Actions runs the same builder before deploying `docs/`; see [.github/workflows/pages.yml](.github/workflows/pages.yml).
+Open `http://localhost:8000`. The build validates paper counts, unique IDs, required SFPE/dependency fields, and all public paper URLs before writing the public JSON and CSV. GitHub Actions runs the same builder before deploying `docs/`; see [.github/workflows/pages.yml](https://anonymous.4open.science/r/SFPE-Counseling-Audit/.github/workflows/pages.yml).
 
 ## Repository structure
 
@@ -388,12 +388,12 @@ Open `http://localhost:8000`. The build validates paper counts, unique IDs, requ
 
 ## Security
 
-`.env`, output directories, downloaded full text, virtual environments, caches, and common key files are ignored. Before publication, run the documented secret scan in [docs/IMPLEMENTATION_NOTES.md](docs/IMPLEMENTATION_NOTES.md). The repository contains no real API keys, tokens, private endpoints, or personal filesystem paths.
+`.env`, output directories, downloaded full text, virtual environments, caches, and common key files are ignored. Before publication, run the documented secret scan in [docs/IMPLEMENTATION_NOTES.md](https://anonymous.4open.science/r/SFPE-Counseling-Audit/docs/IMPLEMENTATION_NOTES.md). The repository contains no real API keys, tokens, private endpoints, or personal filesystem paths.
 
 
 ## Reproducible selection and living updates
 
-The original 47 candidates were discovered with GPT assistance. We now freeze that seed input and publish a [selection protocol](docs/selection_protocol.md), a [per-paper screening ledger](data/selection/2026-10-13/screening.json), and its [computed accounting](data/selection/2026-10-13/screening_summary.json). This is a retrospective screening snapshot; no original database hit count, query log, or exclusion count is reconstructed from the bibliography.
+The original 47 candidates were discovered with GPT assistance. We now freeze that seed input and publish a [selection protocol](https://anonymous.4open.science/r/SFPE-Counseling-Audit/docs/selection_protocol.md), a [per-paper screening ledger](https://anonymous.4open.science/r/SFPE-Counseling-Audit/data/selection/2026-10-13/screening.json), and its [computed accounting](https://anonymous.4open.science/r/SFPE-Counseling-Audit/data/selection/2026-10-13/screening_summary.json). This is a retrospective screening snapshot; no original database hit count, query log, or exclusion count is reconstructed from the bibliography.
 
 The eligibility rule is formal publication plus counselor/mental-health-support modeling or client simulation. Standalone datasets, detection methods, and evaluation resources are supporting literature. Publication has been verified for all 47 candidates. The first ledger preserves pending scope decisions. The newer `2026-10-13-reviewed` ledger completes them with 35 core and 12 supporting papers; the existing 47-record SFPE release remains the unchanged legacy mixed-candidate audit.
 
